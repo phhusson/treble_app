@@ -5,7 +5,7 @@ apply plugin: 'kotlin-android'
 android {
     compileSdkVersion 27
     defaultConfig {
-        applicationId "me.treble.app"
+        applicationId "me.phh.treble.app"
         minSdkVersion 27
         targetSdkVersion 27
         versionCode 1

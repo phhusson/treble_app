@@ -1,9 +1,8 @@
-package me.treble.app
+package me.phh.treble.app
 
 import android.content.Context
 import android.media.AudioManager
 import android.os.UEventObserver
-import me.treble.app.Tools.audioManager
 
 object OnePlusAlertSlider: EntryStartup {
     override fun startup(ctxt: Context) {
@@ -19,11 +18,11 @@ object OnePlusAlertSlider: EntryStartup {
                     val vibrate = state.contains("USB_HOST=0")
                     android.util.Log.v("PHH", "Got ringing = $ringing, silent = $silent, vibrate = $vibrate")
                     if (ringing && !silent && !vibrate)
-                        audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+                        Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
                     if (silent && !ringing && !vibrate)
-                        audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT)
+                        Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT)
                     if (vibrate && !silent && !ringing)
-                        audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+                        Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
                 } catch (e: Exception) {
                     android.util.Log.d("PHH", "Failed parsing uevent", e)
                 }

@@ -1,4 +1,4 @@
-package me.treble.app
+package me.phh.treble.app
 
 import android.content.Context
 import android.media.AudioSystem
@@ -32,14 +32,14 @@ object QtiAudio: EntryStartup {
                     val svc = vendor.qti.hardware.radio.am.V1_0.IQcRilAudio.getService(slot)
                     svc.setCallback(cbA)
                 } catch (e: Exception) {
-                    Log.d("PHH", "Failed setting vendor.qti.hardware.radio.am $slot cb")
+                    Log.d("PHH", "Failed setting vendor.qti.hardware.radio.am $slot cb $e")
                 }
 
                 try {
                     val svc = vendor.qti.qcril.am.V1_0.IQcRilAudio.getService(slot)
                     svc.setCallback(cbB)
                 } catch (e: Exception) {
-                    Log.d("PHH", "Failed setting vendor.qti.hardware.radio.am $slot cb")
+                    Log.d("PHH", "Failed setting vendor.qti.hardware.radio.am $slot cb $e")
                 }
             }
         }

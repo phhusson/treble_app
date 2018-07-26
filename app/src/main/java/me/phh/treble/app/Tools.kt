@@ -1,4 +1,4 @@
-package me.treble.app
+package me.phh.treble.app
 
 import android.content.Context
 import android.media.AudioManager

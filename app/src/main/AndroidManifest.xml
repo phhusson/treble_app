@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     android:sharedUserId="android.uid.system"
     android:persistent="true"
-    package="me.treble.app">
+    package="me.phh.treble.app">
 
     <application
         android:allowBackup="true"
@@ -11,12 +11,12 @@
         android:supportsRtl="true"
         >
         <service
-            android:name=".EntryService"
-            android:exported="true" />
+            android:name=".EntryService" />
 
         <receiver android:name=".Starter">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="me.phh.update" />
             </intent-filter>
         </receiver>
     </application>
