@@ -1,12 +1,54 @@
 package me.phh.treble.app
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.media.AudioManager
+import android.os.SystemProperties
 import android.os.UEventObserver
+import android.preference.PreferenceManager
+import android.util.Log
 
 object OnePlusAlertSlider: EntryStartup {
+    val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
+        Log.d("PHH", "Got sp change $sp $key")
+        when(key) {
+            OnePlusSettings.displayModeKey -> {
+                val value = sp.getString(key, "default")
+                when (value) {
+                    "default" -> {
+                        SystemProperties.set("sys.dci3p", "0")
+                        SystemProperties.set("sys.dcip3", "0")
+                        SystemProperties.set("sys.srgb", "0")
+                        SystemProperties.set("sys.default_mode", "1")
+                    }
+                    "srgb" -> {
+                        SystemProperties.set("sys.dci3p", "0")
+                        SystemProperties.set("sys.dcip3", "0")
+                        SystemProperties.set("sys.srgb", "1")
+                        SystemProperties.set("sys.default_mode", "0")
+                    }
+                    "dcip3" -> {
+                        SystemProperties.set("sys.dci3p", "1")
+                        SystemProperties.set("sys.dcip3", "1")
+                        SystemProperties.set("sys.srgb", "0")
+                        SystemProperties.set("sys.default_mode", "0")
+                    }
+                }
+            }
+            OnePlusSettings.usbOtgKey -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.oem.otg_support", value.toString())
+            }
+            OnePlusSettings.highBrightnessModeKey -> {
+                val value = sp.getString(key, "0")
+                SystemProperties.set("sys.hbm", value)
+            }
+        }
+    }
+
     override fun startup(ctxt: Context) {
         if(!Tools.vendorFp.contains("OnePlus6")) return
+        Log.d("PHH", "Starting OP6 service")
         object : UEventObserver() {
             override fun onUEvent(event: UEventObserver.UEvent) {
                 try {
@@ -29,5 +71,11 @@ object OnePlusAlertSlider: EntryStartup {
 
             }
         }.startObserving("DEVPATH=/devices/platform/soc/soc:tri_state_key")
+
+        val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
+        sp.registerOnSharedPreferenceChangeListener(spListener)
+
+        //Refresh parameters on boot
+        spListener.onSharedPreferenceChanged(sp, OnePlusSettings.displayModeKey)
     }
 }

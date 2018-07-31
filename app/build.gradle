@@ -29,6 +29,10 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
     }
 }
 dependencies {
+    implementation 'com.android.support:support-v4:27.1.1'
     compileOnly files('libs/framework.jar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 }
+
+apply plugin: 'kotlin-android-extensions'

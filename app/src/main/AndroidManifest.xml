@@ -1,17 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    android:sharedUserId="android.uid.system"
+    package="me.phh.treble.app"
     android:persistent="true"
-    package="me.phh.treble.app">
+    android:sharedUserId="android.uid.system">
 
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        >
-        <service
-            android:name=".EntryService" />
+        android:supportsRtl="true">
+        <service android:name=".EntryService" />
 
         <receiver android:name=".Starter">
             <intent-filter>
@@ -19,5 +18,16 @@
                 <action android:name="me.phh.update" />
             </intent-filter>
         </receiver>
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
+
 </manifest>

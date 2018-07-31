@@ -9,6 +9,9 @@ import android.os.UserHandle
 import android.util.Log
 
 class EntryService: Service() {
+    companion object {
+        var service: EntryService? = null
+    }
     override fun onBind(intent: Intent): IBinder? {
         return null
     }
@@ -22,15 +25,13 @@ class EntryService: Service() {
     }
 
     override fun onCreate() {
-        Log.d("PHH", "Starting 1")
+        service = this
+
         tryC { Tools.startup(this) }
-        Log.d("PHH", "Starting 2")
         tryC { QtiAudio.startup(this) }
-        Log.d("PHH", "Starting 3")
         tryC { OnePlusAlertSlider.startup(this) }
-        Log.d("PHH", "Starting 4")
         tryC { OverlayPicker.startup(this) }
-        Log.d("PHH", "Starting 5")
+        tryC { Doze.startup(this) }
     }
 }
 

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Display">
+	    <ListPreference
+		android:defaultValue="default"
+		android:entries="@array/pref_oneplus_display_mode"
+		android:entryValues="@array/pref_oneplus_display_mode_values"
+		android:key="key_oneplus_display_mode"
+		android:title="Display Mode" />
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/pref_oneplus_display_high_brightness"
+            android:entryValues="@array/pref_oneplus_display_high_brightness_values"
+            android:key="key_oneplus_display_high_brightness"
+            android:title="High brightness mode" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="Other">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_oneplus_usb_otg"
+            android:title="Enable USB OTG" />
+    </PreferenceCategory>
+</PreferenceScreen>
