@@ -10,7 +10,6 @@ import android.util.Log
 
 object OnePlus: EntryStartup {
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
-        Log.d("PHH", "Got sp change $sp $key")
         when(key) {
             OnePlusSettings.displayModeKey -> {
                 val value = sp.getString(key, "default")
@@ -47,7 +46,7 @@ object OnePlus: EntryStartup {
     }
 
     override fun startup(ctxt: Context) {
-        if(!Tools.vendorFp.contains("OnePlus6")) return
+        if(!OnePlusSettings.enabled()) return
         Log.d("PHH", "Starting OP6 service")
         object : UEventObserver() {
             override fun onUEvent(event: UEventObserver.UEvent) {
@@ -77,5 +76,7 @@ object OnePlus: EntryStartup {
 
         //Refresh parameters on boot
         spListener.onSharedPreferenceChanged(sp, OnePlusSettings.displayModeKey)
+        spListener.onSharedPreferenceChanged(sp, OnePlusSettings.usbOtgKey)
+        spListener.onSharedPreferenceChanged(sp, OnePlusSettings.highBrightnessModeKey)
     }
 }

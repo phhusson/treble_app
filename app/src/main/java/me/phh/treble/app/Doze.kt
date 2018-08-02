@@ -144,7 +144,6 @@ object Doze: EntryStartup {
     }
 
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
-        Log.d("PHH", "Got sp change $sp $key")
         when(key) {
             DozeSettings.handwaveKey, DozeSettings.pocketKey -> {
                 updateState(
