@@ -8,7 +8,7 @@ import android.os.UEventObserver
 import android.preference.PreferenceManager
 import android.util.Log
 
-object OnePlusAlertSlider: EntryStartup {
+object OnePlus: EntryStartup {
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         Log.d("PHH", "Got sp change $sp $key")
         when(key) {
