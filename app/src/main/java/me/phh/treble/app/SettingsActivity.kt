@@ -56,6 +56,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         loadHeadersFromResource(R.xml.pref_headers, target)
         if(!OnePlusSettings.enabled())
             target.removeIf { it.fragment == OnePlusSettingsFragment::class.java.name }
+        if(!HuaweiSettings.enabled())
+            target.removeIf { it.fragment == HuaweiSettingsFragment::class.java.name }
     }
 
     /**
@@ -66,6 +68,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
         return PreferenceFragment::class.java.name == fragmentName
                 || OnePlusSettingsFragment::class.java.name == fragmentName
                 || DozeSettingsFragment::class.java.name == fragmentName
+                || HuaweiSettingsFragment::class.java.name == fragmentName
     }
 
     companion object {

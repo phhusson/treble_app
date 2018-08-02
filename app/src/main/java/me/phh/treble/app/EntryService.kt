@@ -20,7 +20,7 @@ class EntryService: Service() {
         try {
             fnc()
         } catch(e: Exception) {
-            Log.d("PHH", "Caught", e)
+            Log.e("PHH", "Caught", e)
         }
     }
 
@@ -32,6 +32,7 @@ class EntryService: Service() {
         tryC { OnePlus.startup(this) }
         tryC { OverlayPicker.startup(this) }
         tryC { Doze.startup(this) }
+        tryC { Huawei.startup(this) }
     }
 }
 
