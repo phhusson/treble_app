@@ -20,7 +20,7 @@ class EntryService: Service() {
     private fun tryC(fnc: () -> Unit) {
         try {
             fnc()
-        } catch(e: Exception) {
+        } catch(e: Throwable) {
             Log.e("PHH", "Caught", e)
         }
     }
