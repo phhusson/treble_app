@@ -6,6 +6,12 @@
         android:fragment="me.phh.treble.app.HuaweiSettingsFragment"
         android:title="Huawei features" />
     <header
+        android:fragment="me.phh.treble.app.SamsungSettingsFragment"
+        android:title="Samsung features" />
+    <header
         android:fragment="me.phh.treble.app.DozeSettingsFragment"
         android:title="Doze features" />
+    <header
+        android:fragment="me.phh.treble.app.MiscSettingsFragment"
+        android:title="Misc features" />
 </preference-headers>

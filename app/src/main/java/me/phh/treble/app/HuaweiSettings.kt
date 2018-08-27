@@ -8,6 +8,7 @@ import android.preference.PreferenceFragment
 object HuaweiSettings {
     val fingerprintGestures = "key_huawei_fingerprint_gestures"
     val touchscreenGloveMode = "key_huawei_touchscreen_glove_mode"
+    val fastCharge = "key_huawei_fast_charge"
 
     fun enabled(): Boolean =
             Tools.vendorFpLow.contains("huawei") ||

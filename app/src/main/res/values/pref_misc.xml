@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_misc_mobile_signal">
+	    <item>Android default</item>
+	    <item>Huawei devices/OpenKirin</item>
+	    <item>RSSI</item>
+	    <item>RSRP</item>
+	    <item>RSSNR</item>
+    </array>
+    <array name="pref_misc_mobile_signal_values">
+	    <item>default</item>
+	    <item>openkirin</item>
+	    <item>rssi</item>
+	    <item>rsrp</item>
+	    <item>rssnr</item>
+    </array>
+
+    <array name="pref_misc_fps_divisor">
+	    <item>"1 (default)"</item>
+	    <item>"2"</item>
+	    <item>"3"</item>
+    </array>
+    <array name="pref_misc_fps_divisor_values">
+	    <item>"1"</item>
+	    <item>"2"</item>
+	    <item>"3"</item>
+    </array>
+</resources>

@@ -4,18 +4,26 @@
     android:persistent="true"
     android:sharedUserId="android.uid.system">
 
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true">
+
+        <uses-library android:name="vendor.huawei.hardware.biometrics.fingerprint.V2_1" />
+        <uses-library android:name="vendor.huawei.hardware.tp.V1_0" />
+        <uses-library android:name="vendor.qti.hardware.radio.am.V1_0"/>
+        <uses-library android:name="vendor.qti.qcril.am.V1_0" />
+
         <service android:name=".EntryService" />
 
         <receiver android:name=".Starter">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="me.phh.update" />
+                <action android:name="android.intent.action.MY_PACKAGE_REPLACED" />
             </intent-filter>
         </receiver>
 

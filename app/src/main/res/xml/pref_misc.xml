@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Mobile network">
+	    <ListPreference
+		    android:defaultValue="default"
+		    android:entries="@array/pref_misc_mobile_signal"
+		    android:entryValues="@array/pref_misc_mobile_signal_values"
+		    android:key="key_misc_mobile_signal"
+		    android:title="Signal meter method" />
+	    <ListPreference
+		    android:defaultValue="1"
+		    android:entries="@array/pref_misc_fps_divisor"
+		    android:entryValues="@array/pref_misc_fps_divisor_values"
+		    android:key="key_misc_fps_divisor"
+		    android:title="FPS Divisor" />
+    </PreferenceCategory>
+</PreferenceScreen>

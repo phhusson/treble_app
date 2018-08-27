@@ -69,6 +69,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
                 || OnePlusSettingsFragment::class.java.name == fragmentName
                 || DozeSettingsFragment::class.java.name == fragmentName
                 || HuaweiSettingsFragment::class.java.name == fragmentName
+                || MiscSettingsFragment::class.java.name == fragmentName
+                || SamsungSettingsFragment::class.java.name == fragmentName
     }
 
     companion object {
