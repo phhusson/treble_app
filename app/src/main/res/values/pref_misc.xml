@@ -25,4 +25,15 @@
 	    <item>"2"</item>
 	    <item>"3"</item>
     </array>
+
+    <array name="pref_misc_max_aspect_ratio_pre_o">
+	    <item>"1.86 (default)"</item>
+	    <item>"2.0"</item>
+	    <item>"Infinite"</item>
+    </array>
+    <array name="pref_misc_max_aspect_ratio_pre_o_values">
+	    <item>"1.86"</item>
+	    <item>"2.0"</item>
+	    <item>"0.0"</item>
+    </array>
 </resources>

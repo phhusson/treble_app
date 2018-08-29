@@ -23,6 +23,11 @@ object Misc: EntryStartup {
                     Log.d("PHH", "Setting fps divisor to $value")
                     Settings.Global.putString(ctxt.applicationContext.contentResolver, "fps_divisor", value)
                 }
+                MiscSettings.maxAspectRatioPreO -> {
+                    val value = sp.getString(key, "1.86")
+                    SystemProperties.set("persist.sys.max_aspect_ratio.pre_o", value)
+                    Log.d("PHH", "Setting max aspect ratio for pre-o app $value")
+                }
             }
         }
 
@@ -34,5 +39,6 @@ object Misc: EntryStartup {
         //Refresh parameters on boot
         spListener.onSharedPreferenceChanged(sp, MiscSettings.fpsDivisor)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.mobileSignal)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.maxAspectRatioPreO)
     }
 }

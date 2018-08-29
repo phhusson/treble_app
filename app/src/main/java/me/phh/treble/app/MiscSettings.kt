@@ -8,6 +8,7 @@ import android.preference.PreferenceFragment
 object MiscSettings {
     val mobileSignal = "key_misc_mobile_signal"
     val fpsDivisor = "key_misc_fps_divisor"
+    val maxAspectRatioPreO = "key_misc_max_aspect_ratio_pre_o"
 
     fun enabled(): Boolean = true
 }
