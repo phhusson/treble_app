@@ -58,6 +58,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
             target.removeIf { it.fragment == OnePlusSettingsFragment::class.java.name }
         if(!HuaweiSettings.enabled())
             target.removeIf { it.fragment == HuaweiSettingsFragment::class.java.name }
+        if(!SamsungSettings.enabled())
+            target.removeIf { it.fragment == SamsungSettingsFragment::class.java.name }
     }
 
     /**
