@@ -36,12 +36,22 @@ object OverlayPicker: EntryStartup {
             setOverlayEnabled("me.phh.treble.overlay.telephony.lte", true)
     }
 
+    fun handleSamsung(ctxt: Context) {
+        if(vendorFp == null) return
+
+        if(vendorFp.matches(Regex(".*(crown|star)[q2]*lte.*")) ||
+                vendorFp.matches(Regex(".*(SC-0[23]K|SCV3[89]).*"))) {
+            setOverlayEnabled("me.phh.treble.overlay.samsung.s9.systemui", true)
+        }
+    }
+
     override fun startup(ctxt: Context) {
         om = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService("overlay"))
 
         handleHtc(ctxt)
         enableLte(ctxt)
+        handleSamsung(ctxt)
 
         setOverlayEnabled("me.phh.treble.overlay.systemui.falselocks", true)
     }
