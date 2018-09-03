@@ -14,6 +14,14 @@ class Huawei: EntryStartup {
     val fpService = IExtBiometricsFingerprint.getService()
     val tsService = ITouchscreen.getService()
 
+    fun writeToFileNofail(path: String, content: String) {
+        try {
+            File(path).printWriter().use { it.println(content) }
+        } catch(t: Throwable) {
+            Log.d("PHH", "Failed writing to $path", t)
+        }
+    }
+
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         when(key) {
             HuaweiSettings.fingerprintGestures -> {
@@ -33,16 +41,16 @@ class Huawei: EntryStartup {
                 val value = sp.getString(key, "-1")
                 when(value) {
                     "-1" -> {
-                        File(fastChargeCharger).printWriter().use { it.println("1500") }
-                        File(fastChargeData).printWriter().use { it.println("900") }
+                        writeToFileNofail(fastChargeCharger, "1500")
+                        writeToFileNofail(fastChargeData, "900")
                     }
                     "2750" -> {
-                        File(fastChargeCharger).printWriter().use { it.println("2750") }
-                        File(fastChargeData).printWriter().use { it.println("1000") }
+                        writeToFileNofail(fastChargeCharger, "2750")
+                        writeToFileNofail(fastChargeData, "1000")
                     }
                     "4000" -> {
-                        File(fastChargeCharger).printWriter().use { it.println("4000") }
-                        File(fastChargeData).printWriter().use { it.println("2000") }
+                        writeToFileNofail(fastChargeCharger, "4000")
+                        writeToFileNofail(fastChargeData, "2000")
                     }
                 }
             }
