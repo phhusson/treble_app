@@ -53,6 +53,7 @@ class QtiAudio: EntryStartup {
             val installed = ctxt.packageManager.getInstalledPackages(0).find { it.packageName == "org.codeaurora.ims" } != null
             val imsRroProperty = "persist.sys.phh.ims.caf"
             Log.d("PHH", "CAF IMS $installed installed")
+            Thread.sleep(30*1000)
             if(installed) {
                 SystemProperties.set(imsRroProperty, "true")
                 val replaceIntent =
