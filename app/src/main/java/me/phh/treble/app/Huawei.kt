@@ -2,6 +2,8 @@ package me.phh.treble.app
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.os.Parcel
+import android.os.ServiceManager
 import android.preference.PreferenceManager
 import android.util.Log
 import vendor.huawei.hardware.biometrics.fingerprint.V2_1.IExtBiometricsFingerprint
@@ -13,6 +15,16 @@ class Huawei: EntryStartup {
     val fastChargeData = "/sys/class/hw_power/charger/charge_data/iin_thermal"
     val fpService = IExtBiometricsFingerprint.getService()
     val tsService = ITouchscreen.getService()
+    val surfaceFlinger = ServiceManager.getService("SurfaceFlinger");
+
+    fun enableHwcOverlay(v: Boolean) {
+        val data = Parcel.obtain()
+        data.writeInterfaceToken("android.ui.ISurfaceComposer")
+        data.writeInt(if(v) 0 else 1)
+        surfaceFlinger.transact(1008, data, null, 0)
+        data.recycle()
+        Log.d("PHH", "Set surface flinger hwc overlay to $v")
+    }
 
     fun writeToFileNofail(path: String, content: String) {
         try {
@@ -54,6 +66,10 @@ class Huawei: EntryStartup {
                     }
                 }
             }
+            HuaweiSettings.noHwcomposer -> {
+                val value = sp.getBoolean(key, false)
+                enableHwcOverlay(!value)
+            }
         }
     }
 
@@ -67,6 +83,7 @@ class Huawei: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.fingerprintGestures)
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.touchscreenGloveMode)
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.fastCharge)
+        spListener.onSharedPreferenceChanged(sp, HuaweiSettings.noHwcomposer)
         tsService.hwTsGetChipInfo({ _, chip_info ->
             Log.d("PHH", "HW Touchscreen chip $chip_info")
         })
