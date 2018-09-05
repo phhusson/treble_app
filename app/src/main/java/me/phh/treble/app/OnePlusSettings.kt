@@ -7,6 +7,7 @@ object OnePlusSettings {
     val displayModeKey = "key_oneplus_display_mode"
     val highBrightnessModeKey = "key_oneplus_display_high_brightness"
     val usbOtgKey = "key_oneplus_usb_otg"
+    val dt2w = "key_oneplus_double_tap_to_wake"
 
     fun enabled(): Boolean = Tools.vendorFp.contains("OnePlus")
 }
