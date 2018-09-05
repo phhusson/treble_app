@@ -7,8 +7,10 @@ import android.os.SystemProperties
 import android.os.UEventObserver
 import android.preference.PreferenceManager
 import android.util.Log
+import java.io.File
 
 object OnePlus: EntryStartup {
+    val dtPanel = "/proc/touchpanel/double_tap_enable"
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         when(key) {
             OnePlusSettings.displayModeKey -> {
@@ -42,12 +44,25 @@ object OnePlus: EntryStartup {
                 val value = sp.getString(key, "0")
                 SystemProperties.set("sys.hbm", value)
             }
+            OnePlusSettings.dt2w -> {
+                val value = if(sp.getBoolean(key, false)) "1" else "0"
+                writeToFileNofail(dtPanel, value)
+                Log.d("PHH", "Setting dtPanel to $value")
+            }
+        }
+    }
+
+    fun writeToFileNofail(path: String, content: String) {
+        try {
+            File(path).printWriter().use { it.println(content) }
+        } catch(t: Throwable) {
+            Log.d("PHH", "Failed writing to $path", t)
         }
     }
 
     override fun startup(ctxt: Context) {
         if(!OnePlusSettings.enabled()) return
-        Log.d("PHH", "Starting OP6 service")
+        Log.d("PHH", "Starting OP service")
         object : UEventObserver() {
             override fun onUEvent(event: UEventObserver.UEvent) {
                 try {
@@ -78,5 +93,7 @@ object OnePlus: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, OnePlusSettings.displayModeKey)
         spListener.onSharedPreferenceChanged(sp, OnePlusSettings.usbOtgKey)
         spListener.onSharedPreferenceChanged(sp, OnePlusSettings.highBrightnessModeKey)
+        spListener.onSharedPreferenceChanged(sp, OnePlusSettings.dt2w)
+
     }
 }
