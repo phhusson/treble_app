@@ -8,7 +8,7 @@ object OnePlusSettings {
     val highBrightnessModeKey = "key_oneplus_display_high_brightness"
     val usbOtgKey = "key_oneplus_usb_otg"
 
-    fun enabled(): Boolean = Tools.vendorFp.contains("OnePlus6")
+    fun enabled(): Boolean = Tools.vendorFp.contains("OnePlus")
 }
 
 class OnePlusSettingsFragment : PreferenceFragment() {
