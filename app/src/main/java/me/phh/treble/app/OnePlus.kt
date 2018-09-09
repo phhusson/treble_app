@@ -10,7 +10,8 @@ import android.util.Log
 import java.io.File
 
 object OnePlus: EntryStartup {
-    val dtPanel = "/proc/touchpanel/double_tap_enable"
+    val dtPanel = "/proc/touchpanel/double_tap_enable" //OP3
+    val gestureEnable = "/proc/touchpanel/gesture_enable" //OP6
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         when(key) {
             OnePlusSettings.displayModeKey -> {
@@ -45,8 +46,15 @@ object OnePlus: EntryStartup {
                 SystemProperties.set("sys.hbm", value)
             }
             OnePlusSettings.dt2w -> {
-                val value = if(sp.getBoolean(key, false)) "1" else "0"
+                //TODO: We need to check that the screen is on at this time
+                //This won't have any effect if done with screen off
+                val b = sp.getBoolean(key, false)
+                val value = if(b) "1" else "0"
                 writeToFileNofail(dtPanel, value)
+                try {
+                    val v = if(b) arrayOf<Byte>(-128, 0) else arrayOf<Byte>(0, 0)
+                    File(gestureEnable).outputStream().use { it.write(v.toByteArray()) }
+                } catch(t: Throwable) { Log.d("PHH", "OP: Couldn't write to gesture enable")}
                 Log.d("PHH", "Setting dtPanel to $value")
             }
         }
