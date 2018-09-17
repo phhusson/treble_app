@@ -30,11 +30,7 @@ tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
 }
 dependencies {
     implementation 'com.android.support:support-v4:27.1.1'
-    compileOnly files('libs/framework.jar')
-    compileOnly files('libs/vendor.huawei.hardware.tp-V1.0-java.jar')
-    compileOnly files('libs/vendor.huawei.hardware.biometrics.fingerprint-V2.1-java.jar')
-    compileOnly files('libs/vendor.qti.qcril.am-V1.0-java.jar')
-    compileOnly files('libs/vendor.qti.hardware.radio.am-V1.0-java.jar')
+    compileOnly fileTree(dir: 'libs', include: '*.jar')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:27.1.1'
 }
