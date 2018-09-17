@@ -2,6 +2,7 @@ package me.phh.treble.app
 
 import android.content.Context
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.os.SystemProperties
 import android.preference.PreferenceManager
 import android.util.Log
@@ -45,6 +46,14 @@ class Samsung: EntryStartup {
 
         Log.e("PHH", "Samsung TS: Supports glove_mode ${tsCmdExists("glove_mode")}")
         Log.e("PHH", "Samsung TS: Supports aod_enable ${tsCmdExists("aod_enable")}")
+
+        for(malware in listOf("com.dti.globe", "com.singtel.mysingtel", "com.LogiaGroup.LogiaDeck")) {
+            try {
+                ctxt.packageManager
+                        .setApplicationEnabledSetting(malware, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0)
+            } catch (t: Throwable) { }
+        }
+
     }
 
     companion object: EntryStartup {
