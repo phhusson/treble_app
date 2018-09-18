@@ -36,6 +36,7 @@ class EntryService: Service() {
         tryC { Huawei.startup(this) }
         tryC { Misc.startup(this) }
         tryC { Samsung.startup(this) }
+        tryC { Hostapd.startup(this) }
     }
 }
 
