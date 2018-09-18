@@ -47,7 +47,7 @@ class Samsung: EntryStartup {
         Log.e("PHH", "Samsung TS: Supports glove_mode ${tsCmdExists("glove_mode")}")
         Log.e("PHH", "Samsung TS: Supports aod_enable ${tsCmdExists("aod_enable")}")
 
-        for(malware in listOf("com.dti.globe", "com.singtel.mysingtel", "com.LogiaGroup.LogiaDeck")) {
+        for(malware in listOf("com.dti.globe", "com.singtel.mysingtel", "com.LogiaGroup.LogiaDeck", "com.mygalaxy")) {
             try {
                 ctxt.packageManager
                         .setApplicationEnabledSetting(malware, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0)
