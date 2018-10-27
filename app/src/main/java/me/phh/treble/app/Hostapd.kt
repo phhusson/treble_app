@@ -85,7 +85,7 @@ class Hostapd: EntryStartup {
                             "driver=nl80211\n" +
                             "ctrl_interface=/data/misc/wifi/hostapd/ctrl\n" +
                             "ssid2=${ssidHex}\n" +
-                            "channel=$channel" +
+                            "channel=$channel\n" +
                             "iee80211n=1\n" +
                             "hw_mode=$hw_mode\n" +
                             "ignore_broadcast_ssid=$hidden\n" +
