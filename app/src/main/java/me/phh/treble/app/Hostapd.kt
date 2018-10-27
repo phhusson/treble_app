@@ -9,6 +9,9 @@ import android.util.Log
 import java.io.File
 import java.util.ArrayList
 
+import javax.crypto.SecretKeyFactory
+import javax.crypto.spec.PBEKeySpec
+
 class Hostapd: EntryStartup {
     val hostapdSvc = object: android.hardware.wifi.hostapd.V1_0.IHostapd.Stub() {
         override fun terminate() {
@@ -35,7 +38,18 @@ class Hostapd: EntryStartup {
                                 .padStart(2, '0')
                     }
 
-        fun generatePsk(ssid: ArrayList<Byte>, passphrase: String): String = ""
+        fun generatePsk(ssid: ArrayList<Byte>, passphrase: String): String {
+            val secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
+            val keySpec = PBEKeySpec(passphrase.toCharArray(), ssid.toByteArray(), 4096, 256)
+            val secretKey = secretKeyFactory.generateSecret(keySpec)
+            val bytes = secretKey.encoded
+
+            val list = ArrayList<Byte>(bytes.size)
+            for (b in bytes) {
+                 list.add(b)
+            }
+            return stringToHex(list)
+        }
 
         override fun addAccessPoint(ifaceParams: IHostapd.IfaceParams, nwParams: IHostapd.NetworkParams): HostapdStatus {
             Log.d("PHH", "Hostapd add access point")
@@ -44,7 +58,7 @@ class Hostapd: EntryStartup {
 
             val ssidHex = stringToHex(nwParams.ssid)
             var encryptionConfig = ""
-            /*if (nwParams.encryptionType != IHostapd.EncryptionType.NONE) {
+            if (nwParams.encryptionType != IHostapd.EncryptionType.NONE) {
                 val psk = generatePsk(nwParams.ssid, nwParams.pskPassphrase)
 
                 if (psk == "") {
@@ -60,7 +74,7 @@ class Hostapd: EntryStartup {
                         ret.debugMessage = "Unknown encryption type ${nwParams.encryptionType}"
                     }
                 }
-            }*/
+            }
 
             val hw_mode = if(ifaceParams.channelParams.band == IHostapd.Band.BAND_5_GHZ) "a" else "g"
             val channel = ifaceParams.channelParams.channel
