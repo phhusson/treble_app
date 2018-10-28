@@ -6,6 +6,9 @@ import android.hardware.wifi.hostapd.V1_0.HostapdStatusCode
 import android.hardware.wifi.hostapd.V1_0.IHostapd
 import android.os.SystemProperties
 import android.util.Log
+import javax.crypto.SecretKey;
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 import java.io.File
 import java.util.ArrayList
 
@@ -35,7 +38,17 @@ class Hostapd: EntryStartup {
                                 .padStart(2, '0')
                     }
 
-        fun generatePsk(ssid: ArrayList<Byte>, passphrase: String): String = ""
+        fun generatePsk(ssid: ArrayList<Byte>?, passphrase: String?): String {
+            if (ssid == null || passphrase == null) return ""
+            val secretKeyFactory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1")
+            val secretKey = secretKeyFactory.generateSecret(PBEKeySpec(passphrase.toCharArray(), ssid.toByteArray(), 4096, 256))
+            val bytes = secretKey.encoded
+            val list = ArrayList<Byte>(bytes.size)
+            for (b in bytes) {
+                list.add(java.lang.Byte.valueOf(b))
+            }
+            return stringToHex(list)
+        }
 
         override fun addAccessPoint(ifaceParams: IHostapd.IfaceParams, nwParams: IHostapd.NetworkParams): HostapdStatus {
             Log.d("PHH", "Hostapd add access point")
@@ -44,7 +57,7 @@ class Hostapd: EntryStartup {
 
             val ssidHex = stringToHex(nwParams.ssid)
             var encryptionConfig = ""
-            /*if (nwParams.encryptionType != IHostapd.EncryptionType.NONE) {
+            if (nwParams.encryptionType != IHostapd.EncryptionType.NONE) {
                 val psk = generatePsk(nwParams.ssid, nwParams.pskPassphrase)
 
                 if (psk == "") {
@@ -60,7 +73,6 @@ class Hostapd: EntryStartup {
                         ret.debugMessage = "Unknown encryption type ${nwParams.encryptionType}"
                     }
                 }
-            }*/
 
             val hw_mode = if(ifaceParams.channelParams.band == IHostapd.Band.BAND_5_GHZ) "a" else "g"
             val channel = ifaceParams.channelParams.channel
