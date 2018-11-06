@@ -3,6 +3,7 @@ package me.phh.treble.app
 import android.content.Context
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.media.AudioSystem
 import android.os.SystemProperties
 import android.preference.PreferenceManager
 import android.util.Log
@@ -29,6 +30,17 @@ class Samsung: EntryStartup {
                 val cmd = if(value) "glove_mode,1" else "glove_mode,0"
                 val ret = tsCmd(cmd)
                 Log.e("PHH", "Setting glove mode to $cmd got $ret")
+            }
+            SamsungSettings.audioStereoMode -> {
+                val value = sp.getBoolean(key, false)
+                if(value) {
+                    AudioSystem.setParameters("Dualspk=1")
+                    AudioSystem.setParameters("SpkAmpLPowerOn=1")
+                    AudioSystem.setParameters("ProximitySensorClosed=0")
+                } else {
+                    AudioSystem.setParameters("Dualspk=0")
+                    AudioSystem.setParameters("SpkAmpLPowerOn=0")
+                }
             }
         }
     }

@@ -7,6 +7,7 @@ import android.preference.PreferenceFragment
 object SamsungSettings {
     val highBrightess = "key_samsung_high_brightness"
     val gloveMode = "key_samsung_glove_mode"
+    val audioStereoMode = "key_samsung_audio_stereo"
 
     fun enabled(): Boolean =
             Tools.vendorFpLow.matches(Regex(".*(crown|star)[q2]*lte.*"))
