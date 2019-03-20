@@ -20,4 +20,8 @@
 		    android:key="key_misc_max_aspect_ratio_pre_o"
 		    android:title="Compatibility max aspect ratio" />
     </PreferenceCategory>
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="key_misc_multi_camera"
+        android:title="Expose Aux cameras (Qualcomm)" />
 </PreferenceScreen>
