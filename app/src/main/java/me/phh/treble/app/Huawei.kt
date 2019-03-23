@@ -1,9 +1,13 @@
 package me.phh.treble.app
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
+import android.os.SystemProperties
 import android.os.Parcel
 import android.os.ServiceManager
+import android.os.UserHandle
 import android.preference.PreferenceManager
 import android.util.Log
 import vendor.huawei.hardware.biometrics.fingerprint.V2_1.IExtBiometricsFingerprint
