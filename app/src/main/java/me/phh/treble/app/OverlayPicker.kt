@@ -45,6 +45,14 @@ object OverlayPicker: EntryStartup {
         }
     }
 
+    fun handleXiaomi(ctxt: Context) {
+        if(vendorFp == null) return
+
+        if(vendorFp.matches(Regex(".*iaomi/perseus.*"))) {
+            setOverlayEnabled("me.phh.treble.overlay.xiaomi.mimix3.systemui", true)
+        }
+    }
+
     override fun startup(ctxt: Context) {
         om = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService("overlay"))
@@ -52,6 +60,7 @@ object OverlayPicker: EntryStartup {
         handleHtc(ctxt)
         enableLte(ctxt)
         handleSamsung(ctxt)
+        handleXiaomi(ctxt)
 
         setOverlayEnabled("me.phh.treble.overlay.systemui.falselocks", true)
     }
