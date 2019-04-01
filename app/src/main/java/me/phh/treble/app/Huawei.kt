@@ -96,8 +96,8 @@ class Huawei: EntryStartup {
         val installed = ctxt.packageManager.getInstalledPackages(0).find { it.packageName == "com.huawei.ims" } != null
         val imsRroProperty = "persist.sys.phh.ims.hw"
         Log.d("PHH", "HwIms $installed installed")
-        if(installed and (SystemProperties.getBoolean(imsRroProperty, false).not())) {
-            SystemProperties.set(imsRroProperty, "true")
+        if(installed != SystemProperties.getBoolean(imsRroProperty, false)) {
+            SystemProperties.set(imsRroProperty, if (installed) "true" else "false")
             val replaceIntent =
                     Intent(Intent.ACTION_PACKAGE_CHANGED)
                             .setData(Uri.parse("package:com.huawei.ims"))
@@ -105,8 +105,6 @@ class Huawei: EntryStartup {
                             .putExtra(Intent.EXTRA_DONT_KILL_APP, false)
                             .putExtra(Intent.EXTRA_CHANGED_COMPONENT_NAME_LIST, emptyArray<String>())
             ctxt.sendBroadcastAsUser(replaceIntent, UserHandle.SYSTEM)
-        } else {
-            SystemProperties.set(imsRroProperty, "false")
         }
     }
 
