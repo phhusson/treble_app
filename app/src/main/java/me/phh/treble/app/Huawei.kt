@@ -1,9 +1,13 @@
 package me.phh.treble.app
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
+import android.net.Uri
+import android.os.SystemProperties
 import android.os.Parcel
 import android.os.ServiceManager
+import android.os.UserHandle
 import android.preference.PreferenceManager
 import android.util.Log
 import vendor.huawei.hardware.biometrics.fingerprint.V2_1.IExtBiometricsFingerprint
@@ -87,6 +91,21 @@ class Huawei: EntryStartup {
         tsService.hwTsGetChipInfo({ _, chip_info ->
             Log.d("PHH", "HW Touchscreen chip $chip_info")
         })
+        
+        Log.d("PHH", "Checking HwIms status")
+        val installed = ctxt.packageManager.getInstalledPackages(0).find { it.packageName == "com.huawei.ims" } != null
+        val imsRroProperty = "persist.sys.phh.ims.hw"
+        Log.d("PHH", "HwIms $installed installed")
+        if(installed != SystemProperties.getBoolean(imsRroProperty, false)) {
+            SystemProperties.set(imsRroProperty, if (installed) "true" else "false")
+            val replaceIntent =
+                    Intent(Intent.ACTION_PACKAGE_CHANGED)
+                            .setData(Uri.parse("package:com.huawei.ims"))
+                            .putExtra(Intent.EXTRA_UID, 0)
+                            .putExtra(Intent.EXTRA_DONT_KILL_APP, false)
+                            .putExtra(Intent.EXTRA_CHANGED_COMPONENT_NAME_LIST, emptyArray<String>())
+            ctxt.sendBroadcastAsUser(replaceIntent, UserHandle.SYSTEM)
+        }
     }
 
     companion object: EntryStartup {
