@@ -32,7 +32,13 @@ class HuaweiAudio : EntryStartup, BroadcastReceiver() {
         Log.d(tag, "Registered for headset plug")
     }
 
-    companion object {
+    companion object : EntryStartup {
         const val tag = "HuaweiAudio"
+        private var self: HuaweiAudio? = null
+        override fun startup(ctxt: Context) {
+            if (!HuaweiSettings.enabled()) return
+            self = HuaweiAudio()
+            self!!.startup(ctxt)
+        }
     }
 }
