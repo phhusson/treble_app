@@ -10,6 +10,8 @@ import android.util.Log
 class HuaweiAudio : EntryStartup, BroadcastReceiver() {
     private var audioManager: AudioManager? = null
     override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action != Intent.ACTION_HEADSET_PLUG)
+            return
         if (audioManager == null) {
             audioManager = context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         }
