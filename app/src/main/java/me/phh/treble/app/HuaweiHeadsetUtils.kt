@@ -6,7 +6,7 @@ import java.util.concurrent.locks.ReentrantLock
 import kotlin.concurrent.withLock
 
 object HuaweiHeadsetUtils {
-    private val lock = ReentrantLock()
+    private val lock = ReentrantLock(true)
     private var mode: Int = AudioManager.MODE_INVALID
     fun speaker(audioManager: AudioManager) {
         lock.withLock {
