@@ -15,7 +15,8 @@ class Huawei: EntryStartup {
     val fastChargeData = "/sys/class/hw_power/charger/charge_data/iin_thermal"
     val fpService = IExtBiometricsFingerprint.getService()
     val tsService = ITouchscreen.getService()
-    val surfaceFlinger = ServiceManager.getService("SurfaceFlinger");
+    val surfaceFlinger = ServiceManager.getService("SurfaceFlinger")
+    var ctxt: Context? = null
 
     fun enableHwcOverlay(v: Boolean) {
         val data = Parcel.obtain()
@@ -70,6 +71,17 @@ class Huawei: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 enableHwcOverlay(!value)
             }
+            HuaweiSettings.headsetFix -> {
+                val value = sp.getBoolean(key, true)
+                Log.d("PHH", "Setting Huawei headset fix to $value")
+                if (value) {
+                    Log.d("PHH", "starting huaweiaudio")
+                    HuaweiAudio.startup(ctxt!!)
+                } else {
+                    Log.d("PHH", "stopping huaweiaudio")
+                    HuaweiAudio.shutdown(ctxt!!)
+                }
+            }
         }
     }
 
@@ -79,18 +91,21 @@ class Huawei: EntryStartup {
         val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
         sp.registerOnSharedPreferenceChangeListener(spListener)
 
+        this.ctxt = ctxt.applicationContext
+
         //Refresh parameters on boot
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.fingerprintGestures)
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.touchscreenGloveMode)
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.fastCharge)
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.noHwcomposer)
+        spListener.onSharedPreferenceChanged(sp, HuaweiSettings.headsetFix)
         tsService.hwTsGetChipInfo({ _, chip_info ->
             Log.d("PHH", "HW Touchscreen chip $chip_info")
         })
     }
 
     companion object: EntryStartup {
-        var self: Huawei? = null
+        private var self: Huawei? = null
         override fun startup(ctxt: Context) {
             if (!HuaweiSettings.enabled()) return
             self = Huawei()

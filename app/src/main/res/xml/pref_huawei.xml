@@ -24,4 +24,10 @@
 		    android:key="key_huawei_fast_charge"
 		    android:title="Huawei fast charge" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="Headset/Headphones">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="key_huawei_headset_fix"
+            android:title="Switch to headset when headset connected" />
+    </PreferenceCategory>
 </PreferenceScreen>
