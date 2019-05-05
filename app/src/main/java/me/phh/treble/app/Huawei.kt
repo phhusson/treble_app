@@ -71,17 +71,6 @@ class Huawei: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 enableHwcOverlay(!value)
             }
-            HuaweiSettings.headsetFix -> {
-                val value = sp.getBoolean(key, true)
-                Log.d("PHH", "Setting Huawei headset fix to $value")
-                if (value) {
-                    Log.d("PHH", "starting huaweiaudio")
-                    HuaweiAudio.startup(ctxt!!)
-                } else {
-                    Log.d("PHH", "stopping huaweiaudio")
-                    HuaweiAudio.shutdown(ctxt!!)
-                }
-            }
         }
     }
 
@@ -98,7 +87,6 @@ class Huawei: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.touchscreenGloveMode)
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.fastCharge)
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.noHwcomposer)
-        spListener.onSharedPreferenceChanged(sp, HuaweiSettings.headsetFix)
         tsService.hwTsGetChipInfo({ _, chip_info ->
             Log.d("PHH", "HW Touchscreen chip $chip_info")
         })

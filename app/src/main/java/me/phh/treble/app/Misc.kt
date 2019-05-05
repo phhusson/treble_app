@@ -1,14 +1,14 @@
 package me.phh.treble.app
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.SystemProperties
 import android.preference.PreferenceManager
 import android.provider.Settings
 import android.util.Log
-import vendor.huawei.hardware.biometrics.fingerprint.V2_1.IExtBiometricsFingerprint
-import vendor.huawei.hardware.tp.V1_0.ITouchscreen
 
+@SuppressLint("StaticFieldLeak")
 object Misc: EntryStartup {
     fun safeSetprop(key: String, value: String?) {
         try {
@@ -47,6 +47,18 @@ object Misc: EntryStartup {
                     safeSetprop("ctl.restart", "camera-provider-2-4")
                 }
             }
+            MiscSettings.headsetFix -> {
+                val value = sp.getBoolean(key, HuaweiSettings.enabled())
+                if (! sp.contains(key))
+                Log.d("PHH", "Setting Huawei headset fix to $value")
+                if (value) {
+                    Log.d("PHH", "starting huaweiaudio")
+                    ForceHeadsetAudio.startup(ctxt)
+                } else {
+                    Log.d("PHH", "stopping huaweiaudio")
+                    ForceHeadsetAudio.shutdown(ctxt)
+                }
+            }
         }
     }
 
@@ -64,5 +76,8 @@ object Misc: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, MiscSettings.mobileSignal)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.maxAspectRatioPreO)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.multiCameras)
+        if (! sp.contains(MiscSettings.headsetFix))
+            sp.edit().putBoolean(MiscSettings.headsetFix, HuaweiSettings.enabled()).commit()
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.headsetFix)
     }
 }
