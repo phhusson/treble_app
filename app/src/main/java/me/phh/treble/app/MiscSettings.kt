@@ -9,6 +9,7 @@ object MiscSettings {
     val fpsDivisor = "key_misc_fps_divisor"
     val maxAspectRatioPreO = "key_misc_max_aspect_ratio_pre_o"
     val multiCameras = "key_misc_multi_camera"
+    val headsetFix = "key_huawei_headset_fix"
 
     fun enabled(): Boolean = true
 }

@@ -19,7 +19,8 @@ class Huawei: EntryStartup {
     val fastChargeData = "/sys/class/hw_power/charger/charge_data/iin_thermal"
     val fpService = IExtBiometricsFingerprint.getService()
     val tsService = ITouchscreen.getService()
-    val surfaceFlinger = ServiceManager.getService("SurfaceFlinger");
+    val surfaceFlinger = ServiceManager.getService("SurfaceFlinger")
+    var ctxt: Context? = null
 
     fun enableHwcOverlay(v: Boolean) {
         val data = Parcel.obtain()
@@ -83,6 +84,8 @@ class Huawei: EntryStartup {
         val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
         sp.registerOnSharedPreferenceChangeListener(spListener)
 
+        this.ctxt = ctxt.applicationContext
+
         //Refresh parameters on boot
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.fingerprintGestures)
         spListener.onSharedPreferenceChanged(sp, HuaweiSettings.touchscreenGloveMode)
@@ -109,7 +112,7 @@ class Huawei: EntryStartup {
     }
 
     companion object: EntryStartup {
-        var self: Huawei? = null
+        private var self: Huawei? = null
         override fun startup(ctxt: Context) {
             if (!HuaweiSettings.enabled()) return
             self = Huawei()

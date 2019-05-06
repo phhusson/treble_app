@@ -24,4 +24,5 @@
 		    android:key="key_huawei_fast_charge"
 		    android:title="Huawei fast charge" />
     </PreferenceCategory>
+
 </PreferenceScreen>

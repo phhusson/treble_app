@@ -24,4 +24,10 @@
         android:defaultValue="false"
         android:key="key_misc_multi_camera"
         android:title="Expose Aux cameras (Qualcomm)" />
+	<PreferenceCategory android:title="Headset/Headphones">
+		<CheckBoxPreference
+			android:defaultValue="false"
+			android:key="key_huawei_headset_fix"
+			android:title="Force headset switch (Huawei default)" />
+	</PreferenceCategory>
 </PreferenceScreen>
