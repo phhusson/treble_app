@@ -7,6 +7,7 @@ import android.os.SystemProperties
 import android.preference.PreferenceManager
 import android.provider.Settings
 import android.util.Log
+import java.lang.ref.WeakReference
 
 @SuppressLint("StaticFieldLeak")
 object Misc: EntryStartup {
@@ -17,8 +18,10 @@ object Misc: EntryStartup {
             Log.d("PHH", "Failed setting prop $key", e)
         }
     }
-    lateinit var ctxt: Context
+    lateinit var ctxt: WeakReference<Context>
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
+        val c = ctxt.get()
+        if(c == null) return@OnSharedPreferenceChangeListener
         when(key) {
             MiscSettings.mobileSignal -> {
                 val value = sp.getString(key, "default")
@@ -28,7 +31,7 @@ object Misc: EntryStartup {
             MiscSettings.fpsDivisor -> {
                 val value = sp.getString(key, "1")
                 Log.d("PHH", "Setting fps divisor to $value")
-                Settings.Global.putString(ctxt.contentResolver, "fps_divisor", value)
+                Settings.Global.putString(c.contentResolver, "fps_divisor", value)
             }
             MiscSettings.maxAspectRatioPreO -> {
                 val value = sp.getString(key, "1.86")
@@ -53,10 +56,17 @@ object Misc: EntryStartup {
                 Log.d("PHH", "Setting Huawei headset fix to $value")
                 if (value) {
                     Log.d("PHH", "starting huaweiaudio")
-                    ForceHeadsetAudio.startup(ctxt)
+                    ForceHeadsetAudio.startup(c)
                 } else {
                     Log.d("PHH", "stopping huaweiaudio")
-                    ForceHeadsetAudio.shutdown(ctxt)
+                    ForceHeadsetAudio.shutdown(c)
+                }
+            }
+            MiscSettings.roundedCorners -> {
+                val value = sp.getString(key, "-1").toInt()
+                if(value >= 0) {
+                    Settings.Secure.putInt(c.contentResolver,"sysui_rounded_size", value)
+                    Settings.Secure.putInt(c.contentResolver,"sysui_rounded_content_padding", value)
                 }
             }
         }
@@ -69,7 +79,7 @@ object Misc: EntryStartup {
         val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
         sp.registerOnSharedPreferenceChangeListener(spListener)
 
-        this.ctxt = ctxt.applicationContext
+        this.ctxt = WeakReference(ctxt.applicationContext)
 
         //Refresh parameters on boot
         spListener.onSharedPreferenceChanged(sp, MiscSettings.fpsDivisor)

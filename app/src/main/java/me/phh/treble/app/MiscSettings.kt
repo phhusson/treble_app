@@ -10,6 +10,7 @@ object MiscSettings {
     val maxAspectRatioPreO = "key_misc_max_aspect_ratio_pre_o"
     val multiCameras = "key_misc_multi_camera"
     val headsetFix = "key_huawei_headset_fix"
+    val roundedCorners = "key_misc_rounded_corners"
 
     fun enabled(): Boolean = true
 }
