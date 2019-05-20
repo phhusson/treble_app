@@ -65,7 +65,7 @@ object Misc: EntryStartup {
             MiscSettings.roundedCorners -> {
                 val value = sp.getString(key, "-1").toInt()
                 if(value >= 0) {
-                    Settings.Secure.putInt(c.contentResolver,"sysui_rounded_size", value)
+                    //Settings.Secure.putInt(c.contentResolver,"sysui_rounded_size", value)
                     Settings.Secure.putInt(c.contentResolver,"sysui_rounded_content_padding", value)
                 }
             }
