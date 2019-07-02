@@ -86,7 +86,7 @@ class Hostapd: EntryStartup {
                             "ctrl_interface=/data/misc/wifi/hostapd/ctrl\n" +
                             "ssid2=${ssidHex}\n" +
                             "channel=$channel\n" +
-                            "iee80211n=1\n" +
+                            "ieee80211n=1\n" +
                             "hw_mode=$hw_mode\n" +
                             "ignore_broadcast_ssid=$hidden\n" +
                             "wowlan_triggers=any\n" +
