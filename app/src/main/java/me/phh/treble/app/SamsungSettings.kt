@@ -10,7 +10,7 @@ object SamsungSettings {
     val audioStereoMode = "key_samsung_audio_stereo"
 
     fun enabled(): Boolean =
-            Tools.vendorFpLow.matches(Regex(".*(crown|star)[q2]*lte.*"))
+            Tools.vendorFpLow.startsWith("samsung/")
 }
 
 class SamsungSettingsFragment : PreferenceFragment() {
