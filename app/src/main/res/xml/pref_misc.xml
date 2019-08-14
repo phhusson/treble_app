@@ -35,4 +35,14 @@
         android:key="key_misc_rounded_corners"
 	android:title="Set rounded corners diameter"
 	android:inputType="number" />
+    <PreferenceCategory android:title="Backlight">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_linear_brightness"
+            android:title="Use linear screen brightness slider" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_disable_buttons_backlight"
+            android:title="Disable backlight of hardware buttons if present (requires reboot)" />
+    </PreferenceCategory>
 </PreferenceScreen>

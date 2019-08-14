@@ -69,6 +69,14 @@ object Misc: EntryStartup {
                     Settings.Secure.putInt(c.contentResolver,"sysui_rounded_content_padding", value)
                 }
             }
+            MiscSettings.linearBrightness -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.linear_brightness", if(value) "true" else "false")
+            }
+            MiscSettings.disableButtonsBacklight -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.disable_buttons_light", if(value) "true" else "false")
+            }
         }
     }
 
