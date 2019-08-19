@@ -7,19 +7,20 @@
 		    android:entryValues="@array/pref_misc_mobile_signal_values"
 		    android:key="key_misc_mobile_signal"
 		    android:title="Signal meter method" />
-	    <ListPreference
-		    android:defaultValue="1"
-		    android:entries="@array/pref_misc_fps_divisor"
-		    android:entryValues="@array/pref_misc_fps_divisor_values"
-		    android:key="key_misc_fps_divisor"
-		    android:title="FPS Divisor" />
-	    <ListPreference
-		    android:defaultValue="1.86"
-		    android:entries="@array/pref_misc_max_aspect_ratio_pre_o"
-		    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
-		    android:key="key_misc_max_aspect_ratio_pre_o"
-		    android:title="Compatibility max aspect ratio" />
     </PreferenceCategory>
+
+    <ListPreference
+	    android:defaultValue="1"
+	    android:entries="@array/pref_misc_fps_divisor"
+	    android:entryValues="@array/pref_misc_fps_divisor_values"
+	    android:key="key_misc_fps_divisor"
+	    android:title="FPS Divisor" />
+    <ListPreference
+	    android:defaultValue="1.86"
+	    android:entries="@array/pref_misc_max_aspect_ratio_pre_o"
+	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
+	    android:key="key_misc_max_aspect_ratio_pre_o"
+	    android:title="Compatibility max aspect ratio" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_misc_multi_camera"
