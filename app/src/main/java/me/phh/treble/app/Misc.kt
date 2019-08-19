@@ -77,6 +77,10 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.disable_buttons_light", if(value) "true" else "false")
             }
+            MiscSettings.forceNavbar -> {
+                val value = sp.getBoolean(key, false)
+                OverlayPicker.setOverlayEnabled("me.phh.treble.overlay.navbar", value)
+            }
         }
     }
 

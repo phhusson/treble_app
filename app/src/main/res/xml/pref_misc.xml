@@ -25,6 +25,10 @@
         android:defaultValue="false"
         android:key="key_misc_multi_camera"
         android:title="Expose Aux cameras (Qualcomm)" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="key_misc_force_navbar"
+        android:title="Force navigation bar enabled" />
     <PreferenceCategory android:title="Headset/Headphones">
         <CheckBoxPreference
             android:defaultValue="false"

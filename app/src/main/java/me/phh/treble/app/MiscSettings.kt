@@ -13,6 +13,7 @@ object MiscSettings {
     val roundedCorners = "key_misc_rounded_corners"
     val linearBrightness = "key_misc_linear_brightness"
     val disableButtonsBacklight = "key_misc_disable_buttons_backlight"
+    val forceNavbar = "key_misc_force_navbar"
 
     fun enabled(): Boolean = true
 }

@@ -5,6 +5,7 @@ import android.os.ServiceManager
 import android.content.om.IOverlayManager
 import android.os.RemoteException
 import android.os.SystemProperties
+import android.preference.PreferenceManager
 import android.util.Log
 
 object OverlayPicker: EntryStartup {
@@ -14,7 +15,7 @@ object OverlayPicker: EntryStartup {
     private val vendorFp = SystemProperties.get("ro.vendor.build.fingerprint")
     private val productBoard = SystemProperties.get("ro.product.board")
 
-    private fun setOverlayEnabled(o: String, enabled: Boolean) {
+    fun setOverlayEnabled(o: String, enabled: Boolean) {
         try {
             om!!.setEnabled(o, enabled, 0)
         } catch (e: RemoteException) {
@@ -26,8 +27,11 @@ object OverlayPicker: EntryStartup {
         //HTC U11+
         if (vendorFp == null) return
 
-        if (vendorFp.contains("htc_ocm"))
+        if (vendorFp.contains("htc_ocm")) {
             setOverlayEnabled("me.phh.treble.overlay.navbar", true)
+            val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
+            sp.edit().putBoolean(MiscSettings.forceNavbar, true).apply()
+        }
     }
 
     private fun enableLte(ctxt: Context) {
