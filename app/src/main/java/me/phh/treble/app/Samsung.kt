@@ -50,6 +50,10 @@ class Samsung: EntryStartup {
                     Log.e("PHH", "Failed setting wireless charging transmit", e)
                 }
             }
+            SamsungSettings.doubleTapToWake -> {
+                val cmd = if(sp.getBoolean(key, false)) "aot_enable,1" else "aot_enable,0"
+                tsCmd(cmd)
+            }
         }
     }
 
