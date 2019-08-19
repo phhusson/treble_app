@@ -42,13 +42,25 @@ class Samsung: EntryStartup {
                     AudioSystem.setParameters("SpkAmpLPowerOn=0")
                 }
             }
+            SamsungSettings.wirelessChargingTransmit -> {
+                val value = if(sp.getBoolean(key, false)) "1" else "0"
+                try {
+                    File("/sys/devices/platform/battery/power_supply/battery/wc_tx_en").writeText(value + "\n")
+                } catch(e: Exception) {
+                    Log.e("PHH", "Failed setting wireless charging transmit", e)
+                }
+            }
         }
     }
 
     override fun startup(ctxt: Context) {
         if (!SamsungSettings.enabled()) return
 
+        //Reset wirelesss charging transmit at every boot
         val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
+
+        sp.edit().putBoolean(SamsungSettings.wirelessChargingTransmit, false).apply()
+
         sp.registerOnSharedPreferenceChangeListener(spListener)
 
         //Refresh parameters on boot

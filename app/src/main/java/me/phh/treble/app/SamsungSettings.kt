@@ -8,6 +8,7 @@ object SamsungSettings {
     val highBrightess = "key_samsung_high_brightness"
     val gloveMode = "key_samsung_glove_mode"
     val audioStereoMode = "key_samsung_audio_stereo"
+    val wirelessChargingTransmit = "key_samsung_wireless_charging_transmit"
 
     fun enabled(): Boolean =
             Tools.vendorFpLow.startsWith("samsung/")
