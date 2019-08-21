@@ -45,7 +45,7 @@ class Samsung: EntryStartup {
             SamsungSettings.wirelessChargingTransmit -> {
                 val value = if(sp.getBoolean(key, false)) "1" else "0"
                 try {
-                    File("/sys/devices/platform/battery/power_supply/battery/wc_tx_en").writeText(value + "\n")
+                    File("/sys/class/power_supply/battery/wc_tx_en").writeText(value + "\n")
                 } catch(e: Exception) {
                     Log.e("PHH", "Failed setting wireless charging transmit", e)
                 }
