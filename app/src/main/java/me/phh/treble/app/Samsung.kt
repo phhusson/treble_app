@@ -71,6 +71,7 @@ class Samsung: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, SamsungSettings.highBrightess)
         spListener.onSharedPreferenceChanged(sp, SamsungSettings.gloveMode)
         spListener.onSharedPreferenceChanged(sp, SamsungSettings.audioStereoMode)
+        spListener.onSharedPreferenceChanged(sp, SamsungSettings.doubleTapToWake)
         Log.e("PHH", "Samsung TS: ${tsCmd("get_chip_vendor")}:${tsCmd("get_chip_name")}")
 
         Log.e("PHH", "Samsung TS: Supports glove_mode ${tsCmdExists("glove_mode")}")
