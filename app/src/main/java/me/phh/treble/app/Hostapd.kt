@@ -94,6 +94,7 @@ class Hostapd: EntryStartup {
 
             try {
                 val conf = File("/data/misc/wifi/hostapd.conf")
+                conf.delete()
                 conf.printWriter().use { it.print(config) }
                 conf.setReadable(true, false)
             } catch (t: Throwable) {
