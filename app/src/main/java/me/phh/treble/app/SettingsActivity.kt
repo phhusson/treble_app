@@ -54,6 +54,8 @@ class SettingsActivity : AppCompatPreferenceActivity() {
     @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onBuildHeaders(target: MutableList<PreferenceActivity.Header>) {
         loadHeadersFromResource(R.xml.pref_headers, target)
+        if(!LenovoSettings.enabled())
+            target.removeIf { it.fragment == LenovoSettingsFragment::class.java.name }
         if(!OnePlusSettings.enabled())
             target.removeIf { it.fragment == OnePlusSettingsFragment::class.java.name }
         if(!HuaweiSettings.enabled())
@@ -68,6 +70,7 @@ class SettingsActivity : AppCompatPreferenceActivity() {
      */
     override fun isValidFragment(fragmentName: String): Boolean {
         return PreferenceFragment::class.java.name == fragmentName
+                || LenovoSettingsFragment::class.java.name == fragmentName
                 || OnePlusSettingsFragment::class.java.name == fragmentName
                 || DozeSettingsFragment::class.java.name == fragmentName
                 || HuaweiSettingsFragment::class.java.name == fragmentName
