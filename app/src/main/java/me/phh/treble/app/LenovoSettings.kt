@@ -2,11 +2,12 @@ package me.phh.treble.app
 
 import android.os.Bundle
 import android.preference.PreferenceFragment
+import java.io.File
 
 object LenovoSettings {
     val dt2w = "lenovo_double_tap_to_wake"
 
-    fun enabled(): Boolean = Tools.vendorFp.contains("Lenovo")
+    fun enabled(): Boolean = Tools.vendorFp.contains("Lenovo") && File(Lenovo.dtPanel).exists()
 }
 
 class LenovoSettingsFragment : PreferenceFragment() {
