@@ -9,6 +9,9 @@
         android:fragment="me.phh.treble.app.SamsungSettingsFragment"
         android:title="Samsung features" />
     <header
+        android:fragment="me.phh.treble.app.LenovoSettingsFragment"
+        android:title="Lenovo features" />
+    <header
         android:fragment="me.phh.treble.app.DozeSettingsFragment"
         android:title="Doze features" />
     <header
