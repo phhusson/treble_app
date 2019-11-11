@@ -1,10 +1,6 @@
 package me.phh.treble.app
 
-import android.os.Bundle
-import android.os.SystemProperties
-import android.preference.PreferenceFragment
-
-object MiscSettings {
+object MiscSettings : Settings {
     val mobileSignal = "key_misc_mobile_signal"
     val fpsDivisor = "key_misc_fps_divisor"
     val maxAspectRatioPreO = "key_misc_max_aspect_ratio_pre_o"
@@ -16,12 +12,9 @@ object MiscSettings {
     val disableButtonsBacklight = "key_misc_disable_buttons_backlight"
     val forceNavbar = "key_misc_force_navbar"
 
-    fun enabled(): Boolean = true
+    override fun enabled() = true
 }
 
-class MiscSettingsFragment : PreferenceFragment() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        addPreferencesFromResource(R.xml.pref_misc)
-    }
+class MiscSettingsFragment : SettingsFragment() {
+    override val preferencesResId = R.xml.pref_misc
 }

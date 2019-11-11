@@ -1,15 +1,13 @@
-@file:Suppress("DEPRECATION")
-
 package me.phh.treble.app
 
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
-import android.preference.ListPreference
-import android.preference.Preference
 import android.preference.PreferenceActivity
-import android.preference.PreferenceFragment
-import android.preference.PreferenceManager
+import androidx.preference.ListPreference
+import androidx.preference.Preference
+import androidx.preference.PreferenceFragment
+import androidx.preference.PreferenceManager
 
 /**
  * A [PreferenceActivity] that presents a set of application settings. On
