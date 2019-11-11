@@ -2,10 +2,8 @@
 
 package me.phh.treble.app
 
-import android.annotation.TargetApi
 import android.content.Context
 import android.content.res.Configuration
-import android.os.Build
 import android.os.Bundle
 import android.preference.ListPreference
 import android.preference.Preference
@@ -47,16 +45,15 @@ class SettingsActivity : PreferenceActivity() {
     /**
      * {@inheritDoc}
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
     override fun onBuildHeaders(target: MutableList<Header>) {
         loadHeadersFromResource(R.xml.pref_headers, target)
-        if(!LenovoSettings.enabled())
+        if (!LenovoSettings.enabled())
             target.removeIf { it.fragment == LenovoSettingsFragment::class.java.name }
-        if(!OnePlusSettings.enabled())
+        if (!OnePlusSettings.enabled())
             target.removeIf { it.fragment == OnePlusSettingsFragment::class.java.name }
-        if(!HuaweiSettings.enabled())
+        if (!HuaweiSettings.enabled())
             target.removeIf { it.fragment == HuaweiSettingsFragment::class.java.name }
-        if(!SamsungSettings.enabled())
+        if (!SamsungSettings.enabled())
             target.removeIf { it.fragment == SamsungSettingsFragment::class.java.name }
     }
 
@@ -79,36 +76,31 @@ class SettingsActivity : PreferenceActivity() {
          * A preference value change listener that updates the preference's summary
          * to reflect its new value.
          */
-        private val sBindPreferenceSummaryToValueListener = Preference.OnPreferenceChangeListener { preference, value ->
-            val stringValue = value.toString()
+        private val sBindPreferenceSummaryToValueListener =
+            Preference.OnPreferenceChangeListener { preference, value ->
+                val stringValue = value.toString()
 
-            if (preference is ListPreference) {
-                // For list preferences, look up the correct display value in
-                // the preference's 'entries' list.
-                val listPreference = preference
-                val index = listPreference.findIndexOfValue(stringValue)
-
-                // Set the summary to reflect the new value.
-                preference.setSummary(
-                        if (index >= 0)
-                            listPreference.entries[index]
-                        else
-                            null)
-
-            } else {
-                // For all other preferences, set the summary to the value's
-                // simple string representation.
-                preference.summary = stringValue
+                preference.summary = if (preference is ListPreference) {
+                    // For list preferences, look up the correct display value in the preference's
+                    // 'entries' list.
+                    val index = preference.findIndexOfValue(stringValue)
+                    // Set the summary to reflect the new value.
+                    if (index >= 0) preference.entries[index] else null
+                } else {
+                    // For all other preferences, set the summary to the value's simple string
+                    // representation.
+                    stringValue
+                }
+                true
             }
-            true
-        }
 
         /**
          * Helper method to determine if the device has an extra-large screen. For
          * example, 10" tablets are extra-large.
          */
         private fun isXLargeTablet(context: Context): Boolean {
-            return context.resources.configuration.screenLayout and Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_XLARGE
+            return context.resources.configuration.screenLayout and
+                    Configuration.SCREENLAYOUT_SIZE_MASK >= Configuration.SCREENLAYOUT_SIZE_XLARGE
         }
 
         /**
@@ -124,12 +116,13 @@ class SettingsActivity : PreferenceActivity() {
             // Set the listener to watch for value changes.
             preference.onPreferenceChangeListener = sBindPreferenceSummaryToValueListener
 
-            // Trigger the listener immediately with the preference's
-            // current value.
-            sBindPreferenceSummaryToValueListener.onPreferenceChange(preference,
-                    PreferenceManager
-                            .getDefaultSharedPreferences(preference.context)
-                            .getString(preference.key, ""))
+            // Trigger the listener immediately with the preference's current value.
+            sBindPreferenceSummaryToValueListener.onPreferenceChange(
+                preference,
+                PreferenceManager
+                    .getDefaultSharedPreferences(preference.context)
+                    .getString(preference.key, "")
+            )
         }
     }
 }
