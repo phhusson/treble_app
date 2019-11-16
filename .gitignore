@@ -1,11 +1,15 @@
+# IDEA
 *.iml
+/.idea
+
+# Gradle
 .gradle
+build
 /local.properties
-/.idea/libraries
-/.idea/modules.xml
-/.idea/workspace.xml
-.DS_Store
-/build
 /captures
-.externalNativeBuild
+
+# macOS
+.DS_Store
+
+# Release build
 app.apk
