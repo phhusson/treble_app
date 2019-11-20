@@ -114,8 +114,9 @@ class Hostapd: EntryStartup {
     companion object : EntryStartup{
         override fun startup(ctxt: Context) {
             try {
-                //Check if there is already an hostapd interface
-                if(IHostapd.getService()!=null) return
+                val serviceManager = android.hidl.manager.V1_0.IServiceManager.getService()
+                val v = serviceManager.getTransport("android.hardware.wifi.hostapd@1.0::IHostapd", "default")
+                if(v != 0.toByte()) return
             } catch(t: Throwable) {
                 Log.d("PHH", "Couldn't find hostapd service", t)
             }
