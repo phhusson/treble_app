@@ -53,6 +53,8 @@ class SettingsActivity : PreferenceActivity() {
             target.removeIf { it.fragment == HuaweiSettingsFragment::class.java.name }
         if (!SamsungSettings.enabled())
             target.removeIf { it.fragment == SamsungSettingsFragment::class.java.name }
+        if (!XiaomiSettings.enabled())
+            target.removeIf { it.fragment == XiaomiSettingsFragment::class.java.name }
     }
 
     /**
@@ -67,6 +69,7 @@ class SettingsActivity : PreferenceActivity() {
                 || HuaweiSettingsFragment::class.java.name == fragmentName
                 || MiscSettingsFragment::class.java.name == fragmentName
                 || SamsungSettingsFragment::class.java.name == fragmentName
+                || XiaomiSettingsFragment::class.java.name == fragmentName
     }
 
     companion object {
