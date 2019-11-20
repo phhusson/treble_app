@@ -36,4 +36,15 @@
 	    <item>"2.0"</item>
 	    <item>"0.0"</item>
     </array>
+
+    <array name="pref_misc_bluetooth">
+        <item>"None"</item>
+	    <item>"Mediatek"</item>
+	    <item>"Huawei"</item>
+    </array>
+    <array name="pref_misc_bluetooth_values">
+	    <item>"none"</item>
+	    <item>"mediatek"</item>
+	    <item>"huawei"</item>
+    </array>
 </resources>

@@ -86,6 +86,27 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 OverlayPicker.setOverlayEnabled("me.phh.treble.overlay.navbar", value)
             }
+            MiscSettings.bluetooth -> {
+                val value = sp.getString(key, "none")
+                android.util.Log.d("PHH", "Setting bluetooth workaround to $value")
+                when(value) {
+                    "none" -> {
+                        SystemProperties.set("persist.sys.bt.unsupport.features",    "00000000")
+                        SystemProperties.set("persist.sys.bt.unsupport.states",      "00000000")
+                        SystemProperties.set("persist.sys.bt.unsupport.stdfeatures", "00000000")
+                    }
+                    "mediatek" -> {
+                        SystemProperties.set("persist.sys.bt.unsupport.features",    "00000000")
+                        SystemProperties.set("persist.sys.bt.unsupport.states",      "00000000")
+                        SystemProperties.set("persist.sys.bt.unsupport.stdfeatures", "000001")
+                    }
+                    "huawei" -> {
+                        SystemProperties.set("persist.sys.bt.unsupport.features",    "00000001")
+                        SystemProperties.set("persist.sys.bt.unsupport.states",      "000000000000000000000011111")
+                        SystemProperties.set("persist.sys.bt.unsupport.stdfeatures", "000001")
+                    }
+                }
+            }
         }
     }
 
@@ -106,5 +127,7 @@ object Misc: EntryStartup {
         if (! sp.contains(MiscSettings.headsetFix))
             sp.edit().putBoolean(MiscSettings.headsetFix, HuaweiSettings.enabled()).commit()
         spListener.onSharedPreferenceChanged(sp, MiscSettings.headsetFix)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.bluetooth)
+
     }
 }

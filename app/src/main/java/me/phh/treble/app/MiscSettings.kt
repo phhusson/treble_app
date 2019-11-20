@@ -11,6 +11,7 @@ object MiscSettings : Settings {
     val linearBrightness = "key_misc_linear_brightness"
     val disableButtonsBacklight = "key_misc_disable_buttons_backlight"
     val forceNavbar = "key_misc_force_navbar"
+    val bluetooth = "key_misc_bluetooth"
 
     override fun enabled() = true
 }
