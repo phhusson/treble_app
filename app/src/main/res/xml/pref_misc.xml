@@ -61,4 +61,6 @@
         android:entryValues="@array/pref_misc_bluetooth_values"
         android:key="key_misc_bluetooth"
         android:title="Bluetooth workarounds" />
+    <Preference android:title="Securize"
+        android:key="key_misc_securize" />
 </PreferenceScreen>

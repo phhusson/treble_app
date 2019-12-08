@@ -128,6 +128,6 @@ object Misc: EntryStartup {
             sp.edit().putBoolean(MiscSettings.headsetFix, HuaweiSettings.enabled()).commit()
         spListener.onSharedPreferenceChanged(sp, MiscSettings.headsetFix)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.bluetooth)
-
+        
     }
 }
