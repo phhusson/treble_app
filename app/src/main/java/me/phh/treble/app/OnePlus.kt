@@ -71,6 +71,8 @@ object OnePlus: EntryStartup {
     override fun startup(ctxt: Context) {
         if(!OnePlusSettings.enabled()) return
         Log.d("PHH", "Starting OP service")
+        //TODO: Oneplus framework calibrates tri_state_key because it is a hall sensor
+        // It does so by copying /mnt/vendor/persist/engineermode/tri_state_hall_data to /sys/bus/platform/devices/soc:tri_state_key/hall_data_calib
         object : UEventObserver() {
             override fun onUEvent(event: UEventObserver.UEvent) {
                 try {
