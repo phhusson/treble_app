@@ -65,6 +65,22 @@ object Misc: EntryStartup {
                     safeSetprop("ctl.restart", "camera-provider-2-4")
                 }
             }
+            MiscSettings.forceCamera2APIHAL3 -> {
+                val value = sp.getBoolean(key, false)
+                val defValue = "0"
+                val newValue = if (value) "1" else defValue
+
+                if (value ||
+                        SystemProperties.get("persist.vendor.camera.HAL3.enabled", defValue) != newValue ||
+                        SystemProperties.get("persist.vendor.camera.eis.enable", defValue) != newValue) {
+                    safeSetprop("persist.vendor.camera.HAL3.enabled", newValue)
+                    safeSetprop("persist.vendor.camera.eis.enable", newValue)
+                    Log.d("PHH", "forced Camera2API HAL3 to $value")
+                    // Restart services
+                    safeSetprop("ctl.restart", "vendor.camera-provider-2-4")
+                    safeSetprop("ctl.restart", "camera-provider-2-4")
+                }
+            }
             MiscSettings.headsetFix -> {
                 val value = sp.getBoolean(key, HuaweiSettings.enabled())
                 if (! sp.contains(key))
@@ -146,6 +162,7 @@ object Misc: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, MiscSettings.mobileSignal)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.maxAspectRatioPreO)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.multiCameras)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.forceCamera2APIHAL3)
         if (! sp.contains(MiscSettings.headsetFix))
             sp.edit().putBoolean(MiscSettings.headsetFix, HuaweiSettings.enabled()).commit()
         spListener.onSharedPreferenceChanged(sp, MiscSettings.headsetFix)
