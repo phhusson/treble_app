@@ -16,6 +16,12 @@
 	    android:key="key_misc_fps_divisor"
 	    android:title="FPS Divisor" />
     <ListPreference
+	    android:defaultValue="1"
+	    android:entries="@array/pref_misc_display_fps"
+	    android:entryValues="@array/pref_misc_display_fps_values"
+	    android:key="key_misc_display_fps"
+	    android:title="Force FPS" />
+    <ListPreference
 	    android:defaultValue="1.86"
 	    android:entries="@array/pref_misc_max_aspect_ratio_pre_o"
 	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"

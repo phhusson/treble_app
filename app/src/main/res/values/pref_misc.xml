@@ -47,4 +47,14 @@
 	    <item>"mediatek"</item>
 	    <item>"huawei"</item>
     </array>
+
+
+    <array name="pref_misc_display_fps">
+	    <item>"Don't force"</item>
+	    <item>"60fps"</item>
+    </array>
+    <array name="pref_misc_display_fps_values">
+	    <item>"-1"</item>
+	    <item>"0"</item>
+    </array>
 </resources>

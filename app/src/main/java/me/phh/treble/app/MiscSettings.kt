@@ -1,11 +1,15 @@
 package me.phh.treble.app
 
+import android.hardware.display.DisplayManager
 import android.os.Bundle
+import android.util.Log
+import androidx.preference.ListPreference
 import androidx.preference.Preference
 
 object MiscSettings : Settings {
     val mobileSignal = "key_misc_mobile_signal"
     val fpsDivisor = "key_misc_fps_divisor"
+    val displayFps = "key_misc_display_fps"
     val maxAspectRatioPreO = "key_misc_max_aspect_ratio_pre_o"
     val multiCameras = "key_misc_multi_camera"
     val headsetFix = "key_huawei_headset_fix"
@@ -25,8 +29,8 @@ class MiscSettingsFragment : SettingsFragment() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         super.onCreatePreferences(savedInstanceState, rootKey)
 
-        val pref = findPreference<Preference>(MiscSettings.securize)
-        pref!!.setOnPreferenceClickListener {
+        val securizePref = findPreference<Preference>(MiscSettings.securize)
+        securizePref!!.setOnPreferenceClickListener {
             var cmds = listOf(
                     "/sbin/su 0 /system/bin/phh-securize.sh",
                     "/sbin/su -c /system/bin/phh-securize.sh",
@@ -42,5 +46,20 @@ class MiscSettingsFragment : SettingsFragment() {
             }
             return@setOnPreferenceClickListener true
         }
+
+        val fpsPref = findPreference<ListPreference>(MiscSettings.displayFps)!!
+        val displayManager = activity.getSystemService(DisplayManager::class.java)
+        for(display in displayManager.displays) {
+            Log.d("PHH", "Got display $display")
+            for(mode in display.supportedModes) {
+                Log.d("PHH", "\tMode ${mode.modeId} $mode")
+            }
+        }
+
+        val fpsEntries = listOf("Don't force") + displayManager.displays[0].supportedModes.map { it.refreshRate.toString() }
+        val fpsValues = listOf("-1") + displayManager.displays[0].supportedModes.map { (it.modeId - 1).toString() }
+
+        fpsPref.setEntries(fpsEntries.toTypedArray())
+        fpsPref.setEntryValues(fpsValues.toTypedArray())
     }
 }

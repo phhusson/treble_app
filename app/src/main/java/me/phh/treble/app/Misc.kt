@@ -3,6 +3,9 @@ package me.phh.treble.app
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.hardware.display.DisplayManager
+import android.os.Parcel
+import android.os.ServiceManager
 import android.os.SystemProperties
 import android.preference.PreferenceManager
 import android.provider.Settings
@@ -18,6 +21,17 @@ object Misc: EntryStartup {
             Log.d("PHH", "Failed setting prop $key", e)
         }
     }
+
+    val surfaceFlinger = ServiceManager.getService("SurfaceFlinger")
+    fun forceFps(v: Int) {
+        val data = Parcel.obtain()
+        data.writeInterfaceToken("android.ui.ISurfaceComposer")
+        data.writeInt(v)
+        surfaceFlinger.transact(1035, data, null, 0)
+        data.recycle()
+        Log.d("PHH", "Set surface flinger forced fps/mode to $v")
+    }
+
     lateinit var ctxt: WeakReference<Context>
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         val c = ctxt.get()
@@ -107,11 +121,14 @@ object Misc: EntryStartup {
                     }
                 }
             }
+            MiscSettings.displayFps -> {
+                val value = sp.getString(key, "-1").toInt()
+                forceFps(value)
+            }
         }
     }
 
     override fun startup(ctxt: Context) {
-
         if (!MiscSettings.enabled()) return
 
         val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
@@ -128,6 +145,6 @@ object Misc: EntryStartup {
             sp.edit().putBoolean(MiscSettings.headsetFix, HuaweiSettings.enabled()).commit()
         spListener.onSharedPreferenceChanged(sp, MiscSettings.headsetFix)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.bluetooth)
-        
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.displayFps)
     }
 }
