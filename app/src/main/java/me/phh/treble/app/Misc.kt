@@ -16,6 +16,7 @@ import java.lang.ref.WeakReference
 object Misc: EntryStartup {
     fun safeSetprop(key: String, value: String?) {
         try {
+            Log.d("PHH", "Setting property $key to $value")
             SystemProperties.set(key, value)
         } catch (e: Exception) {
             Log.d("PHH", "Failed setting prop $key", e)

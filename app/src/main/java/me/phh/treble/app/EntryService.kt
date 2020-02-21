@@ -32,6 +32,7 @@ class EntryService: Service() {
         tryC { QtiAudio.startup(this) }
         tryC { Lenovo.startup(this) }
         tryC { OnePlus.startup(this) }
+        tryC { Oppo.startup(this) }
         tryC { OverlayPicker.startup(this) }
         tryC { Doze.startup(this) }
         tryC { Huawei.startup(this) }

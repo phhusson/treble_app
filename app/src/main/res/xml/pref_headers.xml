@@ -15,6 +15,9 @@
         android:fragment="me.phh.treble.app.XiaomiSettingsFragment"
         android:title="Xiaomi features" />
     <header
+        android:fragment="me.phh.treble.app.OppoSettingsFragment"
+        android:title="Oppo features" />
+    <header
         android:fragment="me.phh.treble.app.DozeSettingsFragment"
         android:title="Doze features" />
     <header
