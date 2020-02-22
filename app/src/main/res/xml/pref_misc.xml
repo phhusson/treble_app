@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <Preference android:title="Sponsor phh"
+        android:key="key_sponsor">
+	    <intent
+		    android:action="android.intent.action.VIEW"
+		    android:data="https://github.com/sponsors/phhusson/" />
+    </Preference>
+    <Preference android:title="Donate once to phh"
+        android:key="key_donate">
+	    <intent
+		    android:action="android.intent.action.VIEW"
+		    android:data="https://paypal.me/phhusson" />
+    </Preference>
+
     <PreferenceCategory android:title="Mobile network">
 	    <ListPreference
 		    android:defaultValue="default"
