@@ -6,7 +6,7 @@ object OppoSettings : Settings {
     val dt2w = "key_oppo_double_tap_to_wake"
     val gamingMode = "key_oppo_ts_game_mode"
 
-    override fun enabled() = Tools.deviceId == "RMX1931"
+    override fun enabled() = Tools.deviceId.startsWith("RMX") || Tools.deviceId == "CPH1859"
 }
 
 class OppoSettingsFragment : SettingsFragment() {
