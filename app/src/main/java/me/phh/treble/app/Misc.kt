@@ -126,6 +126,10 @@ object Misc: EntryStartup {
                 val value = sp.getString(key, "-1").toInt()
                 forceFps(value)
             }
+            MiscSettings.remotectl -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.remote", if(value) "true" else "false")
+            }
         }
     }
 

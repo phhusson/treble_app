@@ -20,6 +20,7 @@ object MiscSettings : Settings {
     val forceNavbar = "key_misc_force_navbar"
     val bluetooth = "key_misc_bluetooth"
     val securize = "key_misc_securize"
+    val remotectl = "key_misc_remotectl"
 
     override fun enabled() = true
 }
