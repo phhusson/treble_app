@@ -18,6 +18,11 @@ object Oppo: EntryStartup {
                 val value = if(b) "1" else "0"
                 Misc.safeSetprop("persist.sys.phh.oppo.gaming_mode", value)
             }
+            OppoSettings.usbOtg -> {
+                val b = sp.getBoolean(key, false)
+                val value = if(b) "1" else "0"
+                Misc.safeSetprop("persist.sys.phh.oppo.usbotg", value)
+            }
         }
     }
 
@@ -30,5 +35,6 @@ object Oppo: EntryStartup {
         //Refresh parameters on boot
         spListener.onSharedPreferenceChanged(sp, OppoSettings.gamingMode)
         spListener.onSharedPreferenceChanged(sp, OppoSettings.dt2w)
+        spListener.onSharedPreferenceChanged(sp, OppoSettings.usbOtg)
     }
 }

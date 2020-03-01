@@ -5,6 +5,7 @@ import android.os.Bundle
 object OppoSettings : Settings {
     val dt2w = "key_oppo_double_tap_to_wake"
     val gamingMode = "key_oppo_ts_game_mode"
+    val usbOtg = "key_oppo_usb_otg"
 
     override fun enabled() = Tools.deviceId.startsWith("RMX") || Tools.deviceId == "CPH1859"
 }

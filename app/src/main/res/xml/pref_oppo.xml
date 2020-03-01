@@ -15,4 +15,10 @@
             android:key="key_oppo_ts_game_mode"
             android:title="Enable game mode" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="Other">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_oppo_usb_otg"
+            android:title="Enable USB OTG" />
+    </PreferenceCategory>
 </PreferenceScreen>
