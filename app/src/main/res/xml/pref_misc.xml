@@ -44,6 +44,10 @@
         android:defaultValue="false"
         android:key="key_misc_multi_camera"
         android:title="Expose Aux cameras (Qualcomm)" />
+	<CheckBoxPreference
+		android:defaultValue="false"
+		android:key="key_misc_force_camera2api_hal3"
+		android:title="Force Enable Camera2API HAL3" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_misc_force_navbar"
