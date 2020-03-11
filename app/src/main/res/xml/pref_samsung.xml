@@ -24,4 +24,23 @@
             android:key="key_samsung_double_tap_to_wake"
             android:title="Enable double tap to wake" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="Workarounds">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_samsung_extra_sensors"
+            android:title="Enable extra sensors" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_samsung_colorspace"
+            android:title="Enable workaround for white-ish screen" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_samsung_broken_fingerprint"
+            android:title="Enable workaround for broken fingerprint" />
+        <EditTextPreference
+            android:defaultValue="-1"
+            android:key="key_samsung_backlight_multiplier"
+            android:title="Set backlight scale/max backlight level"
+            android:inputType="number" />
+    </PreferenceCategory>
 </PreferenceScreen>

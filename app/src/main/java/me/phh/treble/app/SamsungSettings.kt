@@ -6,6 +6,10 @@ object SamsungSettings : Settings {
     val audioStereoMode = "key_samsung_audio_stereo"
     val wirelessChargingTransmit = "key_samsung_wireless_charging_transmit"
     val doubleTapToWake = "key_samsung_double_tap_to_wake"
+    val extraSensors = "key_samsung_extra_sensors"
+    val colorspace = "key_samsung_colorspace"
+    val brokenFingerprint = "key_samsung_broken_fingerprint"
+    val backlightMultiplier = "key_samsung_backlight_multiplier"
 
     override fun enabled() = Tools.vendorFpLow.startsWith("samsung/")
 }

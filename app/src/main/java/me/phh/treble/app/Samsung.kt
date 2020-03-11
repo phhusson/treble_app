@@ -54,6 +54,22 @@ class Samsung: EntryStartup {
                 val cmd = if(sp.getBoolean(key, false)) "aot_enable,1" else "aot_enable,0"
                 tsCmd(cmd)
             }
+            SamsungSettings.extraSensors -> {
+                val value = if(sp.getBoolean(key, false)) "true" else " false"
+                SystemProperties.set("persist.sys.phh.samsung_sensors", value)
+            }
+            SamsungSettings.colorspace -> {
+                val value = if(sp.getBoolean(key, false)) "true" else " false"
+                SystemProperties.set("persist.sys.phh.samsung_colorspace", value)
+            }
+            SamsungSettings.brokenFingerprint -> {
+                val value = if(sp.getBoolean(key, false)) "1" else " 0"
+                SystemProperties.set("persist.sys.phh.samsung_fingerprint", value)
+            }
+            SamsungSettings.backlightMultiplier -> {
+                val value = sp.getInt(key, -1)
+                SystemProperties.set("persist.sys.phh.samsung_backlight", value.toString())
+            }
         }
     }
 
