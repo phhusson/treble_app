@@ -67,8 +67,8 @@ class Samsung: EntryStartup {
                 SystemProperties.set("persist.sys.phh.samsung_fingerprint", value)
             }
             SamsungSettings.backlightMultiplier -> {
-                val value = sp.getInt(key, -1)
-                SystemProperties.set("persist.sys.phh.samsung_backlight", value.toString())
+                val value = sp.getString(key, "-1")
+                SystemProperties.set("persist.sys.phh.samsung_backlight", value)
             }
         }
     }
