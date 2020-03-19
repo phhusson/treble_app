@@ -33,7 +33,7 @@ class QtiAudio: EntryStartup {
 
     override fun startup(ctxt: Context) {
         thread {
-            for(slot in listOf("slot1", "slot2")) {
+            for(slot in listOf("slot1", "slot2", "default")) {
                 try {
                     val svc = vendor.qti.hardware.radio.am.V1_0.IQcRilAudio.getService(slot)
                     svc.setCallback(cbA)
