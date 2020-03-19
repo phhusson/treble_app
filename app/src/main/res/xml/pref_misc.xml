@@ -61,12 +61,12 @@
     <EditTextPreference
         android:defaultValue="-1"
         android:key="key_misc_rounded_corners"
-	android:title="Set rounded corners diameter"
+	android:title="Set rounded corners content padding"
 	android:inputType="number" />
     <EditTextPreference
         android:defaultValue="-1"
         android:key="key_misc_rounded_corners_overlay"
-        android:title="Set forced/faked rounded corners diameter"
+        android:title="Set forced/faked rounded corners content padding"
 	android:inputType="number" />
     <PreferenceCategory android:title="Backlight">
         <CheckBoxPreference
