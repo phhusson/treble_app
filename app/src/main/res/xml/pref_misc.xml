@@ -29,7 +29,7 @@
 	    android:key="key_misc_fps_divisor"
 	    android:title="FPS Divisor" />
     <ListPreference
-	    android:defaultValue="1"
+	    android:defaultValue="-1"
 	    android:entries="@array/pref_misc_display_fps"
 	    android:entryValues="@array/pref_misc_display_fps_values"
 	    android:key="key_misc_display_fps"
