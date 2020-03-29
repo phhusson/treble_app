@@ -42,7 +42,7 @@ class Huawei: EntryStartup {
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         when(key) {
             HuaweiSettings.fingerprintGestures -> {
-                val value = sp.getBoolean(key, true)
+                val value = sp.getBoolean(key, false)
                 Log.d("PHH", "Setting Huawei fingerprint gestures to $value")
                 if(value)
                     fpService?.sendCmdToHal(41)
