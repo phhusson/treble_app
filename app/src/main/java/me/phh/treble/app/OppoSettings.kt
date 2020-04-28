@@ -6,6 +6,7 @@ object OppoSettings : Settings {
     val dt2w = "key_oppo_double_tap_to_wake"
     val gamingMode = "key_oppo_ts_game_mode"
     val usbOtg = "key_oppo_usb_otg"
+    val dcDiming = "key_oppo_dc_diming"
 
     override fun enabled() = Tools.deviceId.startsWith("RMX") || Tools.deviceId == "CPH1859"
 }

@@ -20,5 +20,9 @@
             android:defaultValue="false"
             android:key="key_oppo_usb_otg"
             android:title="Enable USB OTG" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_oppo_dc_diming"
+            android:title="Enable DC Diming" />
     </PreferenceCategory>
 </PreferenceScreen>
