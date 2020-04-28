@@ -6,12 +6,6 @@
 		    android:action="android.intent.action.VIEW"
 		    android:data="https://github.com/sponsors/phhusson/" />
     </Preference>
-    <Preference android:title="Donate once to phh"
-        android:key="key_donate">
-	    <intent
-		    android:action="android.intent.action.VIEW"
-		    android:data="https://paypal.me/phhusson" />
-    </Preference>
 
     <PreferenceCategory android:title="Mobile network">
 	    <ListPreference
