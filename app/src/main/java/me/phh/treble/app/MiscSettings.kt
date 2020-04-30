@@ -22,6 +22,7 @@ object MiscSettings : Settings {
     val bluetooth = "key_misc_bluetooth"
     val securize = "key_misc_securize"
     val remotectl = "key_misc_remotectl"
+    val volte = "key_misc_volte"
 
     override fun enabled() = true
 }
@@ -47,6 +48,15 @@ class MiscSettingsFragment : SettingsFragment() {
                 } catch(t: Throwable) {}
             }
             return@setOnPreferenceClickListener true
+        }
+
+        val voltePref = findPreference<Preference>(MiscSettings.volte)
+        voltePref!!.setOnPreferenceClickListener {
+                SystemProperties.set("persist.dbg.allow_ims_off", "1")
+                SystemProperties.set("persist.dbg.volte_avail_ovr", "1")
+                SystemProperties.set("persist.dbg.vt_avail_ovr", "1")
+                SystemProperties.set("persist.dbg.wfc_avail_ovr", "1")
+                SystemProperties.set("persist.sys.phh.ims.caf", "true")
         }
 
         val fpsPref = findPreference<ListPreference>(MiscSettings.displayFps)!!

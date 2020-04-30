@@ -78,16 +78,23 @@
             android:key="key_misc_disable_buttons_backlight"
             android:title="Disable backlight of hardware buttons if present (requires reboot)" />
     </PreferenceCategory>
-    <ListPreference
-        android:defaultValue="-1"
-        android:entries="@array/pref_misc_bluetooth"
-        android:entryValues="@array/pref_misc_bluetooth_values"
-        android:key="key_misc_bluetooth"
-        android:title="Bluetooth workarounds" />
-    <Preference android:title="Securize"
-        android:key="key_misc_securize" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_misc_remotectl"
-        android:title="Allow takeover of the device by phh for debugging" />
+    <PreferenceCategory android:title="VoLTE">
+        <Preference
+            android:key="key_misc_volte"
+            android:title="Fix VoLTE (Qualcomm)" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Other">
+        <ListPreference
+            android:defaultValue="-1"
+            android:entries="@array/pref_misc_bluetooth"
+            android:entryValues="@array/pref_misc_bluetooth_values"
+            android:key="key_misc_bluetooth"
+            android:title="Bluetooth workarounds" />
+        <Preference android:title="Securize"
+            android:key="key_misc_securize" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_remotectl"
+            android:title="Allow takeover of the device by phh for debugging" />
+    </PreferenceCategory>
 </PreferenceScreen>

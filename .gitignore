@@ -12,4 +12,10 @@ build
 .DS_Store
 
 # Release build
-app.apk
+TrebleApp.apk
+
+# Sdk
+/sdk/platform-tools/
+/sdk/platforms/
+/sdk/build-tools/
+
