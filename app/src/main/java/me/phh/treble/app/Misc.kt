@@ -56,11 +56,11 @@ object Misc: EntryStartup {
             MiscSettings.multiCameras -> {
                 val value = sp.getBoolean(key, false)
 
-                if(value ||
-                    SystemProperties.get("vendor.camera.aux.packagelist", null) == null ||
-                    SystemProperties.get("camera.aux.packagelist", null) == null ) {
+                if (value ||
+                        SystemProperties.get("vendor.camera.aux.packagelist", null) == null ||
+                        SystemProperties.get("camera.aux.packagelist", null) == null) {
                     safeSetprop("vendor.camera.aux.packagelist", if (value) "nothing" else null)
-                    safeSetprop("camera.aux.packagelist", if(value) "nothing" else null)
+                    safeSetprop("camera.aux.packagelist", if (value) "nothing" else null)
                     safeSetprop("ctl.restart", "vendor.camera-provider-2-4")
                     safeSetprop("ctl.restart", "camera-provider-2-4")
                 }
@@ -83,8 +83,8 @@ object Misc: EntryStartup {
             }
             MiscSettings.headsetFix -> {
                 val value = sp.getBoolean(key, HuaweiSettings.enabled())
-                if (! sp.contains(key))
-                Log.d("PHH", "Setting Huawei headset fix to $value")
+                if (!sp.contains(key))
+                    Log.d("PHH", "Setting Huawei headset fix to $value")
                 if (value) {
                     Log.d("PHH", "starting huaweiaudio")
                     ForceHeadsetAudio.startup(c)
@@ -95,45 +95,45 @@ object Misc: EntryStartup {
             }
             MiscSettings.roundedCorners -> {
                 val value = sp.getString(key, "-1").toInt()
-                if(value >= 0) {
-                    Settings.Secure.putInt(c.contentResolver,"sysui_rounded_content_padding", value)
+                if (value >= 0) {
+                    Settings.Secure.putInt(c.contentResolver, "sysui_rounded_content_padding", value)
                 }
             }
             MiscSettings.roundedCornersOverlay -> {
                 val value = sp.getString(key, "-1").toFloat()
-                if(value >= 0) {
-                    Settings.Secure.putFloat(c.contentResolver,"sysui_rounded_size", value)
+                if (value >= 0) {
+                    Settings.Secure.putFloat(c.contentResolver, "sysui_rounded_size", value)
                 }
             }
             MiscSettings.linearBrightness -> {
                 val value = sp.getBoolean(key, false)
-                SystemProperties.set("persist.sys.phh.linear_brightness", if(value) "true" else "false")
+                SystemProperties.set("persist.sys.phh.linear_brightness", if (value) "true" else "false")
             }
             MiscSettings.disableButtonsBacklight -> {
                 val value = sp.getBoolean(key, false)
-                SystemProperties.set("persist.sys.phh.disable_buttons_light", if(value) "true" else "false")
+                SystemProperties.set("persist.sys.phh.disable_buttons_light", if (value) "true" else "false")
             }
-            MiscSettings.forceNavbar -> {
+            MiscSettings.forceNavbarOff -> {
                 val value = sp.getBoolean(key, false)
-                OverlayPicker.setOverlayEnabled("me.phh.treble.overlay.navbar", value)
+                SystemProperties.set("persist.sys.phh.mainkeys", if (value) "1" else "0")
             }
             MiscSettings.bluetooth -> {
                 val value = sp.getString(key, "none")
                 android.util.Log.d("PHH", "Setting bluetooth workaround to $value")
-                when(value) {
+                when (value) {
                     "none" -> {
-                        SystemProperties.set("persist.sys.bt.unsupport.features",    "00000000")
-                        SystemProperties.set("persist.sys.bt.unsupport.states",      "00000000")
+                        SystemProperties.set("persist.sys.bt.unsupport.features", "00000000")
+                        SystemProperties.set("persist.sys.bt.unsupport.states", "00000000")
                         SystemProperties.set("persist.sys.bt.unsupport.stdfeatures", "00000000")
                     }
                     "mediatek" -> {
-                        SystemProperties.set("persist.sys.bt.unsupport.features",    "00000000")
-                        SystemProperties.set("persist.sys.bt.unsupport.states",      "00000000")
+                        SystemProperties.set("persist.sys.bt.unsupport.features", "00000000")
+                        SystemProperties.set("persist.sys.bt.unsupport.states", "00000000")
                         SystemProperties.set("persist.sys.bt.unsupport.stdfeatures", "000001")
                     }
                     "huawei" -> {
-                        SystemProperties.set("persist.sys.bt.unsupport.features",    "00000001")
-                        SystemProperties.set("persist.sys.bt.unsupport.states",      "000000000000000000000011111")
+                        SystemProperties.set("persist.sys.bt.unsupport.features", "00000001")
+                        SystemProperties.set("persist.sys.bt.unsupport.states", "000000000000000000000011111")
                         SystemProperties.set("persist.sys.bt.unsupport.stdfeatures", "000001")
                     }
                 }
@@ -144,7 +144,11 @@ object Misc: EntryStartup {
             }
             MiscSettings.remotectl -> {
                 val value = sp.getBoolean(key, false)
-                SystemProperties.set("persist.sys.phh.remote", if(value) "true" else "false")
+                SystemProperties.set("persist.sys.phh.remote", if (value) "true" else "false")
+            }
+            MiscSettings.disableAudioEffects -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.disable_audio_effects", if (value) "1" else "0")
             }
         }
     }

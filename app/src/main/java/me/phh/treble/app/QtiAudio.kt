@@ -37,6 +37,7 @@ class QtiAudio: EntryStartup {
                 try {
                     val svc = vendor.qti.hardware.radio.am.V1_0.IQcRilAudio.getService(slot)
                     svc.setCallback(cbA)
+                    isQualcommDevice = true
                 } catch (e: Exception) {
                     Log.d("PHH", "Failed setting vendor.qti.hardware.radio.am $slot cb $e")
                 }
@@ -44,6 +45,7 @@ class QtiAudio: EntryStartup {
                 try {
                     val svc = vendor.qti.qcril.am.V1_0.IQcRilAudio.getService(slot)
                     svc.setCallback(cbB)
+                    isQualcommDevice = true
                 } catch (e: Exception) {
                     Log.d("PHH", "Failed setting vendor.qti.hardware.radio.am $slot cb $e")
                 }
@@ -69,6 +71,7 @@ class QtiAudio: EntryStartup {
         }
     }
     companion object: EntryStartup {
+        var isQualcommDevice = false
         override fun startup(ctxt: Context) {
             QtiAudio().startup(ctxt)
         }

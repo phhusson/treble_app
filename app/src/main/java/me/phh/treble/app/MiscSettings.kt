@@ -18,10 +18,11 @@ object MiscSettings : Settings {
     val roundedCornersOverlay = "key_misc_rounded_corners_overlay"
     val linearBrightness = "key_misc_linear_brightness"
     val disableButtonsBacklight = "key_misc_disable_buttons_backlight"
-    val forceNavbar = "key_misc_force_navbar"
+    val forceNavbarOff = "key_misc_force_navbar_off"
     val bluetooth = "key_misc_bluetooth"
     val securize = "key_misc_securize"
     val remotectl = "key_misc_remotectl"
+    val disableAudioEffects = "key_misc_disable_audio_effects"
 
     override fun enabled() = true
 }

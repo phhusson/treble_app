@@ -40,6 +40,7 @@ class EntryService: Service() {
         tryC { Samsung.startup(this) }
         tryC { Hostapd.startup(this) }
         tryC { Xiaomi.startup(this) }
+        tryC { Qualcomm.startup(this) }
     }
 }
 
