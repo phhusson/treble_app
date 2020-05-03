@@ -23,17 +23,6 @@ object OverlayPicker: EntryStartup {
         }
     }
 
-    private fun handleHtc(ctxt: Context) {
-        //HTC U11+
-        if (vendorFp == null) return
-
-        if (vendorFp.contains("htc_ocm")) {
-            setOverlayEnabled("me.phh.treble.overlay.navbar", true)
-            val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
-            sp.edit().putBoolean(MiscSettings.forceNavbar, true).apply()
-        }
-    }
-
     private fun enableLte(ctxt: Context) {
         //TODO: List here all non-LTE platforms
         if ("mt6580" != platform)
@@ -70,7 +59,6 @@ object OverlayPicker: EntryStartup {
         om = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService("overlay"))
 
-        handleHtc(ctxt)
 		handleNokia(ctxt)
         enableLte(ctxt)
         handleSamsung(ctxt)
