@@ -95,6 +95,8 @@
             android:title="Force navigation bar disabled" />
 		<Preference android:title="Securize"
                 android:key="key_misc_securize" />
+	<Preference android:title="@string/remove_telephony_subsystem"
+		android:key="key_misc_removetelephony" />
 		<CheckBoxPreference
                 android:defaultValue="false"
                 android:key="key_misc_remotectl"
