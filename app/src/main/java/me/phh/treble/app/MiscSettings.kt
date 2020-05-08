@@ -1,5 +1,7 @@
 package me.phh.treble.app
 
+import android.app.AlertDialog
+import android.app.Application
 import android.hardware.display.DisplayManager
 import android.os.Bundle
 import android.util.Log
@@ -21,6 +23,7 @@ object MiscSettings : Settings {
     val forceNavbarOff = "key_misc_force_navbar_off"
     val bluetooth = "key_misc_bluetooth"
     val securize = "key_misc_securize"
+    val removeTelephony = "key_misc_removetelephony"
     val remotectl = "key_misc_remotectl"
     val disableAudioEffects = "key_misc_disable_audio_effects"
     val cameraTimestampOverride = "key_misc_camera_timestamp"
@@ -35,19 +38,62 @@ class MiscSettingsFragment : SettingsFragment() {
 
         val securizePref = findPreference<Preference>(MiscSettings.securize)
         securizePref!!.setOnPreferenceClickListener {
-            var cmds = listOf(
-                    "/sbin/su 0 /system/bin/phh-securize.sh",
-                    "/sbin/su -c /system/bin/phh-securize.sh",
-                    "/system/xbin/phh-su 0 /system/bin/phh-securize.sh",
-                    "/system/xbin/phh-su -c /system/bin/phh-securize.sh",
-                    "/system/xbin/su 0 /system/bin/phh-securize.sh",
-                    "/system/xbin/su -c /system/bin/phh-securize.sh"
-            )
-            for(cmd in cmds) {
-                try {
-                    Runtime.getRuntime().exec(cmd).waitFor()
-                } catch(t: Throwable) {}
+                val builder = AlertDialog.Builder( this.getActivity() )
+                builder.setTitle(getString(R.string.remove_root))
+                builder.setMessage(getString(R.string.continue_question))
+
+                builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+                var cmds = listOf(
+                        "/sbin/su 0 /system/bin/phh-securize.sh",
+                        "/sbin/su -c /system/bin/phh-securize.sh",
+                        "/system/xbin/phh-su 0 /system/bin/phh-securize.sh",
+                        "/system/xbin/phh-su -c /system/bin/phh-securize.sh",
+                        "/system/xbin/su 0 /system/bin/phh-securize.sh",
+                        "/system/xbin/su -c /system/bin/phh-securize.sh"
+                )
+                for(cmd in cmds) {
+                    try {
+                        Runtime.getRuntime().exec(cmd).waitFor()
+                    } catch(t: Throwable) {}
+                }
             }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+            }
+
+            builder.show()
+            return@setOnPreferenceClickListener true
+        }
+
+        val removeTelephonyPref = findPreference<Preference>(MiscSettings.removeTelephony)
+        removeTelephonyPref!!.setOnPreferenceClickListener {
+
+            val builder = AlertDialog.Builder( this.getActivity() )
+            builder.setTitle(getString(R.string.remove_telephony_subsystem))
+            builder.setMessage(getString(R.string.continue_question))
+
+            builder.setPositiveButton(android.R.string.yes) { dialog, which ->
+
+                var cmds = listOf(
+                        "/sbin/su 0 /system/bin/remove-telephony.sh",
+                        "/sbin/su -c /system/bin/remove-telephony.sh",
+                        "/system/xbin/phh-su 0 /system/bin/remove-telephony.sh",
+                        "/system/xbin/phh-su -c /system/bin/remove-telephony.sh",
+                        "/system/xbin/su 0 /system/bin/remove-telephony.sh",
+                        "/system/xbin/su -c /system/bin/remove-telephony.sh"
+                )
+                for(cmd in cmds) {
+                    try {
+                        Runtime.getRuntime().exec(cmd).waitFor()
+                    } catch(t: Throwable) {}
+                }
+            }
+
+            builder.setNegativeButton(android.R.string.no) { dialog, which ->
+            }
+
+            builder.show()
             return@setOnPreferenceClickListener true
         }
 

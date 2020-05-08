@@ -3,4 +3,7 @@
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_top_level">Phh Treble Settings</string>
     <string name="desc_activity_top_level">Device specific settings</string>
+    <string name="remove_telephony_subsystem">Remove Telephony Subsystem</string>
+    <string name="remove_root">Remove Root</string>
+    <string name="continue_question">Continue?</string>
 </resources>
