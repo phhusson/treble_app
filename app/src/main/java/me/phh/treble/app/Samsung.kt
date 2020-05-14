@@ -70,6 +70,10 @@ class Samsung: EntryStartup {
                 val value = sp.getString(key, "-1")
                 SystemProperties.set("persist.sys.phh.samsung_backlight", value)
             }
+            SamsungSettings.cameraIds -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.samsung.camera_ids", value.toString())
+            }
         }
     }
 

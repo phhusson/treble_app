@@ -10,6 +10,7 @@ object SamsungSettings : Settings {
     val colorspace = "key_samsung_colorspace"
     val brokenFingerprint = "key_samsung_broken_fingerprint"
     val backlightMultiplier = "key_samsung_backlight_multiplier"
+    val cameraIds = "key_samsung_camera_ids"
 
     override fun enabled() = Tools.vendorFpLow.startsWith("samsung/")
 }
