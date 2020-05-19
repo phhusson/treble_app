@@ -59,6 +59,23 @@
             android:key="key_misc_disable_buttons_backlight"
             android:title="Disable backlight of hardware buttons if present (requires reboot)" />
 	</PreferenceCategory>
+	<PreferenceCategory android:title="Camera">
+		<CheckBoxPreference
+						android:defaultValue="false"
+						android:key="key_misc_multi_camera"
+						android:title="Expose Aux cameras (Qualcomm)" />
+		<CheckBoxPreference
+				android:defaultValue="false"
+				android:key="key_misc_force_camera2api_hal3"
+				android:title="Force Enable Camera2API HAL3" />
+		<ListPreference
+		    android:defaultValue="-1"
+		    android:entries="@array/pref_misc_camera_timestamp"
+		    android:entryValues="@array/pref_misc_camera_timestamp_values"
+		    android:key="key_misc_camera_timestamp"
+				android:summary="Requires a Reboot"
+		    android:title="Force Timestamp Source" />
+  </PreferenceCategory>
 	<PreferenceCategory android:title="Other">
 		<ListPreference
         android:defaultValue="-1"
@@ -72,14 +89,6 @@
     	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
     	    android:key="key_misc_max_aspect_ratio_pre_o"
     	    android:title="Compatibility max aspect ratio" />
-		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_multi_camera"
-            android:title="Expose Aux cameras (Qualcomm)" />
-		<CheckBoxPreference
-    		android:defaultValue="false"
-    		android:key="key_misc_force_camera2api_hal3"
-    		android:title="Force Enable Camera2API HAL3" />
 		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_force_navbar_off"
