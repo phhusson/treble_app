@@ -1,91 +1,92 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <Preference android:title="Sponsor phh"
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<Preference android:title="Sponsor phh"
         android:key="key_sponsor">
-	    <intent
+		<intent
 		    android:action="android.intent.action.VIEW"
 		    android:data="https://github.com/sponsors/phhusson/" />
-    </Preference>
-
-    <PreferenceCategory android:title="Mobile network">
-	    <ListPreference
+	</Preference>
+	<PreferenceCategory android:title="Mobile network">
+		<ListPreference
 		    android:defaultValue="default"
 		    android:entries="@array/pref_misc_mobile_signal"
 		    android:entryValues="@array/pref_misc_mobile_signal_values"
 		    android:key="key_misc_mobile_signal"
 		    android:title="Signal meter method" />
-    </PreferenceCategory>
-
-    <ListPreference
-	    android:defaultValue="1"
-	    android:entries="@array/pref_misc_fps_divisor"
-	    android:entryValues="@array/pref_misc_fps_divisor_values"
-	    android:key="key_misc_fps_divisor"
-	    android:title="FPS Divisor" />
-    <ListPreference
-	    android:defaultValue="-1"
-	    android:entries="@array/pref_misc_display_fps"
-	    android:entryValues="@array/pref_misc_display_fps_values"
-	    android:key="key_misc_display_fps"
-	    android:title="Force FPS" />
-    <ListPreference
-	    android:defaultValue="1.86"
-	    android:entries="@array/pref_misc_max_aspect_ratio_pre_o"
-	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
-	    android:key="key_misc_max_aspect_ratio_pre_o"
-	    android:title="Compatibility max aspect ratio" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_misc_multi_camera"
-        android:title="Expose Aux cameras (Qualcomm)" />
-	<CheckBoxPreference
-		android:defaultValue="false"
-		android:key="key_misc_force_camera2api_hal3"
-		android:title="Force Enable Camera2API HAL3" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_misc_force_navbar_off"
-        android:title="Force navigation bar disabled" />
-    <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_misc_disable_audio_effects"
-        android:title="Disable audio effects" />
-    <PreferenceCategory android:title="Headset/Headphones">
-        <CheckBoxPreference
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Headset/Headphones">
+		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_huawei_headset_fix"
             android:title="Force headset switch (Huawei default)" />
-    </PreferenceCategory>
-    <EditTextPreference
-        android:defaultValue="-1"
-        android:key="key_misc_rounded_corners"
-	android:title="Set rounded corners diameter"
-	android:inputType="number" />
-    <EditTextPreference
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Backlight">
+		<EditTextPreference
+            android:defaultValue="-1"
+            android:key="key_misc_rounded_corners"
+	          android:title="Set rounded corners diameter"
+	          android:inputType="number" />
+		<EditTextPreference
         android:defaultValue="-1"
         android:key="key_misc_rounded_corners_overlay"
         android:title="Set forced/faked rounded corners diameter"
 	android:inputType="number" />
-    <PreferenceCategory android:title="Backlight">
-        <CheckBoxPreference
+		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_linear_brightness"
             android:title="Use linear screen brightness slider" />
-        <CheckBoxPreference
+		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_disable_buttons_backlight"
             android:title="Disable backlight of hardware buttons if present (requires reboot)" />
-    </PreferenceCategory>
-    <ListPreference
+	</PreferenceCategory>
+	<PreferenceCategory android:title="Other">
+		<ListPreference
         android:defaultValue="-1"
         android:entries="@array/pref_misc_bluetooth"
         android:entryValues="@array/pref_misc_bluetooth_values"
         android:key="key_misc_bluetooth"
         android:title="Bluetooth workarounds" />
-    <Preference android:title="Securize"
+		<Preference android:title="Securize"
         android:key="key_misc_securize" />
-    <CheckBoxPreference
+		<CheckBoxPreference
         android:defaultValue="false"
         android:key="key_misc_remotectl"
         android:title="Allow takeover of the device by phh for debugging" />
+		<ListPreference
+    	    android:defaultValue="1"
+    	    android:entries="@array/pref_misc_fps_divisor"
+    	    android:entryValues="@array/pref_misc_fps_divisor_values"
+    	    android:key="key_misc_fps_divisor"
+    	    android:title="FPS Divisor" />
+		<ListPreference
+    	    android:defaultValue="-1"
+    	    android:entries="@array/pref_misc_display_fps"
+    	    android:entryValues="@array/pref_misc_display_fps_values"
+    	    android:key="key_misc_display_fps"
+    	    android:title="Force FPS" />
+		<ListPreference
+    	    android:defaultValue="1.86"
+    	    android:entries="@array/pref_misc_max_aspect_ratio_pre_o"
+    	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
+    	    android:key="key_misc_max_aspect_ratio_pre_o"
+    	    android:title="Compatibility max aspect ratio" />
+		<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_multi_camera"
+            android:title="Expose Aux cameras (Qualcomm)" />
+		<CheckBoxPreference
+    		android:defaultValue="false"
+    		android:key="key_misc_force_camera2api_hal3"
+    		android:title="Force Enable Camera2API HAL3" />
+		<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_force_navbar_off"
+            android:title="Force navigation bar disabled" />
+		<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_disable_audio_effects"
+            android:title="Disable audio effects" />
+	</PreferenceCategory>
 </PreferenceScreen>

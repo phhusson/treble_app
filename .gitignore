@@ -11,5 +11,10 @@ build
 # macOS
 .DS_Store
 
-# Release build
-app.apk
+# Release Build
+TrebleApp.apk
+
+# Sdk
+/sdk/platform-tools/
+/sdk/platforms/
+/sdk/build-tools/
