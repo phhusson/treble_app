@@ -57,4 +57,15 @@
 	    <item>"-1"</item>
 	    <item>"0"</item>
     </array>
+
+    <array name="pref_misc_camera_timestamp">
+      <item>"Don't override"</item>
+      <item>"Clock monotonic"</item>
+      <item>"Clock boottime"</item>
+    </array>
+    <array name="pref_misc_camera_timestamp_values">
+      <item>"-1"</item>
+      <item>"0"</item>
+      <item>"1"</item>
+    </array>
 </resources>

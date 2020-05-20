@@ -23,6 +23,7 @@ object MiscSettings : Settings {
     val securize = "key_misc_securize"
     val remotectl = "key_misc_remotectl"
     val disableAudioEffects = "key_misc_disable_audio_effects"
+    val cameraTimestampOverride = "key_misc_camera_timestamp"
 
     override fun enabled() = true
 }
