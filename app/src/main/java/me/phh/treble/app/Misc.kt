@@ -48,6 +48,11 @@ object Misc: EntryStartup {
                 Log.d("PHH", "Setting fps divisor to $value")
                 Settings.Global.putString(c.contentResolver, "fps_divisor", value)
             }
+            MiscSettings.cameraTimestampOverride -> {
+                val value = sp.getString(key, "-1")
+                Log.d("PHH", "Setting cameraTimestampOverride to $value")
+                SystemProperties.set("persist.sys.phh.camera.force_timestampsource", value)
+            }
             MiscSettings.maxAspectRatioPreO -> {
                 val value = sp.getString(key, "1.86")
                 SystemProperties.set("persist.sys.max_aspect_ratio.pre_o", value)
@@ -163,6 +168,7 @@ object Misc: EntryStartup {
 
         //Refresh parameters on boot
         spListener.onSharedPreferenceChanged(sp, MiscSettings.fpsDivisor)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.cameraTimestampOverride)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.mobileSignal)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.maxAspectRatioPreO)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.multiCameras)
