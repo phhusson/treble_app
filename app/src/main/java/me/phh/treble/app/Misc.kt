@@ -155,6 +155,10 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.disable_audio_effects", if (value) "1" else "0")
             }
+            MiscSettings.forceA2dpOffloadDisable -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.disable_a2dp_offload", if (value) "1" else "0")
+            }
         }
     }
 

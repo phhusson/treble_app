@@ -27,6 +27,7 @@ object MiscSettings : Settings {
     val remotectl = "key_misc_remotectl"
     val disableAudioEffects = "key_misc_disable_audio_effects"
     val cameraTimestampOverride = "key_misc_camera_timestamp"
+    val forceA2dpOffloadDisable = "key_misc_force_a2dp_offload_disable"
 
     override fun enabled() = true
 }

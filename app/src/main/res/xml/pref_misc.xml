@@ -91,6 +91,10 @@
     	    android:title="Compatibility max aspect ratio" />
 		<CheckBoxPreference
             android:defaultValue="false"
+            android:key="key_misc_force_a2dp_disable"
+            android:title="Force A2DP disable" />
+		<CheckBoxPreference
+            android:defaultValue="false"
             android:key="key_misc_force_navbar_off"
             android:title="Force navigation bar disabled" />
 		<Preference android:title="Securize"
