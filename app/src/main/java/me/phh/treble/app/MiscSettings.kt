@@ -47,11 +47,11 @@ class MiscSettingsFragment : SettingsFragment() {
 
                 var cmds = listOf(
                         "/sbin/su -c /system/bin/phh-securize.sh",
-                        "/system/xbin/su -c /system/bin/phh-securize.sh"
+                        "/system/xbin/su -c /system/bin/phh-securize.sh",
                         "/system/xbin/phh-su -c /system/bin/phh-securize.sh",
                         "/sbin/su 0 /system/bin/phh-securize.sh",
                         "/system/xbin/su 0 /system/bin/phh-securize.sh",
-                        "/system/xbin/phh-su 0 /system/bin/phh-securize.sh",
+                        "/system/xbin/phh-su 0 /system/bin/phh-securize.sh"
                 )
                 for(cmd in cmds) {
                     try {
@@ -78,11 +78,11 @@ class MiscSettingsFragment : SettingsFragment() {
 
                 var cmds = listOf(
                         "/sbin/su -c /system/bin/remove-telephony.sh",
-                        "/system/xbin/su -c /system/bin/remove-telephony.sh"
+                        "/system/xbin/su -c /system/bin/remove-telephony.sh",
                         "/system/xbin/phh-su -c /system/bin/remove-telephony.sh",
                         "/sbin/su 0 /system/bin/remove-telephony.sh",
                         "/system/xbin/su 0 /system/bin/remove-telephony.sh",
-                        "/system/xbin/phh-su 0 /system/bin/remove-telephony.sh",
+                        "/system/xbin/phh-su 0 /system/bin/remove-telephony.sh"
                 )
                 for(cmd in cmds) {
                     try {
