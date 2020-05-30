@@ -31,6 +31,25 @@ class QtiAudio: EntryStartup {
         }
     }
 
+    fun handleDynIms(ctxt: Context, pkgName: String, property: String) {
+            Log.d("PHH", "Checking IMS status $pkgName $property")
+            val installed = ctxt.packageManager.getInstalledPackages(0).find { it.packageName == pkgName } != null
+            val imsRroProperty = property
+            Log.d("PHH", "CAF IMS $installed installed")
+            if(installed) {
+                SystemProperties.set(imsRroProperty, "true")
+                val replaceIntent =
+                        Intent(Intent.ACTION_PACKAGE_CHANGED)
+                                .setData(Uri.parse("package:$pkgName"))
+                                .putExtra(Intent.EXTRA_UID, 0)
+                                .putExtra(Intent.EXTRA_DONT_KILL_APP, false)
+                                .putExtra(Intent.EXTRA_CHANGED_COMPONENT_NAME_LIST, emptyArray<String>())
+                ctxt.sendBroadcastAsUser(replaceIntent, UserHandle.SYSTEM)
+            } else {
+                SystemProperties.set(imsRroProperty, "false")
+            }
+    }
+
     override fun startup(ctxt: Context) {
         thread {
             for(slot in listOf("slot1", "slot2", "default")) {
@@ -51,23 +70,9 @@ class QtiAudio: EntryStartup {
                 }
             }
 
-            Log.d("PHH", "Checking CAF IMS status")
-            val installed = ctxt.packageManager.getInstalledPackages(0).find { it.packageName == "org.codeaurora.ims" } != null
-            val imsRroProperty = "persist.sys.phh.ims.caf"
-            Log.d("PHH", "CAF IMS $installed installed")
-            Thread.sleep(30*1000)
-            if(installed) {
-                SystemProperties.set(imsRroProperty, "true")
-                val replaceIntent =
-                        Intent(Intent.ACTION_PACKAGE_CHANGED)
-                                .setData(Uri.parse("package:org.codeaurora.ims"))
-                                .putExtra(Intent.EXTRA_UID, 0)
-                                .putExtra(Intent.EXTRA_DONT_KILL_APP, false)
-                                .putExtra(Intent.EXTRA_CHANGED_COMPONENT_NAME_LIST, emptyArray<String>())
-                ctxt.sendBroadcastAsUser(replaceIntent, UserHandle.SYSTEM)
-            } else {
-                SystemProperties.set(imsRroProperty, "false")
-            }
+            Thread.sleep(30*1000);
+            handleDynIms(ctxt, "org.codeaurora.ims", "persist.sys.phh.ims.caf")
+            handleDynIms(ctxt, "com.shannon.imsservice", "persist.sys.phh.ims.sec")
         }
     }
     companion object: EntryStartup {
