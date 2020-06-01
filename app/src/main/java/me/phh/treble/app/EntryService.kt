@@ -41,6 +41,7 @@ class EntryService: Service() {
         tryC { Hostapd.startup(this) }
         tryC { Xiaomi.startup(this) }
         tryC { Qualcomm.startup(this) }
+        tryC { Vsmart.startup(this) }
     }
 }
 

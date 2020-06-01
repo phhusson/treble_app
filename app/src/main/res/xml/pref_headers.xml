@@ -3,6 +3,9 @@
         android:fragment="me.phh.treble.app.OnePlusSettingsFragment"
         android:title="OnePlus features" />
     <header
+        android:fragment="me.phh.treble.app.VsmartSettingsFragment"
+        android:title="Vsmart features" />
+    <header
         android:fragment="me.phh.treble.app.QualcommSettingsFragment"
         android:title="Qualcomm features" />
     <header
