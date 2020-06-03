@@ -37,6 +37,7 @@ object Misc: EntryStartup {
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         val c = ctxt.get()
         if(c == null) return@OnSharedPreferenceChangeListener
+        val displayManager = c.getSystemService(DisplayManager::class.java)
         when(key) {
             MiscSettings.mobileSignal -> {
                 val value = sp.getString(key, "default")
@@ -145,7 +146,13 @@ object Misc: EntryStartup {
             }
             MiscSettings.displayFps -> {
                 val value = sp.getString(key, "-1").toInt()
-                forceFps(value)
+                val maxValue = displayManager.displays[0].supportedModes.size
+                if(value>= maxValue) {
+                    Log.d("PHH", "Trying to set impossible mode " + value)
+                } else {
+                    Log.d("PHH", "Trying to set mode " + value)
+                    forceFps(value)
+                }
             }
             MiscSettings.remotectl -> {
                 val value = sp.getBoolean(key, false)
