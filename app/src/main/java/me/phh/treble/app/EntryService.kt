@@ -33,7 +33,6 @@ class EntryService: Service() {
         tryC { Lenovo.startup(this) }
         tryC { OnePlus.startup(this) }
         tryC { Oppo.startup(this) }
-        tryC { OverlayPicker.startup(this) }
         tryC { Doze.startup(this) }
         tryC { Huawei.startup(this) }
         tryC { Misc.startup(this) }
@@ -42,6 +41,7 @@ class EntryService: Service() {
         tryC { Xiaomi.startup(this) }
         tryC { Qualcomm.startup(this) }
         tryC { Vsmart.startup(this) }
+        tryC { OverlayPicker.startup(this) }
     }
 }
 
