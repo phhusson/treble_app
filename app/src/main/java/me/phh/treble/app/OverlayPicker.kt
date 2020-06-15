@@ -47,6 +47,17 @@ object OverlayPicker: EntryStartup {
         }
     }
 
+    fun handleVsmart(ctxt: Context) {
+        if(vendorFp == null) return
+
+        if(vendorFp.matches(Regex("vsmart/V620A_open.*"))) {
+            val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
+            if(sp.getString(MiscSettings.roundedCorners, "-1").toInt() == -1) {
+                sp.edit().putString(MiscSettings.roundedCorners, "12").commit()
+            }
+        }
+    }
+
     fun handleXiaomi(ctxt: Context) {
         if(vendorFp == null) return
 
@@ -62,6 +73,7 @@ object OverlayPicker: EntryStartup {
         enableLte(ctxt)
         handleNokia(ctxt)
         handleSamsung(ctxt)
+        handleVsmart(ctxt)
         handleXiaomi(ctxt)
 
         setOverlayEnabled("me.phh.treble.overlay.systemui.falselocks", true)
