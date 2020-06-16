@@ -1,6 +1,7 @@
 package me.phh.treble.app
 
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.Network
 import android.os.Handler
@@ -19,7 +20,7 @@ import java.net.URL
 class PresetDownloader {
     companion object {
         private val handlerThread = HandlerThread("PresetDownloader").also { it.start() }
-        private val handler = Handler(handlerThread.looper)
+        val handler = Handler(handlerThread.looper)
         var ctxtWp: WeakReference<Context>? = null
 
         var alreadyDownloaded = false
@@ -27,6 +28,37 @@ class PresetDownloader {
         val jsonLock = Object() //covers json and matchedNodes
         var json: JSONArray? = null
         var matchedNodes = emptyList<JSONObject>()
+
+        val downloadPresets = object: Runnable {
+            override fun run() {
+                try {
+                    Log.e("PHH-Presets", "Downloading...")
+                    val ctxt = ctxtWp?.get() ?: return
+                    if (alreadyDownloaded) return
+
+                    val connection = URL("https://raw.githubusercontent.com/phhusson/treble_presets/master/infos.json").openConnection() as? HttpURLConnection
+                            ?: return
+                    if (connection.responseCode != 200) {
+                        val error = connection.errorStream.bufferedReader().use { it.readText() }
+                        Log.e("PHH-Presets", "Failed getting infos.json, received ${connection.responseCode}: $error")
+                        return
+                    }
+
+                    val outputFile = File(ctxt.filesDir, "presets.json")
+                    outputFile.outputStream().use { os ->
+                        connection.inputStream.use { inS ->
+                            inS.copyTo(os)
+                        }
+                    }
+
+                    alreadyDownloaded = true
+                    handler.removeCallbacks(parsePresets)
+                    handler.post(parsePresets)
+                } catch(e: Exception) {
+                    Log.d("PHH-Presets", "Failed downloading presets...", e)
+                }
+            }
+        }
 
         val parsePresets = object: Runnable {
             override fun run() {
@@ -69,37 +101,47 @@ class PresetDownloader {
                         matchedNodes = mutablesNodes.toList()
                     }
                     Log.d("PHH-Presets", "Found ${mutablesNodes.size}")
+                    handler.post(applyPresets)
                 } catch(e: Exception) {
                     Log.d("PHH-Presets", "Failed finding matching nodes", e)
                 }
             }
         }
 
-        val downloadPresets = object: Runnable {
+        var forcePresets = false
+        val applyPresets = object: Runnable {
             override fun run() {
                 try {
                     val ctxt = ctxtWp?.get() ?: return
-                    if (alreadyDownloaded) return
-
-                    val connection = URL("https://raw.githubusercontent.com/phhusson/treble_presets/master/infos.json").openConnection() as? HttpURLConnection
-                            ?: return
-                    if (connection.responseCode != 200) {
-                        val error = connection.errorStream.bufferedReader().use { it.readText() }
-                        Log.e("PHH-Presets", "Failed getting infos.json, received ${connection.responseCode}: $error")
-                        return
-                    }
-
-                    val outputFile = File(ctxt.filesDir, "presets.json")
-                    outputFile.outputStream().use { os ->
-                        connection.inputStream.use { inS ->
-                            inS.copyTo(os)
+                    val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
+                    val spEdit = sp.edit()
+                    val nodes = synchronized(jsonLock) { matchedNodes }
+                    for (node in nodes) {
+                        if (!node.has("preferences")) continue
+                        val prefs = node.getJSONObject("preferences")
+                        for (key in prefs.keys()) {
+                            Log.d("PHH-Presets", "Setting preset $key?")
+                            if (sp.contains(key) && !forcePresets) continue
+                            val value = prefs.get(key)
+                            Log.d("PHH-Presets", " => $value")
+                            Log.d("PHH-Presets", "$key has type ${value.javaClass}")
+                            when (value.javaClass) {
+                                Int::class.java -> spEdit.putInt(key, value as Int)
+                                Boolean::class.java -> spEdit.putBoolean(key, value as Boolean)
+                                String::class.java -> {
+                                    if(value == "true" || value == "false") {
+                                        spEdit.putBoolean(key, value == "true")
+                                    } else {
+                                        spEdit.putString(key, value as String)
+                                    }
+                                }
+                            }
                         }
                     }
-
-                    alreadyDownloaded = true
-                    handler.post(parsePresets)
+                    spEdit.apply()
+                    forcePresets = false
                 } catch(e: Exception) {
-                    Log.d("PHH-Presets", "Failed downloading presets...", e)
+                    Log.d("PHH-Presets", "Failed applying presets", e)
                 }
             }
         }
@@ -116,6 +158,7 @@ class PresetDownloader {
             cm.registerDefaultNetworkCallback(networkListener)
 
             handler.post(downloadPresets)
+            handler.removeCallbacks(parsePresets)
             handler.post(parsePresets)
         }
     }

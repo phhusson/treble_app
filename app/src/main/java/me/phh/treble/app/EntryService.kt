@@ -8,6 +8,7 @@ import android.os.IBinder
 import android.os.UserHandle
 import android.util.Log
 import dalvik.system.PathClassLoader
+import kotlin.concurrent.thread
 
 class EntryService: Service() {
     companion object {
@@ -28,22 +29,24 @@ class EntryService: Service() {
     override fun onCreate() {
         service = this
 
-        tryC { Tools.startup(this) }
-        tryC { QtiAudio.startup(this) }
-        tryC { Lenovo.startup(this) }
-        tryC { OnePlus.startup(this) }
-        tryC { Oppo.startup(this) }
-        tryC { OverlayPicker.startup(this) }
-        tryC { Doze.startup(this) }
-        tryC { Huawei.startup(this) }
-        tryC { Misc.startup(this) }
-        tryC { Samsung.startup(this) }
-        tryC { Hostapd.startup(this) }
-        tryC { Xiaomi.startup(this) }
-        tryC { Qualcomm.startup(this) }
-        tryC { Vsmart.startup(this) }
+        thread {
+            tryC { Tools.startup(this) }
+            tryC { QtiAudio.startup(this) }
+            tryC { Lenovo.startup(this) }
+            tryC { OnePlus.startup(this) }
+            tryC { Oppo.startup(this) }
+            tryC { OverlayPicker.startup(this) }
+            tryC { Doze.startup(this) }
+            tryC { Huawei.startup(this) }
+            tryC { Misc.startup(this) }
+            tryC { Samsung.startup(this) }
+            tryC { Hostapd.startup(this) }
+            tryC { Xiaomi.startup(this) }
+            tryC { Qualcomm.startup(this) }
+            tryC { Vsmart.startup(this) }
 
-        tryC { PresetDownloader.startup(this) }
+            tryC { PresetDownloader.startup(this) }
+        }
     }
 }
 
