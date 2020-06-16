@@ -1,5 +1,8 @@
 <preference-headers xmlns:android="http://schemas.android.com/apk/res/android">
     <header
+        android:fragment="me.phh.treble.app.MyDeviceSettingsFragment"
+        android:title="My device" />
+    <header
         android:fragment="me.phh.treble.app.OnePlusSettingsFragment"
         android:title="OnePlus features" />
     <header

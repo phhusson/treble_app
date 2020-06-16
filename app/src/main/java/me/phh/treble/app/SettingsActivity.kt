@@ -61,6 +61,8 @@ class SettingsActivity : PreferenceActivity() {
             target.removeIf { it.fragment == QualcommSettingsFragment::class.java.name }
         if (!VsmartSettings.enabled())
             target.removeIf { it.fragment == VsmartSettingsFragment::class.java.name }
+        if (!MyDeviceSettings.enabled())
+            target.removeIf { it.fragment == MyDeviceSettingsFragment::class.java.name }
     }
 
     /**
@@ -79,6 +81,7 @@ class SettingsActivity : PreferenceActivity() {
                 || OppoSettingsFragment::class.java.name == fragmentName
                 || QualcommSettingsFragment::class.java.name == fragmentName
                 || VsmartSettingsFragment::class.java.name == fragmentName
+                || MyDeviceSettingsFragment::class.java.name == fragmentName
     }
 
     companion object {

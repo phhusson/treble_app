@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen
+	xmlns:android="http://schemas.android.com/apk/res/android">
+	<Preference android:title="Maintainer for my device"
+        android:key="key_maintainer">
+		<intent
+		    android:action="android.intent.action.VIEW"
+		    android:data="https://github.com/sponsors/phhusson/" />
+	</Preference>
+</PreferenceScreen>
