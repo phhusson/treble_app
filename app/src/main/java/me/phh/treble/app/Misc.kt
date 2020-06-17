@@ -33,6 +33,15 @@ object Misc: EntryStartup {
         Log.d("PHH", "Set surface flinger forced fps/mode to $v")
     }
 
+    fun enableHwcOverlay(v: Boolean) {
+        val data = Parcel.obtain()
+        data.writeInterfaceToken("android.ui.ISurfaceComposer")
+        data.writeInt(if(v) 0 else 1)
+        surfaceFlinger.transact(1008, data, null, 0)
+        data.recycle()
+        Log.d("PHH", "Set surface flinger hwc overlay to $v")
+    }
+
     lateinit var ctxt: WeakReference<Context>
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         val c = ctxt.get()
@@ -166,6 +175,10 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.disable_a2dp_offload", if (value) "1" else "0")
             }
+            MiscSettings.noHwcomposer -> {
+                val value = sp.getBoolean(key, false)
+                enableHwcOverlay(!value)
+            }
         }
     }
 
@@ -189,5 +202,6 @@ object Misc: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, MiscSettings.headsetFix)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.bluetooth)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.displayFps)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.noHwcomposer)
     }
 }

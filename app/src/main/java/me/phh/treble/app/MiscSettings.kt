@@ -28,6 +28,7 @@ object MiscSettings : Settings {
     val disableAudioEffects = "key_misc_disable_audio_effects"
     val cameraTimestampOverride = "key_misc_camera_timestamp"
     val forceA2dpOffloadDisable = "key_misc_force_a2dp_offload_disable"
+    val noHwcomposer = "key_misc_no_hwcomposer"
 
     override fun enabled() = true
 }

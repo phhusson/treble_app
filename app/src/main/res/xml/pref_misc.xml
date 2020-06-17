@@ -48,6 +48,11 @@
         android:entryValues="@array/pref_misc_display_fps_values"
         android:key="key_misc_display_fps"
         android:title="Force FPS" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_no_hwcomposer"
+            android:title="Disable HW overlays"
+            android:summary="Eats more CPU and battery" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Backlight">
 		<CheckBoxPreference
