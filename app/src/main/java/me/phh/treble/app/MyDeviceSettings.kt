@@ -26,9 +26,9 @@ class MyDeviceSettingsFragment : SettingsFragment() {
         val deviceNode = nodes.last { it.has("device_name") }
 
         val deviceName = deviceNode.getString("device_name")
-        val maintainer = deviceNode.getJSONObject("maintainer")
+        val maintainer = if(deviceNode.has("maintainer")) deviceNode.getJSONObject("maintainer") else return
         val maintainerNick = maintainer.getString("name")
-        val community = deviceNode.getJSONObject("community")
+        val community = if(deviceNode.has("community")) deviceNode.getJSONObject("community") else return
         maintainerPref.title = "The maintainer of your $deviceName is $maintainerNick"
         if(maintainer.has("telegram")) {
             maintainerPref.setOnPreferenceClickListener {
