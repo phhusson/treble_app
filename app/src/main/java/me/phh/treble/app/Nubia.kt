@@ -32,6 +32,20 @@ object Nubia : EntryStartup {
                 val i = sp.getString(key, "0")
                 writeToFileNofail("/sys/kernel/fan/fan_speed_level", i)
             }
+            NubiaSettings.logoBreath -> {
+                val b = sp.getBoolean(key, false)
+                if(b) {
+                    writeToFileNofail("/sys/class/leds/blue/breath_feature", "3 1000 0 700 0 255 3")
+                } else {
+                    writeToFileNofail("/sys/class/leds/blue/breath_feature", "0")
+                }
+            }
+            NubiaSettings.redmagicLed -> {
+                val i = sp.getString(key, "0")
+                writeToFileNofail("/sys/class/leds/aw22xxx_led/imax", "8")
+                writeToFileNofail("/sys/class/leds/aw22xxx_led/effect", i)
+                writeToFileNofail("/sys/class/leds/aw22xxx_led/cfg", "1")
+            }
         }
     }
 
@@ -45,5 +59,7 @@ object Nubia : EntryStartup {
         spListener.onSharedPreferenceChanged(sp, NubiaSettings.dt2w)
         spListener.onSharedPreferenceChanged(sp, NubiaSettings.tsGameMode)
         spListener.onSharedPreferenceChanged(sp, NubiaSettings.fanSpeed)
+        spListener.onSharedPreferenceChanged(sp, NubiaSettings.logoBreath)
+        spListener.onSharedPreferenceChanged(sp, NubiaSettings.redmagicLed)
     }
 }
