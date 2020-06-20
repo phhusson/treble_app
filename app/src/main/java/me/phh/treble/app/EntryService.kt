@@ -44,6 +44,7 @@ class EntryService: Service() {
             tryC { Xiaomi.startup(this) }
             tryC { Qualcomm.startup(this) }
             tryC { Vsmart.startup(this) }
+            tryC { Nubia.startup(this) }
 
             tryC { PresetDownloader.startup(this) }
         }

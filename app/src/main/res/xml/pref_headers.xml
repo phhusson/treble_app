@@ -6,6 +6,9 @@
         android:fragment="me.phh.treble.app.OnePlusSettingsFragment"
         android:title="OnePlus features" />
     <header
+        android:fragment="me.phh.treble.app.NubiaSettingsFragment"
+        android:title="Nubia features" />
+    <header
         android:fragment="me.phh.treble.app.VsmartSettingsFragment"
         android:title="Vsmart features" />
     <header

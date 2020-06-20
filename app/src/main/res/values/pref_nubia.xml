@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_nubia_fan">
+	    <item>Off</item>
+	    <item>Low</item>
+	    <item>Middle</item>
+	    <item>High</item>
+    </array>
+    <array name="pref_nubia_fan_values">
+	    <item>"0"</item>
+	    <item>"3"</item>
+	    <item>"4"</item>
+	    <item>"5"</item>
+    </array>
+</resources>

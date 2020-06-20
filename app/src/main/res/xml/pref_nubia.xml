@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Touchscreen">
+        <CheckBoxPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="nubia_double_tap_to_wake"
+            android:title="Enable DT2W" />
+        <CheckBoxPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="nubia_touchscreen_game_mode"
+            android:title="Enable game mode" />
+    </PreferenceCategory>
+    <PreferenceCategory android:title="Misc">
+	    <ListPreference
+		    android:defaultValue="-1"
+		    android:entries="@array/pref_nubia_fan"
+		    android:entryValues="@array/pref_nubia_fan_values"
+		    android:key="nubia_fan_speed"
+		    android:title="FAN speed" />
+    </PreferenceCategory>
+</PreferenceScreen>

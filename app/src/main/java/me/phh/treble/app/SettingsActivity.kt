@@ -63,6 +63,8 @@ class SettingsActivity : PreferenceActivity() {
             target.removeIf { it.fragment == VsmartSettingsFragment::class.java.name }
         if (!MyDeviceSettings.enabled())
             target.removeIf { it.fragment == MyDeviceSettingsFragment::class.java.name }
+        if (!NubiaSettings.enabled())
+            target.removeIf { it.fragment == NubiaSettingsFragment::class.java.name }
     }
 
     /**
@@ -82,6 +84,7 @@ class SettingsActivity : PreferenceActivity() {
                 || QualcommSettingsFragment::class.java.name == fragmentName
                 || VsmartSettingsFragment::class.java.name == fragmentName
                 || MyDeviceSettingsFragment::class.java.name == fragmentName
+                || NubiaSettingsFragment::class.java.name == fragmentName
     }
 
     companion object {
