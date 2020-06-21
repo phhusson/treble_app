@@ -53,6 +53,9 @@ object OverlayPicker: EntryStartup {
         if(vendorFp.matches(Regex(".*iaomi/perseus.*"))) {
             setOverlayEnabled("me.phh.treble.overlay.xiaomi.mimix3.systemui", true)
         }
+        if(vendorFp.matches(Regex(".*iaomi/cepheus.*"))) {
+            setOverlayEnabled("me.phh.treble.overlay.xiaomi.mi9.systemui", true)
+        }
     }
 
     override fun startup(ctxt: Context) {
