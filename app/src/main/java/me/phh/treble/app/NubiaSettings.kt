@@ -8,6 +8,9 @@ object NubiaSettings : Settings {
     val fanSpeed = "nubia_fan_speed"
     val logoBreath = "nubia_redmagic_logo_breath"
     val redmagicLed = "nubia_redmagic_led"
+    val boostCpu = "nubia_boost_cpu"
+    val boostGpu = "nubia_boost_gpu"
+    val boostCache = "nubia_boost_cache"
 
     override fun enabled() = Tools.vendorFp.toLowerCase().startsWith("nubia/")
 }

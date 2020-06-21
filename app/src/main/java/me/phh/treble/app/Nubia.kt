@@ -46,6 +46,18 @@ object Nubia : EntryStartup {
                 writeToFileNofail("/sys/class/leds/aw22xxx_led/effect", i)
                 writeToFileNofail("/sys/class/leds/aw22xxx_led/cfg", "1")
             }
+            NubiaSettings.boostCpu -> {
+                val b = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.cpu.boost", if(b) "1" else "0")
+            }
+            NubiaSettings.boostGpu -> {
+                val b = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.gpu.boost", if(b) "1" else "0")
+            }
+            NubiaSettings.boostCache -> {
+                val b = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.cache.boost", if(b) "1" else "0")
+            }
         }
     }
 

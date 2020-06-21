@@ -36,4 +36,24 @@
 		    android:key="nubia_redmagic_led"
 		    android:title="REDMAGIC RGB" />
     </PreferenceCategory>
+    <PreferenceCategory android:title="Boosts">
+        <CheckBoxPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="nubia_boost_cpu"
+            android:title="Boost CPU" />
+        <CheckBoxPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="nubia_boost_cache"
+            android:title="Boost caches" />
+        <CheckBoxPreference
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:defaultValue="false"
+            android:key="nubia_boost_gpu"
+            android:title="Boost GPU" />
+    </PreferenceCategory>
 </PreferenceScreen>
