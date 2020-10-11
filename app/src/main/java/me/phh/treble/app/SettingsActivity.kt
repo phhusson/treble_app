@@ -85,6 +85,7 @@ class SettingsActivity : PreferenceActivity() {
                 || VsmartSettingsFragment::class.java.name == fragmentName
                 || MyDeviceSettingsFragment::class.java.name == fragmentName
                 || NubiaSettingsFragment::class.java.name == fragmentName
+                || ImsSettingsFragment::class.java.name == fragmentName
     }
 
     companion object {

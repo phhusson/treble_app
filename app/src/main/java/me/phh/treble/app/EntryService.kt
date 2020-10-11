@@ -4,6 +4,10 @@ import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.Network
+import android.net.NetworkCapabilities
+import android.net.NetworkRequest
 import android.os.IBinder
 import android.os.UserHandle
 import android.util.Log
@@ -45,8 +49,12 @@ class EntryService: Service() {
             tryC { Qualcomm.startup(this) }
             tryC { Vsmart.startup(this) }
             tryC { Nubia.startup(this) }
+            tryC { Ims.startup(this) }
 
             tryC { PresetDownloader.startup(this) }
+            tryC {
+
+            }
         }
     }
 }
