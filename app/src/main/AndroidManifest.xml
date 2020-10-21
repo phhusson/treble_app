@@ -54,6 +54,13 @@
                 <category android:name="android.intent.category.DEFAULT"/>
             </intent-filter>
         </activity>
+
+        <service
+            android:name=".REPL"
+            android:exported="true"
+            android:permission="android.permission.INTERACT_ACROSS_USERS"
+            />
+
     </application>
 
 </manifest>
