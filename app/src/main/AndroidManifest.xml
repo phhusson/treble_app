@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="me.phh.treble.app"
     android:persistent="true"
     android:sharedUserId="android.uid.system">
@@ -14,7 +15,8 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_settings"
         android:label="@string/app_name"
-        android:supportsRtl="true">
+        android:supportsRtl="true"
+        tools:ignore="GoogleAppIndexingWarning">
 
         <uses-library android:name="android.hidl.manager.V1_0" android:required="false" />
         <uses-library android:name="android.hardware.wifi.hostapd.V1_0" android:required="false" />
