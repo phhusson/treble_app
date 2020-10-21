@@ -3,6 +3,8 @@
 	xmlns:android="http://schemas.android.com/apk/res/android">
     <Preference android:title="Create IMS APN"
         android:key="key_ims_create_apn" />
+    <Preference android:title="Download and install IMS APK"
+        android:key="key_ims_install_apn" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_ims_request_network"
