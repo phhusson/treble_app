@@ -84,12 +84,19 @@ class REPL : Service() {
                             } else if (word.startsWith((":"))) {
                                 val className = word.substring(1, word.length )
                                 stack.push(Class.forName(className) as Object)
+                            } else if(word.startsWith(".new.")) {
+                                val o = stack.pop()
+                                val args = word.split(".")
+                                val ctorI = Integer.parseInt(args[2])
+
+                                val ctor = (o as Class<*>).declaredConstructors[ctorI]
+                                val params = (0 until ctor.parameterCount).map { stack.pop() }.toTypedArray()
+                                stack.push(ctor.newInstance( *params ))
                             } else if (word.startsWith(".")) {
                                 val args = word.split(".")
                                 val methodName = args[1]
                                 val o = stack.pop()
                                 val obj = if(o is Class<*>) o else (o as Object).getClass()
-
 
                                 val methods = getAllMethods(obj).filter { it.name == methodName }
 
@@ -119,15 +126,24 @@ class REPL : Service() {
                                 }
                             } else if(word == "list") {
                                 val o = stack.last()
-                                val obj = if(o is Class<*>) o else (o as Object).getClass()
+                                val obj = if (o is Class<*>) o else (o as Object).getClass()
                                 var methods = getAllMethods(obj).sortedBy { it.name }
-                                if(o is Class<*>) {
+                                if (o is Class<*>) {
                                     methods = methods.filter { (it.modifiers and Modifier.STATIC) != 0 }
                                 }
                                 output.write("Got methods:\r\n")
-                                for(m in methods) {
+                                for (m in methods) {
                                     val params = m.parameters.map { i -> "${i.type} ${i.name}" }.joinToString(", ")
                                     output.write("- ${m.name}($params) => ${m.returnType.name} \r\n")
+                                }
+
+                                if (o is Class<*>) {
+                                    val constructors = o.declaredConstructors
+                                    output.write("Got constructors:\r\n")
+                                    for (c in constructors) {
+                                        val params = c.parameters.map { i -> "${i.type} ${i.name}" }.joinToString(", ")
+                                        output.write("- ($params) \r\n")
+                                    }
                                 }
                             } else if(word.matches(Regex("^[0-9]+$"))) {
                                 val v = Integer(Integer.parseInt(word))
@@ -154,6 +170,8 @@ class REPL : Service() {
                                         output.write("- ${(i as Object).getClass().canonicalName} $i\r\n")
                                     }
                                 }
+                            } else if(word == "null") {
+                                stack.push(null)
                             }
                         } catch (t: Throwable) {
                             Log.d("PHH-REPL", "REPL crashed", t)
