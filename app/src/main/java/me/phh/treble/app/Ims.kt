@@ -60,6 +60,19 @@ object Ims: EntryStartup {
         }
     }
 
+    val mHidlService = android.hidl.manager.V1_0.IServiceManager.getService()
+
+    val mAllSlots = listOf("imsrild1", "imsrild2", "imsrild3", "slot1", "slot2", "slot3", "imsSlot1", "imsSlot2", "mtkSlot1", "mtkSlot2", "imsradio0", "imsradio1")
+    val gotMtkPie = mAllSlots
+            .find { i -> mHidlService.get("vendor.mediatek.hardware.radio@3.0::IRadio", i) != null } != null
+    val gotMtkQuack = mAllSlots
+            .find { i -> mHidlService.get("vendor.mediatek.hardware.mtkradioex@1.0::IMtkRadioEx", i) != null } != null
+    val gotQualcomm = mAllSlots
+            .find { i -> mHidlService.get("vendor.qti.hardware.radio.ims@1.0::IImsRadio", i) != null } != null
+    val gotSLSI = mAllSlots
+            .find { i -> mHidlService.get("vendor.samsung_slsi.telephony.hardware.radio@1.0::IOemSamsungslsi", i) != null } != null
+
+
     override fun startup(ctxt: Context) {
         if (!ImsSettings.enabled()) return
 
@@ -67,6 +80,20 @@ object Ims: EntryStartup {
         sp.registerOnSharedPreferenceChangeListener(spListener)
 
         this.ctxt = WeakReference(ctxt.applicationContext)
+
+        val allOverlays = listOf("me.phh.treble.overlay.mtkims_telephony", "me.phh.treble.overlay.cafims_telephony")
+        val selectOverlay = when {
+            gotMtkPie || gotMtkQuack -> "me.phh.treble.overlay.mtkims_telephony"
+            gotQualcomm -> "me.phh.treble.overlay.cafims_telephony"
+            gotSLSI -> "me.phh.treble.overlay.slsiims_telephony"
+            else -> null
+        }
+        if(selectOverlay != null) {
+            allOverlays
+                    .filter { it != selectOverlay }
+                    .forEach { OverlayPicker.setOverlayEnabled(it, false) }
+            OverlayPicker.setOverlayEnabled(selectOverlay, true)
+        }
 
         //Refresh parameters on boot
         spListener.onSharedPreferenceChanged(sp, ImsSettings.requestNetwork)

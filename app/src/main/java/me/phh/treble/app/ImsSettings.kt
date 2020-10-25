@@ -3,7 +3,9 @@ package me.phh.treble.app
 import android.app.AlertDialog
 import android.app.Application
 import android.app.DownloadManager
+import android.app.PendingIntent
 import android.content.*
+import android.content.pm.PackageInstaller
 import android.hardware.display.DisplayManager
 import android.net.Uri
 import android.os.Bundle
@@ -12,10 +14,13 @@ import android.os.StrictMode
 import android.os.UserHandle
 import android.telephony.TelephonyManager
 import android.util.Log
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import androidx.preference.ListPreference
 import androidx.preference.Preference
+import java.io.ByteArrayInputStream
 import java.io.File
+import java.io.FileInputStream
 
 object ImsSettings : Settings {
     val requestNetwork = "key_ims_request_network"
@@ -82,26 +87,16 @@ class ImsSettingsFragment : SettingsFragment() {
         }
 
         val installIms = findPreference<Preference>(ImsSettings.installImsApk)
-        val hidlService = android.hidl.manager.V1_0.IServiceManager.getService()
 
-
-        val allSlots = listOf("imsrild1", "imsrild2", "imsrild3", "slot1", "slot2", "slot3", "imsSlot1", "imsSlot2", "mtkSlot1", "mtkSlot2", "imsradio0", "imsradio1")
-        val gotMtkPie = allSlots
-                .find { i -> hidlService.get("vendor.mediatek.hardware.radio@3.0::IRadio", i) != null } != null
-        val gotMtkQuack = allSlots
-                .find { i -> hidlService.get("vendor.mediatek.hardware.mtkradioex@1.0::IMtkRadioEx", i) != null } != null
-        val gotQualcomm = allSlots
-                .find { i -> hidlService.get("vendor.qti.hardware.radio.ims@1.0::IImsRadio", i) != null } != null
-
-        Log.d("PHH", "MTK Pie radio = $gotMtkPie")
-        Log.d("PHH", "MTK Quack radio = $gotMtkQuack")
-        Log.d("PHH", "Qualcomm radio = $gotQualcomm")
+        Log.d("PHH", "MTK Pie radio = ${Ims.gotMtkPie}")
+        Log.d("PHH", "MTK Quack radio = ${Ims.gotMtkQuack}")
+        Log.d("PHH", "Qualcomm radio = ${Ims.gotQualcomm}")
 
         val (url, message) =
                 when {
-                    gotMtkPie -> Pair("https://treble.phh.me/stable/ims-mtk-p.apk", "Mediatek Pie vendor")
-                    gotMtkQuack -> Pair("https://treble.phh.me/stable/ims-mtk-q.apk", "Mediatek Pie vendor")
-                    gotQualcomm -> Pair("https://treble.phh.me/stable/ims-q.64.apk", "Qualcomm vendor")
+                    Ims.gotMtkPie -> Pair("https://treble.phh.me/stable/ims-mtk-p.apk", "Mediatek Pie vendor")
+                    Ims.gotMtkQuack -> Pair("https://treble.phh.me/stable/ims-mtk-q.apk", "Mediatek Pie vendor")
+                    Ims.gotQualcomm -> Pair("https://treble.phh.me/stable/ims-q.64.apk", "Qualcomm vendor")
                     else -> Pair("", "NOT SUPPORTED")
                 }
 
@@ -132,21 +127,39 @@ class ImsSettingsFragment : SettingsFragment() {
                     val localUri = Uri.parse(cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)))
                     Log.d("PHH", "Got localURI = $localUri")
                     val filename = localUri.lastPathSegment
+                    val path = localUri.path!!
+                    val pi = context.packageManager.packageInstaller
+                    val sessionId = pi.createSession(PackageInstaller.SessionParams(PackageInstaller.SessionParams.MODE_FULL_INSTALL))
+                    val session = pi.openSession(sessionId)
 
-                    val providerUri = FileProvider.getUriForFile(activity, "me.phh.treble.app", File(localUri.path))
-                    Log.d("PHH", "Got providerUri = $providerUri")
 
-                    val i = Intent(Intent.ACTION_VIEW)
-                    i.setDataAndType(providerUri, "application/vnd.android.package-archive")
-                    i.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
-                    i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    //context.startActivity(i)
-                    val m = Context::class.java.getMethod("startActivityAsUser", Intent::class.java, UserHandle::class.java)
+                    session.openWrite("hello", 0, -1).use { output ->
+                        FileInputStream(path).use { input ->
+                            val buf = ByteArray(512*1024)
+                            while(input.available()>0) {
+                                val l = input.read(buf)
+                                output.write(buf, 0, l)
+                            }
+                            session.fsync(output)
+                        }
+                    }
 
-                    activity.grantUriPermission("android", providerUri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    activity.registerReceiver(
+                            object: BroadcastReceiver() {
+                                override fun onReceive(p0: Context?, intet: Intent?) {
+                                    Log.e("PHH", "Apk install received $intent" )
+                                    Toast.makeText(p0, "IMS apk installed! You may now reboot.", Toast.LENGTH_LONG).show()
+                                }
+                            },
+                            IntentFilter("me.phh.treble.app.ImsInstalled")
+                    )
 
-                    m.invoke(activity, i, UserHandle.getUserHandleForUid(10099))
-
+                    session.commit(
+                            PendingIntent.getBroadcast(
+                                    this@ImsSettingsFragment.activity,
+                                    1,
+                                    Intent("me.phh.treble.app.ImsInstalled"),
+                                    PendingIntent.FLAG_ONE_SHOT).intentSender)
                     activity.unregisterReceiver(this)
                 }
 
