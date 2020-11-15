@@ -63,6 +63,12 @@
             android:permission="android.permission.INTERACT_ACROSS_USERS"
             />
 
+        <activity
+            android:name=".DesktopInput"
+            android:launchMode="singleTask"
+            android:theme="@android:style/Theme.Material.Dialog" >
+        </activity>
+
     </application>
 
 </manifest>

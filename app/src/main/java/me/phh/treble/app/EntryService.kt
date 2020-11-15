@@ -51,6 +51,8 @@ class EntryService: Service() {
             tryC { Nubia.startup(this) }
             tryC { Ims.startup(this) }
 
+            tryC { Desktop.startup(this) }
+
             tryC { PresetDownloader.startup(this) }
             tryC {
 
