@@ -112,6 +112,7 @@ object Misc: EntryStartup {
                 val value = sp.getString(key, "-1").toInt()
                 if (value >= 0) {
                     Settings.Secure.putInt(c.contentResolver, "sysui_rounded_content_padding", value)
+                    SystemProperties.set("persist.sys.phh.rounded_corners_padding", value.toString())
                 }
             }
             MiscSettings.roundedCornersOverlay -> {
