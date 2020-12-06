@@ -29,6 +29,7 @@ object MiscSettings : Settings {
     val cameraTimestampOverride = "key_misc_camera_timestamp"
     val forceA2dpOffloadDisable = "key_misc_force_a2dp_offload_disable"
     val noHwcomposer = "key_misc_no_hwcomposer"
+    val backlightScale = "key_misc_backlight_scale"
 
     override fun enabled() = true
 }

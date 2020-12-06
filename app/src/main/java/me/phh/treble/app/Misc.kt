@@ -179,6 +179,10 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 enableHwcOverlay(!value)
             }
+            MiscSettings.backlightScale -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.backlight.scale", if (value) "1" else "0")
+            }
         }
     }
 
