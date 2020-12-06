@@ -30,6 +30,7 @@ object MiscSettings : Settings {
     val forceA2dpOffloadDisable = "key_misc_force_a2dp_offload_disable"
     val noHwcomposer = "key_misc_no_hwcomposer"
     val backlightScale = "key_misc_backlight_scale"
+    val headsetDevinput = "key_misc_headset_devinput"
 
     override fun enabled() = true
 }

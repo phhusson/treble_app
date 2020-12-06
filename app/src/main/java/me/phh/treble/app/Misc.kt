@@ -184,6 +184,10 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.backlight.scale", if (value) "1" else "0")
             }
+            MiscSettings.headsetDevinput -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.overlay.devinputjack", if (value) "true" else "false")
+            }
         }
     }
 

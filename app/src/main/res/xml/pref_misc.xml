@@ -21,6 +21,10 @@
             android:key="key_huawei_headset_fix"
             android:title="Force headset switch (Huawei default)" />
 		<CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_headset_devinput"
+            android:title="Use alternate way to detect headsets" />
+		<CheckBoxPreference
                     android:defaultValue="false"
                     android:key="key_misc_disable_audio_effects"
                     android:title="Disable audio effects" />
