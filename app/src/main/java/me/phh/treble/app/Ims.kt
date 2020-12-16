@@ -71,6 +71,8 @@ object Ims: EntryStartup {
             .find { i -> mHidlService.get("vendor.qti.hardware.radio.ims@1.0::IImsRadio", i) != null } != null
     val gotSLSI = mAllSlots
             .find { i -> mHidlService.get("vendor.samsung_slsi.telephony.hardware.radio@1.0::IOemSamsungslsi", i) != null } != null
+    val gotSPRD = mAllSlots
+            .find { i -> mHidlService.get("vendor.sprd.hardware.radio@1.0::IExtRadio", i) != null } != null
 
 
     override fun startup(ctxt: Context) {
@@ -86,6 +88,7 @@ object Ims: EntryStartup {
             gotMtkPie || gotMtkQuack -> "me.phh.treble.overlay.mtkims_telephony"
             gotQualcomm -> "me.phh.treble.overlay.cafims_telephony"
             gotSLSI -> "me.phh.treble.overlay.slsiims_telephony"
+            gotSPRD -> "me.phh.treble.overlay.sprdims_telephony"
             else -> null
         }
         if(selectOverlay != null) {
