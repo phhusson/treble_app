@@ -180,6 +180,11 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 enableHwcOverlay(!value)
             }
+            MiscSettings.storageFUSE -> {
+                val value = sp.getBoolean(key, false)
+                Log.d("PHH", "Setting storageFUSE to $value")
+                SystemProperties.set("persist.sys.fflag.override.settings_fuse", if (!value) "true" else "false")
+            }
             MiscSettings.backlightScale -> {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.backlight.scale", if (value) "1" else "0")
@@ -212,5 +217,6 @@ object Misc: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, MiscSettings.bluetooth)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.displayFps)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.noHwcomposer)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.storageFUSE)
     }
 }
