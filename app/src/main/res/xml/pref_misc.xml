@@ -76,7 +76,7 @@
 		<CheckBoxPreference
 						android:defaultValue="false"
 						android:key="key_misc_multi_camera"
-						android:title="Expose Aux cameras (Qualcomm)" />
+						android:title="Expose Aux cameras" />
 		<CheckBoxPreference
 				android:defaultValue="false"
 				android:key="key_misc_force_camera2api_hal3"

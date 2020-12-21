@@ -71,6 +71,7 @@ object Misc: EntryStartup {
             MiscSettings.multiCameras -> {
                 val value = sp.getBoolean(key, false)
 
+                safeSetprop("persist.sys.phh.include_all_cameras", value)
                 if (value ||
                         SystemProperties.get("vendor.camera.aux.packagelist", null) == null ||
                         SystemProperties.get("camera.aux.packagelist", null) == null) {
@@ -78,6 +79,7 @@ object Misc: EntryStartup {
                     safeSetprop("camera.aux.packagelist", if (value) "nothing" else null)
                     safeSetprop("ctl.restart", "vendor.camera-provider-2-4")
                     safeSetprop("ctl.restart", "camera-provider-2-4")
+                    safeSetprop("ctl.restart", "cameraserver")
                 }
             }
             MiscSettings.forceCamera2APIHAL3 -> {
