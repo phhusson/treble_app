@@ -71,7 +71,7 @@ object Misc: EntryStartup {
             MiscSettings.multiCameras -> {
                 val value = sp.getBoolean(key, false)
 
-                safeSetprop("persist.sys.phh.include_all_cameras", value)
+                safeSetprop("persist.sys.phh.include_all_cameras", if(value) "true" else "false")
                 if (value ||
                         SystemProperties.get("vendor.camera.aux.packagelist", null) == null ||
                         SystemProperties.get("camera.aux.packagelist", null) == null) {
