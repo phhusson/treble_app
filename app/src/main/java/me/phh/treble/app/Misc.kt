@@ -195,6 +195,28 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.overlay.devinputjack", if (value) "true" else "false")
             }
+            MiscSettings.accentColor -> {
+                val value = sp.getString(key, "")
+                val allOverlays = OverlayPicker.getOverlays("android")
+                        .filter { it.packageName.startsWith("com.android.theme.color") }
+                allOverlays
+                        .filter { it.packageName != value }
+                        .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
+                if (!value.isNullOrEmpty()) {
+                    OverlayPicker.setOverlayEnabled(value, true)
+                }
+            }
+            MiscSettings.iconShape -> {
+                val value = sp.getString(key, "")
+                val allOverlays = OverlayPicker.getOverlays("android")
+                        .filter { it.packageName.startsWith("com.android.theme.icon") }
+                allOverlays
+                        .filter { it.packageName != value }
+                        .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
+                if (!value.isNullOrEmpty()) {
+                    OverlayPicker.setOverlayEnabled(value, true)
+                }
+            }
         }
     }
 
@@ -220,5 +242,7 @@ object Misc: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, MiscSettings.displayFps)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.noHwcomposer)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.storageFUSE)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.accentColor)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.iconShape)
     }
 }

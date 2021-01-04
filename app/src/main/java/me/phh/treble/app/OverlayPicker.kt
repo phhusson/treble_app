@@ -3,6 +3,7 @@ package me.phh.treble.app
 import android.content.Context
 import android.os.ServiceManager
 import android.content.om.IOverlayManager
+import android.content.om.OverlayInfo
 import android.os.RemoteException
 import android.os.SystemProperties
 import android.preference.PreferenceManager
@@ -21,6 +22,16 @@ object OverlayPicker: EntryStartup {
         } catch (e: RemoteException) {
             Log.d("PHH", "Failed to set overlay", e)
         }
+    }
+
+    fun getOverlays(o: String): List<OverlayInfo> {
+        var list = listOf<OverlayInfo>()
+        try {
+            list = om!!.getOverlayInfosForTarget(o, 0).toList().filterIsInstance<OverlayInfo>()       
+        } catch (e: Exception) {
+            Log.d("PHH", "Failed to get overlays", e)
+        }
+        return list
     }
 
     private fun enableLte(ctxt: Context) {
