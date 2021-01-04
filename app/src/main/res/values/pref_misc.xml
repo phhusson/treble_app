@@ -48,7 +48,6 @@
 	    <item>"huawei"</item>
     </array>
 
-
     <array name="pref_misc_display_fps">
 	    <item>"Don't force"</item>
 	    <item>"60fps"</item>
@@ -67,5 +66,19 @@
       <item>"-1"</item>
       <item>"0"</item>
       <item>"1"</item>
+    </array>
+
+    <array name="pref_misc_accent_color">
+	    <item>"Default"</item>
+    </array>
+    <array name="pref_misc_accent_color_values">
+	    <item>""</item>
+    </array>
+
+    <array name="pref_misc_icon_shape">
+	    <item>"Default"</item>
+    </array>
+    <array name="pref_misc_icon_shape_values">
+	    <item>""</item>
     </array>
 </resources>

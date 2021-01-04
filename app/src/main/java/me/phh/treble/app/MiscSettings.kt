@@ -32,6 +32,8 @@ object MiscSettings : Settings {
     val storageFUSE = "key_misc_storage_fuse"
     val backlightScale = "key_misc_backlight_scale"
     val headsetDevinput = "key_misc_headset_devinput"
+    val accentColor = "key_misc_accent_color"
+    val iconShape = "key_misc_icon_shape"
 
     override fun enabled() = true
 }
@@ -121,5 +123,21 @@ class MiscSettingsFragment : SettingsFragment() {
 
         fpsPref.setEntries(fpsEntries.toTypedArray())
         fpsPref.setEntryValues(fpsValues.toTypedArray())
+
+        val accentPref = findPreference<ListPreference>(MiscSettings.accentColor)!!
+        val accentsList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.color.") }
+        val accentEntries = listOf("Default") + accentsList.map { it.packageName.substringAfterLast(".").capitalize() }
+        val accentValues = listOf("") + accentsList.map { it.packageName }
+
+        accentPref.setEntries(accentEntries.toTypedArray())
+        accentPref.setEntryValues(accentValues.toTypedArray())
+
+        val shapePref = findPreference<ListPreference>(MiscSettings.iconShape)!!
+        val shapeList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.icon.") }
+        val shapeEntries = listOf("Default") + shapeList.map { it.packageName.substringAfterLast(".").capitalize() }
+        val shapeValues = listOf("") + shapeList.map { it.packageName }
+
+        shapePref.setEntries(shapeEntries.toTypedArray())
+        shapePref.setEntryValues(shapeValues.toTypedArray())
     }
 }
