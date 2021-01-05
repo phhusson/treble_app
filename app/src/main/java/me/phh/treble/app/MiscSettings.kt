@@ -2,6 +2,7 @@ package me.phh.treble.app
 
 import android.app.AlertDialog
 import android.app.Application
+import android.content.pm.PackageInfo
 import android.hardware.display.DisplayManager
 import android.os.Bundle
 import android.util.Log
@@ -34,6 +35,7 @@ object MiscSettings : Settings {
     val headsetDevinput = "key_misc_headset_devinput"
     val accentColor = "key_misc_accent_color"
     val iconShape = "key_misc_icon_shape"
+    val fontFamily = "key_misc_font_family"
 
     override fun enabled() = true
 }
@@ -125,19 +127,36 @@ class MiscSettingsFragment : SettingsFragment() {
         fpsPref.setEntryValues(fpsValues.toTypedArray())
 
         val accentPref = findPreference<ListPreference>(MiscSettings.accentColor)!!
-        val accentsList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.color.") }
-        val accentEntries = listOf("Default") + accentsList.map { it.packageName.substringAfterLast(".").capitalize() }
-        val accentValues = listOf("") + accentsList.map { it.packageName }
+        val accentList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.color.") }
+        val accentEntries = listOf("Default") + accentList.map { getTargetName(it.packageName) }
+        val accentValues = listOf("") + accentList.map { it.packageName }
 
         accentPref.setEntries(accentEntries.toTypedArray())
         accentPref.setEntryValues(accentValues.toTypedArray())
 
         val shapePref = findPreference<ListPreference>(MiscSettings.iconShape)!!
         val shapeList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.icon.") }
-        val shapeEntries = listOf("Default") + shapeList.map { it.packageName.substringAfterLast(".").capitalize() }
+        val shapeEntries = listOf("Default") + shapeList.map { getTargetName(it.packageName) }
         val shapeValues = listOf("") + shapeList.map { it.packageName }
 
         shapePref.setEntries(shapeEntries.toTypedArray())
         shapePref.setEntryValues(shapeValues.toTypedArray())
+
+        val fontPref = findPreference<ListPreference>(MiscSettings.fontFamily)!!
+        val fontList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.font.") }
+        val fontEntries = listOf("Default") + fontList.map { getTargetName(it.packageName) }
+        val fontValues = listOf("") + fontList.map { it.packageName }
+
+        fontPref.setEntries(fontEntries.toTypedArray())
+        fontPref.setEntryValues(fontValues.toTypedArray())
+    }
+
+    fun getTargetName(p: String): String {
+        var targetName = p.substringAfterLast(".").capitalize()
+        val packageInfo = activity.packageManager.getInstalledPackages(0).find { it.packageName == p }
+        if (packageInfo != null) {
+            targetName = packageInfo.applicationInfo.loadLabel(activity.packageManager).toString()
+        }
+        return targetName
     }
 }

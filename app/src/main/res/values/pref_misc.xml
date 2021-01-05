@@ -81,4 +81,11 @@
     <array name="pref_misc_icon_shape_values">
 	    <item>""</item>
     </array>
+
+    <array name="pref_misc_font_family">
+	    <item>"Default"</item>
+    </array>
+    <array name="pref_misc_font_family_values">
+	    <item>""</item>
+    </array>
 </resources>

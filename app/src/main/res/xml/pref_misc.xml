@@ -7,6 +7,26 @@
 		    android:action="android.intent.action.VIEW"
 		    android:data="https://github.com/sponsors/phhusson/" />
 	</Preference>
+	<PreferenceCategory android:title="Styles">
+		<ListPreference
+			android:defaultValue=""
+			android:entries="@array/pref_misc_accent_color"
+			android:entryValues="@array/pref_misc_accent_color_values"
+			android:key="key_misc_accent_color"
+			android:title="Accent color" />
+		<ListPreference
+			android:defaultValue=""
+			android:entries="@array/pref_misc_icon_shape"
+			android:entryValues="@array/pref_misc_icon_shape_values"
+			android:key="key_misc_icon_shape"
+			android:title="Icon shape" />
+		<ListPreference
+			android:defaultValue=""
+			android:entries="@array/pref_misc_font_family"
+			android:entryValues="@array/pref_misc_font_family_values"
+			android:key="key_misc_font_family"
+			android:title="Font family" />
+	</PreferenceCategory>
 	<PreferenceCategory android:title="Mobile network">
 		<ListPreference
 		    android:defaultValue="default"
@@ -25,50 +45,38 @@
             android:key="key_misc_headset_devinput"
             android:title="Use alternate way to detect headsets" />
 		<CheckBoxPreference
-                    android:defaultValue="false"
-                    android:key="key_misc_disable_audio_effects"
-                    android:title="Disable audio effects" />
+			android:defaultValue="false"
+			android:key="key_misc_disable_audio_effects"
+			android:title="Disable audio effects" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Display">
 		<EditTextPreference
             android:defaultValue="-1"
             android:key="key_misc_rounded_corners"
-	          android:title="Set rounded corners diameter"
-	          android:inputType="number" />
+	        android:title="Set rounded corners diameter"
+	        android:inputType="number" />
 		<EditTextPreference
-        android:defaultValue="-1"
-        android:key="key_misc_rounded_corners_overlay"
-        android:title="Set forced/faked rounded corners diameter"
-	android:inputType="number" />
+			android:defaultValue="-1"
+			android:key="key_misc_rounded_corners_overlay"
+			android:title="Set forced/faked rounded corners diameter"
+			android:inputType="number" />
 		<ListPreference
-        android:defaultValue="1"
-        android:entries="@array/pref_misc_fps_divisor"
-        android:entryValues="@array/pref_misc_fps_divisor_values"
-        android:key="key_misc_fps_divisor"
-        android:title="FPS Divisor" />
+			android:defaultValue="1"
+			android:entries="@array/pref_misc_fps_divisor"
+			android:entryValues="@array/pref_misc_fps_divisor_values"
+			android:key="key_misc_fps_divisor"
+			android:title="FPS Divisor" />
 		<ListPreference
-        android:defaultValue="-1"
-        android:entries="@array/pref_misc_display_fps"
-        android:entryValues="@array/pref_misc_display_fps_values"
-        android:key="key_misc_display_fps"
-        android:title="Force FPS" />
+			android:defaultValue="-1"
+			android:entries="@array/pref_misc_display_fps"
+			android:entryValues="@array/pref_misc_display_fps_values"
+			android:key="key_misc_display_fps"
+			android:title="Force FPS" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_no_hwcomposer"
             android:title="Disable HW overlays"
             android:summary="Eats more CPU and battery" />
-		<ListPreference
-			android:defaultValue=""
-			android:entries="@array/pref_misc_accent_color"
-			android:entryValues="@array/pref_misc_accent_color_values"
-			android:key="key_misc_accent_color"
-			android:title="Accent color" />
-		<ListPreference
-			android:defaultValue=""
-			android:entries="@array/pref_misc_icon_shape"
-			android:entryValues="@array/pref_misc_icon_shape_values"
-			android:key="key_misc_icon_shape"
-			android:title="Icon shape" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Backlight">
 		<CheckBoxPreference
@@ -86,28 +94,28 @@
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Camera">
 		<CheckBoxPreference
-						android:defaultValue="false"
-						android:key="key_misc_multi_camera"
-						android:title="Expose Aux cameras" />
+			android:defaultValue="false"
+			android:key="key_misc_multi_camera"
+			android:title="Expose Aux cameras" />
 		<CheckBoxPreference
-				android:defaultValue="false"
-				android:key="key_misc_force_camera2api_hal3"
-				android:title="Force Enable Camera2API HAL3" />
+			android:defaultValue="false"
+			android:key="key_misc_force_camera2api_hal3"
+			android:title="Force Enable Camera2API HAL3" />
 		<ListPreference
 		    android:defaultValue="-1"
 		    android:entries="@array/pref_misc_camera_timestamp"
 		    android:entryValues="@array/pref_misc_camera_timestamp_values"
 		    android:key="key_misc_camera_timestamp"
-				android:summary="Requires a Reboot"
+			android:summary="Requires a Reboot"
 		    android:title="Force Timestamp Source" />
   </PreferenceCategory>
 	<PreferenceCategory android:title="Other">
 		<ListPreference
-        android:defaultValue="-1"
-        android:entries="@array/pref_misc_bluetooth"
-        android:entryValues="@array/pref_misc_bluetooth_values"
-        android:key="key_misc_bluetooth"
-        android:title="Bluetooth workarounds" />
+			android:defaultValue="-1"
+			android:entries="@array/pref_misc_bluetooth"
+			android:entryValues="@array/pref_misc_bluetooth_values"
+			android:key="key_misc_bluetooth"
+			android:title="Bluetooth workarounds" />
 		<ListPreference
     	    android:defaultValue="1.86"
     	    android:entries="@array/pref_misc_max_aspect_ratio_pre_o"
