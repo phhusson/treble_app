@@ -7,26 +7,6 @@
 		    android:action="android.intent.action.VIEW"
 		    android:data="https://github.com/sponsors/phhusson/" />
 	</Preference>
-	<PreferenceCategory android:title="Styles">
-		<ListPreference
-			android:defaultValue=""
-			android:entries="@array/pref_misc_accent_color"
-			android:entryValues="@array/pref_misc_accent_color_values"
-			android:key="key_misc_accent_color"
-			android:title="Accent color" />
-		<ListPreference
-			android:defaultValue=""
-			android:entries="@array/pref_misc_icon_shape"
-			android:entryValues="@array/pref_misc_icon_shape_values"
-			android:key="key_misc_icon_shape"
-			android:title="Icon shape" />
-		<ListPreference
-			android:defaultValue=""
-			android:entries="@array/pref_misc_font_family"
-			android:entryValues="@array/pref_misc_font_family_values"
-			android:key="key_misc_font_family"
-			android:title="Font family" />
-	</PreferenceCategory>
 	<PreferenceCategory android:title="Mobile network">
 		<ListPreference
 		    android:defaultValue="default"
