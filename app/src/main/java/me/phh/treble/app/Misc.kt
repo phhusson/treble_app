@@ -255,5 +255,6 @@ object Misc: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, MiscSettings.storageFUSE)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.accentColor)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.iconShape)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.fontFamily)
     }
 }
