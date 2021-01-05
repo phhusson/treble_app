@@ -115,6 +115,10 @@
             android:key="key_misc_storage_fuse"
             android:title="Disable FUSE storage layer"
             android:summary="This can (de/in)crease storage speed\nRestart required" />
+		<CheckBoxPreference
+				android:defaultValue="false"
+				android:key="key_misc_restart_ril"
+				android:title="Automatically restart RIL" />
 		<Preference android:title="Securize"
             android:key="key_misc_securize" />
 		<Preference android:title="@string/remove_telephony_subsystem"

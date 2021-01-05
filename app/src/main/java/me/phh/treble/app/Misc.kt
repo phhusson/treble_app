@@ -195,6 +195,10 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.overlay.devinputjack", if (value) "true" else "false")
             }
+            MiscSettings.restartRil -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.restart_ril", if (value) "true" else "false")
+            }
         }
     }
 
