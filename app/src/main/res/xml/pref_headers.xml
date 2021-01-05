@@ -38,4 +38,7 @@
     <header
         android:fragment="me.phh.treble.app.ImsSettingsFragment"
         android:title="IMS features" />
+    <header
+        android:fragment="me.phh.treble.app.StyleSettingsFragment"
+        android:title="Style features" />
 </preference-headers>

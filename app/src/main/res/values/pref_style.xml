@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_style_accent_color">
+	    <item>"Default"</item>
+    </array>
+    <array name="pref_style_accent_color_values">
+	    <item>""</item>
+    </array>
+
+    <array name="pref_style_icon_shape">
+	    <item>"Default"</item>
+    </array>
+    <array name="pref_style_icon_shape_values">
+	    <item>""</item>
+    </array>
+
+    <array name="pref_style_font_family">
+	    <item>"Default"</item>
+    </array>
+    <array name="pref_style_font_family_values">
+	    <item>""</item>
+    </array>
+</resources>
