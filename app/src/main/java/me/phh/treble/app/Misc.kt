@@ -198,7 +198,7 @@ object Misc: EntryStartup {
             MiscSettings.accentColor -> {
                 val value = sp.getString(key, "")
                 val allOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.color") }
+                        .filter { it.packageName.startsWith("com.android.theme.color.") }
                 allOverlays
                         .filter { it.packageName != value }
                         .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
@@ -209,7 +209,18 @@ object Misc: EntryStartup {
             MiscSettings.iconShape -> {
                 val value = sp.getString(key, "")
                 val allOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.icon") }
+                        .filter { it.packageName.startsWith("com.android.theme.icon.") }
+                allOverlays
+                        .filter { it.packageName != value }
+                        .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
+                if (!value.isNullOrEmpty()) {
+                    OverlayPicker.setOverlayEnabled(value, true)
+                }
+            }
+            MiscSettings.fontFamily -> {
+                val value = sp.getString(key, "")
+                val allOverlays = OverlayPicker.getOverlays("android")
+                        .filter { it.packageName.startsWith("com.android.theme.font.") }
                 allOverlays
                         .filter { it.packageName != value }
                         .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }

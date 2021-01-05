@@ -69,6 +69,12 @@
 			android:entryValues="@array/pref_misc_icon_shape_values"
 			android:key="key_misc_icon_shape"
 			android:title="Icon shape" />
+		<ListPreference
+			android:defaultValue=""
+			android:entries="@array/pref_misc_font_family"
+			android:entryValues="@array/pref_misc_font_family_values"
+			android:key="key_misc_font_family"
+			android:title="Font family" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Backlight">
 		<CheckBoxPreference
