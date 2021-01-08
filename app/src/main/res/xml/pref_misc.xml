@@ -109,6 +109,7 @@
 		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_force_navbar_off"
+		android:summary="Requires a Reboot"
             android:title="Force navigation bar disabled" />
 		<CheckBoxPreference
             android:defaultValue="false"
