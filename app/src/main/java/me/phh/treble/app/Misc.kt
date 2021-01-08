@@ -188,8 +188,19 @@ object Misc: EntryStartup {
                 SystemProperties.set("persist.sys.fflag.override.settings_fuse", if (!value) "true" else "false")
             }
             MiscSettings.backlightScale -> {
-                val value = sp.getBoolean(key, false)
-                SystemProperties.set("persist.sys.phh.backlight.scale", if (value) "1" else "0")
+                val value = sp.getString(key, "System Default")
+                android.util.Log.d("PHH", "Setting backlight scale to $value")
+                when (value) {
+                  "System Default" -> { 
+                  SystemProperties.set("persist.sys.phh.backlight.scale","2")
+                  }
+                  "Off" -> {
+                  SystemProperties.set("persist.sys.phh.backlight.scale","0")
+                  }
+                  "On" -> {
+                  SystemProperties.set("persist.sys.phh.backlight.scale","1")
+                  }
+               }
             }
             MiscSettings.headsetDevinput -> {
                 val value = sp.getBoolean(key, false)
