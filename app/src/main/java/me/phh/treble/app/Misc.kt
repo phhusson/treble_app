@@ -191,13 +191,13 @@ object Misc: EntryStartup {
                 val value = sp.getString(key, "System Default")
                 android.util.Log.d("PHH", "Setting backlight scale to $value")
                 when (value) {
-                  "System Default" -> { 
+                  "system default" -> { 
                   SystemProperties.set("persist.sys.phh.backlight.scale","2")
                   }
-                  "Off" -> {
+                  "off" -> {
                   SystemProperties.set("persist.sys.phh.backlight.scale","0")
                   }
-                  "On" -> {
+                  "on" -> {
                   SystemProperties.set("persist.sys.phh.backlight.scale","1")
                   }
                }
