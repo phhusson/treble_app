@@ -67,10 +67,13 @@
             android:defaultValue="false"
             android:key="key_misc_disable_buttons_backlight"
             android:title="Disable backlight of hardware buttons if present (requires reboot)" />
-		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_backlight_scale"
-            android:title="Force alternative backlight scale" />
+		nceCategory android:title="Other">
+		<ListPreference
+			android:defaultValue="-1"
+			android:entries="@array/pref_misc_backlight_scale"
+			android:entryValues="@array/pref_misc_backlight_scale_values"
+			android:key="key_misc_backlight_scale"
+			android:title="Force alternative backlight scale" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Camera">
 		<CheckBoxPreference
