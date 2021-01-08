@@ -67,7 +67,6 @@
             android:defaultValue="false"
             android:key="key_misc_disable_buttons_backlight"
             android:title="Disable backlight of hardware buttons if present (requires reboot)" />
-		nceCategory android:title="Other">
 		<ListPreference
 			android:defaultValue="-1"
 			android:entries="@array/pref_misc_backlight_scale"
