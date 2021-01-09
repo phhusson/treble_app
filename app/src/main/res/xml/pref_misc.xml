@@ -71,7 +71,7 @@
 			android:defaultValue="-1"
 			android:entries="@array/pref_misc_backlight_scale"
 			android:entryValues="@array/pref_misc_backlight_scale_values"
-			android:key="key_misc_backlight_scale"
+			android:key="key_misc_backlight_scale_value"
 			android:title="Force alternative backlight scale" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Camera">
