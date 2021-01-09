@@ -67,12 +67,14 @@
       <item>"0"</item>
       <item>"1"</item>
     </array>
-<array name="pref_misc_backlight_scale">
+    <array name="pref_misc_backlight_scale">
         <item>"System Default"</item>
 	    <item>"On"</item>
 	    <item>"Off"</item>
-<array name="pref_misc_backlight_scale_values">
+    </array>	
+    <array name="pref_misc_backlight_scale_values">
 	    <item>"system default"</item>
 	    <item>"on"</item>
 	    <item>"off"</item>
+    </array>
 </resources>
