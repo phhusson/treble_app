@@ -30,7 +30,7 @@ object MiscSettings : Settings {
     val forceA2dpOffloadDisable = "key_misc_force_a2dp_offload_disable"
     val noHwcomposer = "key_misc_no_hwcomposer"
     val storageFUSE = "key_misc_storage_fuse"
-    val backlightScale = "key_misc_backlight_scale"
+    val backlightScale = "key_misc_backlight_scale_value"
     val headsetDevinput = "key_misc_headset_devinput"
     val restartRil = "key_misc_restart_ril"
 
