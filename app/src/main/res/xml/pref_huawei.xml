@@ -14,7 +14,7 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_huawei_no_hwcomposer"
-            android:title="Enable blurry UI workaround (eats more battery)" />
+            android:title="Enable graphic issues workaround (recommended if ui is blurry)" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Misc">
 	    <ListPreference
