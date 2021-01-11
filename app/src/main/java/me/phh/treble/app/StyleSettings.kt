@@ -7,6 +7,7 @@ object StyleSettings : Settings {
     val accentColor = "key_style_accent_color"
     val iconShape = "key_style_icon_shape"
     val fontFamily = "key_style_font_family"
+    val iconPack = "key_style_icon_pack"
 
     override fun enabled() = true
 }
@@ -39,6 +40,14 @@ class StyleSettingsFragment : SettingsFragment() {
 
         fontPref.setEntries(fontEntries.toTypedArray())
         fontPref.setEntryValues(fontValues.toTypedArray())
+
+        val iconPackPref = findPreference<ListPreference>(StyleSettings.iconPack)!!
+        val iconPackList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.icon_pack.") }
+        val iconPackEntries = listOf("Default") + iconPackList.map { getTargetName(it.packageName) }
+        val iconPackValues = listOf("") + iconPackList.map { it.packageName }
+
+        iconPackPref.setEntries(iconPackEntries.toTypedArray())
+        iconPackPref.setEntryValues(iconPackValues.toTypedArray())
     }
 
     fun getTargetName(p: String): String {

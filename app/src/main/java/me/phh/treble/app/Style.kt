@@ -46,6 +46,29 @@ object Style: EntryStartup {
                     OverlayPicker.setOverlayEnabled(value, true)
                 }
             }
+            StyleSettings.iconPack -> {
+                val value = sp.getString(key, "")
+                val genericValue = value.toString().substringBeforeLast(".")
+                val androidOverlays = OverlayPicker.getOverlays("android")
+                        .filter { it.packageName.startsWith("com.android.theme.icon_pack.") }
+                val settingsOverlays = OverlayPicker.getOverlays("com.android.settings")
+                        .filter { it.packageName.startsWith("com.android.theme.icon_pack.") }
+                val uiOverlays = OverlayPicker.getOverlays("com.android.systemui")
+                        .filter { it.packageName.startsWith("com.android.theme.icon_pack.") }
+                val allOverlays = androidOverlays + settingsOverlays + uiOverlays
+                allOverlays
+                        .filter {
+                            it.packageName != genericValue + ".android" &&
+                            it.packageName != genericValue + ".settings" &&
+                            it.packageName != genericValue + ".systemui"
+                        }
+                        .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
+                if (!value.isNullOrEmpty()) {
+                    OverlayPicker.setOverlayEnabled(genericValue + ".android", true)
+                    OverlayPicker.setOverlayEnabled(genericValue + ".settings", true)
+                    OverlayPicker.setOverlayEnabled(genericValue + ".systemui", true)
+                }
+            }
         }
     }
 
@@ -61,5 +84,6 @@ object Style: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, StyleSettings.accentColor)
         spListener.onSharedPreferenceChanged(sp, StyleSettings.iconShape)
         spListener.onSharedPreferenceChanged(sp, StyleSettings.fontFamily)
+        spListener.onSharedPreferenceChanged(sp, StyleSettings.iconPack)
     }
 }

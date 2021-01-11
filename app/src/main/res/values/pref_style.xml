@@ -20,4 +20,11 @@
     <array name="pref_style_font_family_values">
 	    <item>""</item>
     </array>
+
+    <array name="pref_style_icon_pack">
+	    <item>"Default"</item>
+    </array>
+    <array name="pref_style_icon_pack_values">
+	    <item>""</item>
+    </array>
 </resources>
