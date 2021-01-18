@@ -15,9 +15,8 @@ object Style: EntryStartup {
         when(key) {
             StyleSettings.accentColor -> {
                 val value = sp.getString(key, "")
-                val allOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.color.") }
-                allOverlays
+                val colorOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.AccentColor)
+                colorOverlays
                         .filter { it.packageName != value }
                         .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
                 if (!value.isNullOrEmpty()) {
@@ -26,9 +25,8 @@ object Style: EntryStartup {
             }
             StyleSettings.iconShape -> {
                 val value = sp.getString(key, "")
-                val allOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.icon.") }
-                allOverlays
+                val iconOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.IconShape)
+                iconOverlays
                         .filter { it.packageName != value }
                         .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
                 if (!value.isNullOrEmpty()) {
@@ -37,9 +35,8 @@ object Style: EntryStartup {
             }
             StyleSettings.fontFamily -> {
                 val value = sp.getString(key, "")
-                val allOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.font.") }
-                allOverlays
+                val fontOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.FontFamily)
+                fontOverlays
                         .filter { it.packageName != value }
                         .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
                 if (!value.isNullOrEmpty()) {

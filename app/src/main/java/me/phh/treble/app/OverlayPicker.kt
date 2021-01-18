@@ -11,10 +11,17 @@ import android.util.Log
 
 object OverlayPicker: EntryStartup {
     private var om: IOverlayManager? = null
+    private var overlays = listOf<OverlayInfo>()
 
     private val platform = SystemProperties.get("ro.board.platform")
     private val vendorFp = SystemProperties.get("ro.vendor.build.fingerprint")
     private val productBoard = SystemProperties.get("ro.product.board")
+
+    enum class ThemeOverlay {
+        AccentColor,
+        IconShape,
+        FontFamily
+    }
 
     fun setOverlayEnabled(o: String, enabled: Boolean) {
         try {
@@ -24,14 +31,17 @@ object OverlayPicker: EntryStartup {
         }
     }
 
-    fun getOverlays(o: String): List<OverlayInfo> {
-        var list = listOf<OverlayInfo>()
-        try {
-            list = om!!.getOverlayInfosForTarget(o, 0).toList().filterIsInstance<OverlayInfo>()       
-        } catch (e: Exception) {
-            Log.d("PHH", "Failed to get overlays", e)
+    fun getThemeOverlays(to: ThemeOverlay): List<OverlayInfo> {
+        when(to) {
+            ThemeOverlay.AccentColor ->
+                return overlays.filter { it.packageName.startsWith("com.android.theme.color.") }
+            ThemeOverlay.IconShape ->
+                return overlays.filter { it.packageName.startsWith("com.android.theme.icon.") }
+            ThemeOverlay.FontFamily ->
+                return overlays.filter { it.packageName.startsWith("com.android.theme.font.") }
+            else ->
+                return listOf<OverlayInfo>()
         }
-        return list
     }
 
     private fun enableLte(ctxt: Context) {
@@ -69,6 +79,15 @@ object OverlayPicker: EntryStartup {
         }
     }
 
+    private fun getOverlays(ctxt: Context) {
+        try {
+            overlays = om!!.getOverlayInfosForTarget("android", 0)
+                           .toList().filterIsInstance<OverlayInfo>()       
+        } catch (e: Exception) {
+            Log.d("PHH", "Failed to get overlays", e)
+        }
+    }
+
     override fun startup(ctxt: Context) {
         om = IOverlayManager.Stub.asInterface(
                 ServiceManager.getService("overlay"))
@@ -77,6 +96,7 @@ object OverlayPicker: EntryStartup {
         handleNokia(ctxt)
         handleSamsung(ctxt)
         handleXiaomi(ctxt)
+        getOverlays(ctxt)
 
         setOverlayEnabled("me.phh.treble.overlay.systemui.falselocks", true)
     }
