@@ -15,7 +15,6 @@ object OverlayPicker: EntryStartup {
 
     private val platform = SystemProperties.get("ro.board.platform")
     private val vendorFp = SystemProperties.get("ro.vendor.build.fingerprint")
-    private val productBoard = SystemProperties.get("ro.product.board")
 
     enum class ThemeOverlay {
         AccentColor,
@@ -50,7 +49,7 @@ object OverlayPicker: EntryStartup {
             setOverlayEnabled("me.phh.treble.overlay.telephony.lte", true)
     }
 
-    fun handleNokia(ctxt: Context) {
+    private fun handleNokia(ctxt: Context) {
         if(vendorFp == null) return
 		
         //Nokia 8.1/X7 [PNX]
@@ -59,7 +58,7 @@ object OverlayPicker: EntryStartup {
         }
     }
 
-    fun handleSamsung(ctxt: Context) {
+    private fun handleSamsung(ctxt: Context) {
         if(vendorFp == null) return
 
         if(vendorFp.matches(Regex(".*(crown|star)[q2]*lte.*")) ||
@@ -68,7 +67,7 @@ object OverlayPicker: EntryStartup {
         }
     }
 
-    fun handleXiaomi(ctxt: Context) {
+    private fun handleXiaomi(ctxt: Context) {
         if(vendorFp == null) return
 
         if(vendorFp.matches(Regex(".*iaomi/perseus.*"))) {
