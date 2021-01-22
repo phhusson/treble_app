@@ -15,9 +15,8 @@ object Style: EntryStartup {
         when(key) {
             StyleSettings.accentColor -> {
                 val value = sp.getString(key, "")
-                val allOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.color.") }
-                allOverlays
+                val accentColorOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.AccentColor)
+                accentColorOverlays
                         .filter { it.packageName != value }
                         .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
                 if (!value.isNullOrEmpty()) {
@@ -26,9 +25,8 @@ object Style: EntryStartup {
             }
             StyleSettings.iconShape -> {
                 val value = sp.getString(key, "")
-                val allOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.icon.") }
-                allOverlays
+                val iconShapeOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.IconShape)
+                iconShapeOverlays
                         .filter { it.packageName != value }
                         .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
                 if (!value.isNullOrEmpty()) {
@@ -37,9 +35,8 @@ object Style: EntryStartup {
             }
             StyleSettings.fontFamily -> {
                 val value = sp.getString(key, "")
-                val allOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.font.") }
-                allOverlays
+                val fontFamilyOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.FontFamily)
+                fontFamilyOverlays
                         .filter { it.packageName != value }
                         .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
                 if (!value.isNullOrEmpty()) {
@@ -48,25 +45,14 @@ object Style: EntryStartup {
             }
             StyleSettings.iconPack -> {
                 val value = sp.getString(key, "")
+                val iconPackOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.IconPack)                    
                 val genericValue = value.toString().substringBeforeLast(".")
-                val androidOverlays = OverlayPicker.getOverlays("android")
-                        .filter { it.packageName.startsWith("com.android.theme.icon_pack.") }
-                val settingsOverlays = OverlayPicker.getOverlays("com.android.settings")
-                        .filter { it.packageName.startsWith("com.android.theme.icon_pack.") }
-                val uiOverlays = OverlayPicker.getOverlays("com.android.systemui")
-                        .filter { it.packageName.startsWith("com.android.theme.icon_pack.") }
-                val allOverlays = androidOverlays + settingsOverlays + uiOverlays
-                allOverlays
-                        .filter {
-                            it.packageName != genericValue + ".android" &&
-                            it.packageName != genericValue + ".settings" &&
-                            it.packageName != genericValue + ".systemui"
-                        }
-                        .forEach { OverlayPicker.setOverlayEnabled(it.packageName, false) }
-                if (!value.isNullOrEmpty()) {
-                    OverlayPicker.setOverlayEnabled(genericValue + ".android", true)
-                    OverlayPicker.setOverlayEnabled(genericValue + ".settings", true)
-                    OverlayPicker.setOverlayEnabled(genericValue + ".systemui", true)
+                for (o in iconPackOverlays) {
+                    if (!value.isNullOrEmpty() && o.packageName.startsWith(genericValue)) {
+                        OverlayPicker.setOverlayEnabled(o.packageName, true)
+                    } else {
+                        OverlayPicker.setOverlayEnabled(o.packageName, false)
+                    }
                 }
             }
         }

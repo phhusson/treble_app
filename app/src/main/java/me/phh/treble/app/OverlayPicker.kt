@@ -11,10 +11,17 @@ import android.util.Log
 
 object OverlayPicker: EntryStartup {
     private var om: IOverlayManager? = null
+    private var overlays = listOf<OverlayInfo>()
 
     private val platform = SystemProperties.get("ro.board.platform")
     private val vendorFp = SystemProperties.get("ro.vendor.build.fingerprint")
-    private val productBoard = SystemProperties.get("ro.product.board")
+
+    enum class ThemeOverlay {
+        AccentColor,
+        IconShape,
+        FontFamily,
+        IconPack
+    }
 
     fun setOverlayEnabled(o: String, enabled: Boolean) {
         try {
@@ -24,14 +31,31 @@ object OverlayPicker: EntryStartup {
         }
     }
 
-    fun getOverlays(o: String): List<OverlayInfo> {
-        var list = listOf<OverlayInfo>()
-        try {
-            list = om!!.getOverlayInfosForTarget(o, 0).toList().filterIsInstance<OverlayInfo>()       
-        } catch (e: Exception) {
-            Log.d("PHH", "Failed to get overlays", e)
+    fun getThemeOverlays(to: ThemeOverlay): List<OverlayInfo> {
+        when(to) {
+            ThemeOverlay.AccentColor ->
+                return overlays.filter {
+                    it.targetPackageName == "android" &&
+                    it.packageName.startsWith("com.android.theme.color.")
+                }
+            ThemeOverlay.IconShape ->
+                return overlays.filter {
+                    it.targetPackageName == "android" &&
+                    it.packageName.startsWith("com.android.theme.icon.")
+                }
+            ThemeOverlay.FontFamily ->
+                return overlays.filter {
+                    it.targetPackageName == "android" &&
+                    it.packageName.startsWith("com.android.theme.font.")
+                }
+            ThemeOverlay.IconPack -> {
+                return overlays.filter {
+                    it.packageName.startsWith("com.android.theme.icon_pack.")
+                }
+            }
+            else ->
+                return listOf<OverlayInfo>()
         }
-        return list
     }
 
     private fun enableLte(ctxt: Context) {
@@ -40,7 +64,7 @@ object OverlayPicker: EntryStartup {
             setOverlayEnabled("me.phh.treble.overlay.telephony.lte", true)
     }
 
-    fun handleNokia(ctxt: Context) {
+    private fun handleNokia(ctxt: Context) {
         if(vendorFp == null) return
 		
         //Nokia 8.1/X7 [PNX]
@@ -49,7 +73,7 @@ object OverlayPicker: EntryStartup {
         }
     }
 
-    fun handleSamsung(ctxt: Context) {
+    private fun handleSamsung(ctxt: Context) {
         if(vendorFp == null) return
 
         if(vendorFp.matches(Regex(".*(crown|star)[q2]*lte.*")) ||
@@ -58,7 +82,7 @@ object OverlayPicker: EntryStartup {
         }
     }
 
-    fun handleXiaomi(ctxt: Context) {
+    private fun handleXiaomi(ctxt: Context) {
         if(vendorFp == null) return
 
         if(vendorFp.matches(Regex(".*iaomi/perseus.*"))) {
@@ -66,6 +90,17 @@ object OverlayPicker: EntryStartup {
         }
         if(vendorFp.matches(Regex(".*iaomi/cepheus.*"))) {
             setOverlayEnabled("me.phh.treble.overlay.xiaomi.mi9.systemui", true)
+        }
+    }
+
+    private fun getOverlays(ctxt: Context) {
+        try {
+            val values = mutableListOf<OverlayInfo>()
+            @Suppress("UNCHECKED_CAST")
+            (om!!.getAllOverlays(0) as Map<String, List<OverlayInfo>>).forEach { values.addAll(it.value) }
+            overlays = values.toList()
+        } catch (e: Exception) {
+            Log.d("PHH", "Failed to get overlays", e)
         }
     }
 
@@ -77,6 +112,7 @@ object OverlayPicker: EntryStartup {
         handleNokia(ctxt)
         handleSamsung(ctxt)
         handleXiaomi(ctxt)
+        getOverlays(ctxt)
 
         setOverlayEnabled("me.phh.treble.overlay.systemui.falselocks", true)
     }

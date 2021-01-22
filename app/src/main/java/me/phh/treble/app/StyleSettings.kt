@@ -1,5 +1,6 @@
 package me.phh.treble.app
 
+import android.content.pm.PackageInfo
 import android.os.Bundle
 import androidx.preference.ListPreference
 
@@ -14,37 +15,43 @@ object StyleSettings : Settings {
 
 class StyleSettingsFragment : SettingsFragment() {
     override val preferencesResId = R.xml.pref_style
+    private var packages = listOf<PackageInfo>();
+
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         super.onCreatePreferences(savedInstanceState, rootKey)
 
-        val accentPref = findPreference<ListPreference>(StyleSettings.accentColor)!!
-        val accentList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.color.") }
-        val accentEntries = listOf("Default") + accentList.map { getTargetName(it.packageName) }
-        val accentValues = listOf("") + accentList.map { it.packageName }
+        packages = activity.packageManager.getInstalledPackages(0)
 
-        accentPref.setEntries(accentEntries.toTypedArray())
-        accentPref.setEntryValues(accentValues.toTypedArray())
+        val accentColorPref = findPreference<ListPreference>(StyleSettings.accentColor)!!
+        val accentColorOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.AccentColor)
+        val accentColorEntries = listOf("Default") + accentColorOverlays.map { getTargetName(it.packageName) }
+        val accentColorValues = listOf("") + accentColorOverlays.map { it.packageName }
 
-        val shapePref = findPreference<ListPreference>(StyleSettings.iconShape)!!
-        val shapeList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.icon.") }
-        val shapeEntries = listOf("Default") + shapeList.map { getTargetName(it.packageName) }
-        val shapeValues = listOf("") + shapeList.map { it.packageName }
+        accentColorPref.setEntries(accentColorEntries.toTypedArray())
+        accentColorPref.setEntryValues(accentColorValues.toTypedArray())
 
-        shapePref.setEntries(shapeEntries.toTypedArray())
-        shapePref.setEntryValues(shapeValues.toTypedArray())
+        val iconShapePref = findPreference<ListPreference>(StyleSettings.iconShape)!!
+        val iconShapeOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.IconShape)
+        val iconShapeEntries = listOf("Default") + iconShapeOverlays.map { getTargetName(it.packageName) }
+        val iconShapeValues = listOf("") + iconShapeOverlays.map { it.packageName }
 
-        val fontPref = findPreference<ListPreference>(StyleSettings.fontFamily)!!
-        val fontList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.font.") }
-        val fontEntries = listOf("Default") + fontList.map { getTargetName(it.packageName) }
-        val fontValues = listOf("") + fontList.map { it.packageName }
+        iconShapePref.setEntries(iconShapeEntries.toTypedArray())
+        iconShapePref.setEntryValues(iconShapeValues.toTypedArray())
 
-        fontPref.setEntries(fontEntries.toTypedArray())
-        fontPref.setEntryValues(fontValues.toTypedArray())
+        val fontFamilyPref = findPreference<ListPreference>(StyleSettings.fontFamily)!!
+        val fontFamilyOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.FontFamily)
+        val fontFamilyEntries = listOf("Default") + fontFamilyOverlays.map { getTargetName(it.packageName) }
+        val fontFamilyValues = listOf("") + fontFamilyOverlays.map { it.packageName }
+
+        fontFamilyPref.setEntries(fontFamilyEntries.toTypedArray())
+        fontFamilyPref.setEntryValues(fontFamilyValues.toTypedArray())
 
         val iconPackPref = findPreference<ListPreference>(StyleSettings.iconPack)!!
-        val iconPackList = OverlayPicker.getOverlays("android").filter { it.packageName.startsWith("com.android.theme.icon_pack.") }
-        val iconPackEntries = listOf("Default") + iconPackList.map { getTargetName(it.packageName) }
-        val iconPackValues = listOf("") + iconPackList.map { it.packageName }
+        val iconPackOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.IconPack)
+        var iconPackMap = hashMapOf<String, String>()
+        iconPackOverlays.forEach() { iconPackMap = addOverlayToMap(iconPackMap, it.packageName) }
+        val iconPackEntries = listOf("Default") + iconPackMap.values
+        val iconPackValues = listOf("") + iconPackMap.keys
 
         iconPackPref.setEntries(iconPackEntries.toTypedArray())
         iconPackPref.setEntryValues(iconPackValues.toTypedArray())
@@ -52,10 +59,20 @@ class StyleSettingsFragment : SettingsFragment() {
 
     fun getTargetName(p: String): String {
         var targetName = p.substringAfterLast(".").capitalize()
-        val packageInfo = activity.packageManager.getInstalledPackages(0).find { it.packageName == p }
+        val packageInfo = packages.find { it.packageName == p }
         if (packageInfo != null) {
             targetName = packageInfo.applicationInfo.loadLabel(activity.packageManager).toString()
         }
         return targetName
+    }
+
+    fun addOverlayToMap(map: HashMap<String, String>, o: String): HashMap<String, String> {
+        val genericValue = o.substringBeforeLast(".")
+        val duplicates = map.filterKeys { it.substringBeforeLast(".") == genericValue }
+        if (duplicates.entries.size == 0)
+        {
+            map.put(o, getTargetName(o))
+        }
+        return map
     }
 }
