@@ -15,14 +15,14 @@
 		android:title="Icon shape" />
 	<ListPreference
 		android:defaultValue=""
-		android:entries="@array/pref_style_font_family"
-		android:entryValues="@array/pref_style_font_family_values"
-		android:key="key_style_font_family"
-		android:title="Font family" />
-	<ListPreference
-		android:defaultValue=""
 		android:entries="@array/pref_style_icon_pack"
 		android:entryValues="@array/pref_style_icon_pack_values"
 		android:key="key_style_icon_pack"
 		android:title="Icon pack" />
+	<ListPreference
+		android:defaultValue=""
+		android:entries="@array/pref_style_font_family"
+		android:entryValues="@array/pref_style_font_family_values"
+		android:key="key_style_font_family"
+		android:title="Font family" />
 </PreferenceScreen>
