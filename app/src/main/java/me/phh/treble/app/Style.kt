@@ -7,13 +7,13 @@ import android.preference.PreferenceManager
 import java.lang.ref.WeakReference
 
 @SuppressLint("StaticFieldLeak")
-object Style: EntryStartup {
+object Custom: EntryStartup {
     lateinit var ctxt: WeakReference<Context>
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         val c = ctxt.get()
         if(c == null) return@OnSharedPreferenceChangeListener
         when(key) {
-            StyleSettings.accentColor -> {
+            CustomSettings.accentColor -> {
                 val value = sp.getString(key, "")
                 val accentColorOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.AccentColor)
                 accentColorOverlays
@@ -23,7 +23,7 @@ object Style: EntryStartup {
                     OverlayPicker.setOverlayEnabled(value, true)
                 }
             }
-            StyleSettings.iconShape -> {
+            CustomSettings.iconShape -> {
                 val value = sp.getString(key, "")
                 val iconShapeOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.IconShape)
                 iconShapeOverlays
@@ -33,7 +33,7 @@ object Style: EntryStartup {
                     OverlayPicker.setOverlayEnabled(value, true)
                 }
             }
-            StyleSettings.fontFamily -> {
+            CustomSettings.fontFamily -> {
                 val value = sp.getString(key, "")
                 val fontFamilyOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.FontFamily)
                 fontFamilyOverlays
@@ -43,7 +43,7 @@ object Style: EntryStartup {
                     OverlayPicker.setOverlayEnabled(value, true)
                 }
             }
-            StyleSettings.iconPack -> {
+            CustomSettings.iconPack -> {
                 val value = sp.getString(key, "")
                 val iconPackOverlays = OverlayPicker.getThemeOverlays(OverlayPicker.ThemeOverlay.IconPack)                    
                 val genericValue = value.toString().substringBeforeLast(".")
@@ -59,7 +59,7 @@ object Style: EntryStartup {
     }
 
     override fun startup(ctxt: Context) {
-        if (!StyleSettings.enabled()) return
+        if (!CustomSettings.enabled()) return
 
         val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
         sp.registerOnSharedPreferenceChangeListener(spListener)
@@ -67,9 +67,9 @@ object Style: EntryStartup {
         this.ctxt = WeakReference(ctxt.applicationContext)
 
         //Refresh parameters on boot
-        spListener.onSharedPreferenceChanged(sp, StyleSettings.accentColor)
-        spListener.onSharedPreferenceChanged(sp, StyleSettings.iconShape)
-        spListener.onSharedPreferenceChanged(sp, StyleSettings.fontFamily)
-        spListener.onSharedPreferenceChanged(sp, StyleSettings.iconPack)
+        spListener.onSharedPreferenceChanged(sp, CustomSettings.accentColor)
+        spListener.onSharedPreferenceChanged(sp, CustomSettings.iconShape)
+        spListener.onSharedPreferenceChanged(sp, CustomSettings.fontFamily)
+        spListener.onSharedPreferenceChanged(sp, CustomSettings.iconPack)
     }
 }
