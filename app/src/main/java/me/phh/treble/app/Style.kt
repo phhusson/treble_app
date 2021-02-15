@@ -65,11 +65,5 @@ object Style: EntryStartup {
         sp.registerOnSharedPreferenceChangeListener(spListener)
 
         this.ctxt = WeakReference(ctxt.applicationContext)
-
-        //Refresh parameters on boot
-        spListener.onSharedPreferenceChanged(sp, StyleSettings.accentColor)
-        spListener.onSharedPreferenceChanged(sp, StyleSettings.iconShape)
-        spListener.onSharedPreferenceChanged(sp, StyleSettings.fontFamily)
-        spListener.onSharedPreferenceChanged(sp, StyleSettings.iconPack)
     }
 }
