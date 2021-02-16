@@ -40,5 +40,5 @@
         android:title="IMS features" />
     <header
         android:fragment="me.phh.treble.app.CustomSettingsFragment"
-        android:title="Custom features" />
+        android:title="Customization features" />
 </preference-headers>
