@@ -50,7 +50,7 @@ class EntryService: Service() {
             tryC { Vsmart.startup(this) }
             tryC { Nubia.startup(this) }
             tryC { Ims.startup(this) }
-            tryC { Style.startup(this) }
+            tryC { Custom.startup(this) }
 
             tryC { Desktop.startup(this) }
 
