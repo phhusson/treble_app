@@ -34,7 +34,8 @@
             android:defaultValue="-1"
             android:key="key_misc_rounded_corners"
 	        android:title="Set rounded corners diameter"
-	        android:inputType="number" />
+	        android:inputType="number"
+            android:summary="Requires a reboot" />
 		<EditTextPreference
 			android:defaultValue="-1"
 			android:key="key_misc_rounded_corners_overlay"
@@ -66,7 +67,8 @@
 		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_disable_buttons_backlight"
-            android:title="Disable backlight of hardware buttons if present (requires reboot)" />
+            android:title="Disable backlight of hardware buttons if present"
+            android:summary="Requires a reboot" />
 		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_backlight_scale"
@@ -86,8 +88,8 @@
 		    android:entries="@array/pref_misc_camera_timestamp"
 		    android:entryValues="@array/pref_misc_camera_timestamp_values"
 		    android:key="key_misc_camera_timestamp"
-			android:summary="Requires a Reboot"
-		    android:title="Force Timestamp Source" />
+            android:title="Force Timestamp Source"
+            android:summary="Requires a reboot" />
   </PreferenceCategory>
 	<PreferenceCategory android:title="Other">
 		<ListPreference
@@ -109,13 +111,13 @@
 		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_force_navbar_off"
-		android:summary="Requires a Reboot"
-            android:title="Force navigation bar disabled" />
+            android:title="Force navigation bar disabled"
+            android:summary="Requires a reboot" />
 		<CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_storage_fuse"
             android:title="Disable FUSE storage layer"
-            android:summary="This can (de/in)crease storage speed\nRestart required" />
+            android:summary="This can (de/in)crease storage speed\nRequires a reboot" />
 		<CheckBoxPreference
 				android:defaultValue="false"
 				android:key="key_misc_restart_ril"
