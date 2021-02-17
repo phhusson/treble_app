@@ -4,7 +4,7 @@
         android:defaultValue="false"
         android:key="key_qualcomm_alternate_mediaprofile"
         android:title="Use alternate camera profile"
-        android:summary="Requires reboot" />
+        android:summary="Requires a reboot" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_qualcomm_alternate_audiopolicy"
