@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_nubia_fan">
+	    <item>Отключить</item>
+	    <item>Низкий</item>
+	    <item>Средний</item>
+	    <item>Высокий</item>
+    </array>
+    <array name="pref_nubia_fan_values">
+	    <item>"0"</item>
+	    <item>"3"</item>
+	    <item>"4"</item>
+	    <item>"5"</item>
+    </array>
+
+    <array name="pref_nubia_redmagic_led">
+	    <item>Отключить</item>
+	    <item>Эффект прокрутки0</item>
+	    <item>Эффект прокрутки1</item>
+	    <item>Эффект прокрутки2</item>
+	    <item>Эффект прокрутки3</item>
+	    <item>Эффект прокрутки4</item>
+	    <item>Эффект прокрутки5</item>
+	    <item>Эффект прокрутки6</item>
+	    <item>Эффект прокрутки7</item>
+	    <item>Эффект прокрутки8</item>
+	    <item>Эффект медленного мигания 0</item>
+	    <item>Эффект медленного мигания 1</item>
+	    <item>Эффект медленного мигания 2</item>
+	    <item>Эффект медленного мигания 3</item>
+	    <item>Эффект медленного мигания 4</item>
+	    <item>Эффект медленного мигания 5</item>
+	    <item>Эффект медленного мигания 6</item>
+	    <item>Эффект медленного мигания 7</item>
+	    <item>Эффект медленного мигания 8</item>
+	    <item>Эффект быстрого мигания 0</item>
+	    <item>Эффект быстрого мигания 1</item>
+	    <item>Эффект быстрого мигания 2</item>
+	    <item>Эффект быстрого мигания 3</item>
+	    <item>Эффект быстрого мигания 4</item>
+	    <item>Эффект быстрого мигания 5</item>
+	    <item>Эффект быстрого мигания 6</item>
+	    <item>Эффект быстрого мигания 7</item>
+	    <item>Эффект быстрого мигания 8</item>
+    </array>
+    <array name="pref_nubia_redmagic_led_values">
+	    <item>"0"</item>
+	    <item>"0xa0"</item>
+	    <item>"0xa1"</item>
+	    <item>"0xa2"</item>
+	    <item>"0xa3"</item>
+	    <item>"0xa4"</item>
+	    <item>"0xa5"</item>
+	    <item>"0xa6"</item>
+	    <item>"0xa7"</item>
+	    <item>"0xa8"</item>
+	    <item>"0x70"</item>
+	    <item>"0x71"</item>
+	    <item>"0x72"</item>
+	    <item>"0x73"</item>
+	    <item>"0x74"</item>
+	    <item>"0x75"</item>
+	    <item>"0x76"</item>
+	    <item>"0x77"</item>
+	    <item>"0x78"</item>
+	    <item>"0x80"</item>
+	    <item>"0x81"</item>
+	    <item>"0x82"</item>
+	    <item>"0x83"</item>
+	    <item>"0x85"</item>
+	    <item>"0x86"</item>
+	    <item>"0x87"</item>
+	    <item>"0x88"</item>
+    </array>
+</resources>
