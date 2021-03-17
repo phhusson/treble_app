@@ -33,6 +33,7 @@ object MiscSettings : Settings {
     val backlightScale = "key_misc_backlight_scale"
     val headsetDevinput = "key_misc_headset_devinput"
     val restartRil = "key_misc_restart_ril"
+    val minimalBrightness = "key_misc_minimal_brightness"
 
     override fun enabled() = true
 }

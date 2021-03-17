@@ -73,6 +73,10 @@
             android:defaultValue="false"
             android:key="key_misc_backlight_scale"
             android:title="Force alternative backlight scale" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_minimal_brightness"
+            android:title="Allows setting brightness to the lowest possible" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Camera">
 		<CheckBoxPreference
