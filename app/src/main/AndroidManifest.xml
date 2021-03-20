@@ -69,6 +69,8 @@
             android:theme="@android:style/Theme.Material.Dialog" >
         </activity>
 
+        <activity android:name=".DebugSensors" />
+
     </application>
 
 </manifest>
