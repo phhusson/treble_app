@@ -58,6 +58,10 @@
             android:key="key_misc_no_hwcomposer"
             android:title="Disable HW overlays"
             android:summary="Eats more CPU and battery" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_misc_aod"
+            android:title="Force allow Always-On Display" />
 	</PreferenceCategory>
 	<PreferenceCategory android:title="Backlight">
 		<CheckBoxPreference

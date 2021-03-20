@@ -34,6 +34,7 @@ object MiscSettings : Settings {
     val headsetDevinput = "key_misc_headset_devinput"
     val restartRil = "key_misc_restart_ril"
     val minimalBrightness = "key_misc_minimal_brightness"
+    val aod = "key_misc_aod"
 
     override fun enabled() = true
 }

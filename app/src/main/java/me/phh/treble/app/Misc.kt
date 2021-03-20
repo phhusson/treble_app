@@ -203,6 +203,11 @@ object Misc: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.overlay.minimal_brightness", if (value) "true" else "false")
             }
+            MiscSettings.aod -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.overlay.aod", if (value) "true" else "false")
+                OverlayPicker.setOverlayEnabled("me.phh.treble.overlay.misc.aod_systemui", value)
+            }
         }
     }
 
@@ -228,5 +233,6 @@ object Misc: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, MiscSettings.displayFps)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.noHwcomposer)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.storageFUSE)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.aod)
     }
 }
