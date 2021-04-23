@@ -80,6 +80,10 @@ object OverlayPicker: EntryStartup {
                 vendorFp.matches(Regex(".*(SC-0[23]K|SCV3[89]).*"))) {
             setOverlayEnabled("me.phh.treble.overlay.samsung.s9.systemui", true)
         }
+
+        if(vendorFp.matches(Regex(".*amsung/a40.*"))) {
+            setOverlayEnabled("me.phh.treble.overlay.samsung.a40.systemui", true)
+        }
     }
 
     private fun handleXiaomi(ctxt: Context) {
