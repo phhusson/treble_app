@@ -51,6 +51,7 @@ class EntryService: Service() {
             tryC { Nubia.startup(this) }
             tryC { Ims.startup(this) }
             tryC { Custom.startup(this) }
+            tryC { Hct.startup(this) }
 
             tryC { Desktop.startup(this) }
 
