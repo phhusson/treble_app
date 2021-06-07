@@ -30,6 +30,7 @@ android {
 dependencies {
     compileOnly fileTree(dir: 'libs', include: '*.jar')
     implementation files('libs/vendor.hct.hardware.gesturewake-V1.0-java.jar')
+    implementation files('libs/vendor.ims.zenmotion-V1.0-java.jar')
 
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.preference:preference-ktx:1.1.0'

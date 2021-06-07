@@ -12,6 +12,8 @@ import android.provider.Settings
 import android.util.Log
 import java.lang.ref.WeakReference
 
+import vendor.ims.zenmotion.V1_0.IZenMotion;
+
 @SuppressLint("StaticFieldLeak")
 object Misc: EntryStartup {
     fun safeSetprop(key: String, value: String?) {
@@ -208,6 +210,14 @@ object Misc: EntryStartup {
                 SystemProperties.set("persist.sys.overlay.aod", if (value) "true" else "false")
                 OverlayPicker.setOverlayEnabled("me.phh.treble.overlay.misc.aod_systemui", value)
             }
+            MiscSettings.dt2w -> {
+                // Let's try all known dt2w
+                val value = sp.getBoolean(key, false)
+                val asusSvc = try { IZenMotion.getService() } catch(e: Exception) { null }
+                if(asusSvc != null) {
+                    asusSvc.setDclickEnable(if(value) 1 else 0)
+                }
+            }
         }
     }
 
@@ -233,6 +243,6 @@ object Misc: EntryStartup {
         spListener.onSharedPreferenceChanged(sp, MiscSettings.displayFps)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.noHwcomposer)
         spListener.onSharedPreferenceChanged(sp, MiscSettings.storageFUSE)
-        spListener.onSharedPreferenceChanged(sp, MiscSettings.aod)
+        spListener.onSharedPreferenceChanged(sp, MiscSettings.dt2w)
     }
 }

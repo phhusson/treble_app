@@ -35,6 +35,7 @@ object MiscSettings : Settings {
     val restartRil = "key_misc_restart_ril"
     val minimalBrightness = "key_misc_minimal_brightness"
     val aod = "key_misc_aod"
+    val dt2w = "key_misc_dt2w"
 
     override fun enabled() = true
 }
