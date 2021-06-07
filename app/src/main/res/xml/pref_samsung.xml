@@ -36,6 +36,10 @@
             android:title="Enable extra sensors" />
         <CheckBoxPreference
             android:defaultValue="false"
+            android:key="key_samsung_alternate_audio_policy"
+            android:title="Use alternate audio policy" />
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="key_samsung_colorspace"
             android:title="Enable workaround for white-ish screen" />
         <CheckBoxPreference

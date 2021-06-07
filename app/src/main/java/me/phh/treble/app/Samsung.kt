@@ -74,6 +74,11 @@ class Samsung: EntryStartup {
                 val value = sp.getBoolean(key, false)
                 SystemProperties.set("persist.sys.phh.samsung.camera_ids", value.toString())
             }
+            SamsungSettings.alternateAudioPolicy -> {
+                val b = sp.getBoolean(key, false)
+                val value = if(b) "1" else "0"
+                Misc.safeSetprop("persist.sys.phh.caf.audio_policy", value)
+            }
         }
     }
 
