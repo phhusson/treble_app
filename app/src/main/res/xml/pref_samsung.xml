@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory android:title="Audio">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_samsung_alternate_audio_policy"
+            android:title="Use alternate audio policy" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="key_samsung_audio_stereo"
+            android:title="Enable stereo audio mode" />
+    </PreferenceCategory>
     <PreferenceCategory android:title="Screen">
         <CheckBoxPreference
             android:defaultValue="false"
@@ -11,10 +21,6 @@
             android:title="Enable glove mode" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Misc">
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_audio_stereo"
-            android:title="Enable stereo audio mode" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_samsung_wireless_charging_transmit"
@@ -34,10 +40,6 @@
             android:defaultValue="false"
             android:key="key_samsung_extra_sensors"
             android:title="Enable extra sensors" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_alternate_audio_policy"
-            android:title="Use alternate audio policy" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_samsung_colorspace"
