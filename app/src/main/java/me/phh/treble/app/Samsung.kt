@@ -79,6 +79,10 @@ class Samsung: EntryStartup {
                 val value = if(b) "1" else "0"
                 Misc.safeSetprop("persist.sys.phh.caf.audio_policy", value)
             }
+            SamsungSettings.escoTransportUnitSize -> {
+                val value = sp.getString(key, "0")
+                SystemProperties.set("persist.sys.bt.esco_transport_unit_size", value)
+            }
         }
     }
 
