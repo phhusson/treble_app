@@ -9,6 +9,12 @@
             android:defaultValue="false"
             android:key="key_samsung_audio_stereo"
             android:title="Enable stereo audio mode" />
+        <ListPreference
+            android:defaultValue="0"
+            android:entries="@array/pref_samsung_transport_size"
+            android:entryValues="@array/pref_samsung_transport_size_values"
+            android:key="key_samsung_esco_transport_unit_size"
+            android:title="Set eSCO transport unit size" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Screen">
         <CheckBoxPreference
