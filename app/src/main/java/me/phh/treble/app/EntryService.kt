@@ -54,6 +54,7 @@ class EntryService: Service() {
             tryC { Hct.startup(this) }
 
             tryC { Desktop.startup(this) }
+            tryC { Razr.startup(this) }
 
             tryC { PresetDownloader.startup(this) }
             tryC {
