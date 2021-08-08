@@ -67,6 +67,8 @@ object Ims: EntryStartup {
             .find { i -> mHidlService.get("vendor.mediatek.hardware.radio@3.0::IRadio", i) != null } != null
     val gotMtkQuack = mAllSlots
             .find { i -> mHidlService.get("vendor.mediatek.hardware.mtkradioex@1.0::IMtkRadioEx", i) != null } != null
+    val gotMtkRoar = mAllSlots
+            .find { i -> mHidlService.get("vendor.mediatek.hardware.mtkradioex@2.0::IMtkRadioEx", i) != null } != null
     val gotQualcomm = mAllSlots
             .find { i -> mHidlService.get("vendor.qti.hardware.radio.ims@1.0::IImsRadio", i) != null } != null
     val gotSLSI = mAllSlots
@@ -85,7 +87,7 @@ object Ims: EntryStartup {
 
         val allOverlays = listOf("me.phh.treble.overlay.mtkims_telephony", "me.phh.treble.overlay.cafims_telephony")
         val selectOverlay = when {
-            gotMtkPie || gotMtkQuack -> "me.phh.treble.overlay.mtkims_telephony"
+            gotMtkPie || gotMtkQuack || gotMtkRoar -> "me.phh.treble.overlay.mtkims_telephony"
             gotQualcomm -> "me.phh.treble.overlay.cafims_telephony"
             gotSLSI -> "me.phh.treble.overlay.slsiims_telephony"
             gotSPRD -> "me.phh.treble.overlay.sprdims_telephony"

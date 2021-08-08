@@ -90,12 +90,14 @@ class ImsSettingsFragment : SettingsFragment() {
 
         Log.d("PHH", "MTK Pie radio = ${Ims.gotMtkPie}")
         Log.d("PHH", "MTK Quack radio = ${Ims.gotMtkQuack}")
+        Log.d("PHH", "MTK Roar radio = ${Ims.gotMtkRoar}")
         Log.d("PHH", "Qualcomm radio = ${Ims.gotQualcomm}")
 
         val (url, message) =
                 when {
                     Ims.gotMtkPie -> Pair("https://treble.phh.me/stable/ims-mtk-p.apk", "Mediatek Pie vendor")
                     Ims.gotMtkQuack -> Pair("https://treble.phh.me/stable/ims-mtk-q.apk", "Mediatek Q vendor")
+                    Ims.gotMtkRoar -> Pair("https://treble.phh.me/stable/ims-mtk-r.apk", "Mediatek R vendor")
                     Ims.gotQualcomm -> Pair("https://treble.phh.me/stable/ims-q.64.apk", "Qualcomm vendor")
                     else -> Pair("", "NOT SUPPORTED")
                 }
