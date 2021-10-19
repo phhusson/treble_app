@@ -28,20 +28,30 @@ object Misc: EntryStartup {
     val surfaceFlinger = ServiceManager.getService("SurfaceFlinger")
     fun forceFps(v: Int) {
         val data = Parcel.obtain()
-        data.writeInterfaceToken("android.ui.ISurfaceComposer")
-        data.writeInt(v)
-        surfaceFlinger.transact(1035, data, null, 0)
-        data.recycle()
-        Log.d("PHH", "Set surface flinger forced fps/mode to $v")
+        try {
+            data.writeInterfaceToken("android.ui.ISurfaceComposer")
+            data.writeInt(v)
+            surfaceFlinger.transact(1035, data, null, 0)
+            Log.d("PHH", "Set surface flinger forced fps/mode to $v")
+        } catch (r: Exception) {
+            Log.d("PHH", "Failed setting surface flinger forced fps/mode to $v")
+        } finally {
+            data.recycle()
+        }
     }
 
     fun enableHwcOverlay(v: Boolean) {
         val data = Parcel.obtain()
-        data.writeInterfaceToken("android.ui.ISurfaceComposer")
-        data.writeInt(if(v) 0 else 1)
-        surfaceFlinger.transact(1008, data, null, 0)
-        data.recycle()
-        Log.d("PHH", "Set surface flinger hwc overlay to $v")
+        try {
+            data.writeInterfaceToken("android.ui.ISurfaceComposer")
+            data.writeInt(if(v) 0 else 1)
+            surfaceFlinger.transact(1008, data, null, 0)
+            Log.d("PHH", "Set surface flinger hwc overlay to $v")
+        } catch (r: Exception) {
+            Log.d("PHH", "Failed setting surface flinger hwc overlay to $v")
+        } finally {
+            data.recycle()
+        }
     }
 
     lateinit var ctxt: WeakReference<Context>
