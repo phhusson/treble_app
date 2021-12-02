@@ -9,4 +9,9 @@
         android:defaultValue="false"
         android:key="key_qualcomm_alternate_audiopolicy"
         android:title="Use alternate audio policy" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="key_qualcomm_disable_soundvolume_effect"
+        android:title="Disable soundvolume effect"
+        android:summary="May fix audio distorsion" />
 </PreferenceScreen>
