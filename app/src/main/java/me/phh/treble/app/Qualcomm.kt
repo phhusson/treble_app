@@ -20,6 +20,11 @@ object Qualcomm: EntryStartup {
                 val value = if(b) "true" else "false"
                 Misc.safeSetprop("persist.sys.phh.caf.media_profile", value)
             }
+            QualcommSettings.disableSoundVolumeEffect -> {
+                val b = sp.getBoolean(key, false)
+                val value = if(b) "true" else "false"
+                Misc.safeSetprop("persist.sys.phh.disable_soundvolume_effect", value)
+            }
         }
     }
 
