@@ -75,7 +75,8 @@ object Ims: EntryStartup {
             .find { i -> mHidlService.get("vendor.samsung_slsi.telephony.hardware.radio@1.0::IOemSamsungslsi", i) != null } != null
     val gotSPRD = mAllSlots
             .find { i -> mHidlService.get("vendor.sprd.hardware.radio@1.0::IExtRadio", i) != null } != null
-
+    val gotHW = mAllSlots
+            .find { i -> mHidlService.get("vendor.huawei.hardware.radio@1.0::IRadio", i) != null } != null
 
     override fun startup(ctxt: Context) {
         if (!ImsSettings.enabled()) return
@@ -85,12 +86,13 @@ object Ims: EntryStartup {
 
         this.ctxt = WeakReference(ctxt.applicationContext)
 
-        val allOverlays = listOf("me.phh.treble.overlay.mtkims_telephony", "me.phh.treble.overlay.cafims_telephony")
+        val allOverlays = listOf("me.phh.treble.overlay.mtkims_telephony", "me.phh.treble.overlay.cafims_telephony", "me.phh.treble.overlay.hwims_telephony")
         val selectOverlay = when {
             gotMtkPie || gotMtkQuack || gotMtkRoar -> "me.phh.treble.overlay.mtkims_telephony"
             gotQualcomm -> "me.phh.treble.overlay.cafims_telephony"
             gotSLSI -> "me.phh.treble.overlay.slsiims_telephony"
             gotSPRD -> "me.phh.treble.overlay.sprdims_telephony"
+	        gotHW -> "me.phh.treble.overlay.hwims_telephony"
             else -> null
         }
         if(selectOverlay != null) {
