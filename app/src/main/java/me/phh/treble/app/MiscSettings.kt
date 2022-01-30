@@ -36,6 +36,7 @@ object MiscSettings : Settings {
     val minimalBrightness = "key_misc_minimal_brightness"
     val aod = "key_misc_aod"
     val dt2w = "key_misc_dt2w"
+    val restartSystemUI = "key_misc_restart_systemui"
 
     override fun enabled() = true
 }
@@ -125,5 +126,21 @@ class MiscSettingsFragment : SettingsFragment() {
 
         fpsPref.setEntries(fpsEntries.toTypedArray())
         fpsPref.setEntryValues(fpsValues.toTypedArray())
+
+        val restartSystemUIPref = findPreference<Preference>(MiscSettings.restartSystemUI)
+        restartSystemUIPref!!.setOnPreferenceClickListener {
+            var cmds = listOf(
+                "/sbin/su -c /system/bin/killall com.android.systemui",
+                "/system/xbin/su -c /system/bin/killall com.android.systemui",
+                "/system/xbin/phh-su -c /system/bin/killall com.android.systemui",
+                "/sbin/su 0 /system/bin/killall com.android.systemui",
+                "/system/xbin/su 0 /system/bin/killall com.android.systemui",
+                "/system/xbin/phh-su 0 /system/bin/killall com.android.systemui"
+            )
+            for (cmd in cmds) {
+                Runtime.getRuntime().exec(cmd).waitFor()
+            }
+            return@setOnPreferenceClickListener true
+        }
     }
 }
