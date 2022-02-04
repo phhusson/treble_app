@@ -57,6 +57,23 @@
             </intent-filter>
         </activity>
 
+        <activity
+            android:name=".UpdaterActivity"
+            android:label="@string/title_activity_updater"
+            android:theme="@style/Theme.TrebleApp"
+            android:launchMode="singleTop"
+            android:exported="true">
+            <intent-filter android:priority="1">
+                <action android:name="android.settings.SYSTEM_UPDATE_SETTINGS" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="otahttps" />
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".REPL"
             android:exported="true"
