@@ -211,7 +211,7 @@ class UpdaterActivity : PreferenceActivity() {
     }
 
     private fun getVariant() : String {
-        var flavor = SystemProperties.get("ro.build.flavor").replace("-user", "")
+        var flavor = SystemProperties.get("ro.build.flavor").replace(Regex("-user(debug)?"), "")
         val secure = File("/system/phh/secure")
         val vndklite = File("/system_ext/apex/com.android.vndk.v27/etc/vndkcore.libraries.27.txt")
         if (secure.exists()) {
@@ -332,8 +332,8 @@ class UpdaterActivity : PreferenceActivity() {
 
         runOnUiThread(Runnable {
             update_title.text = getString(R.string.preparing_update_title)
-            progress_bar.setProgress(0)
-            progress_text.text = "0%"
+            progress_bar.setIndeterminate(true)
+            progress_text.text = "Preparing storage for OTA..."
             progress_bar.setVisibility(View.VISIBLE)
             progress_text.setVisibility(View.VISIBLE)
         })
@@ -341,21 +341,11 @@ class UpdaterActivity : PreferenceActivity() {
         SystemProperties.set("ctl.start", "phh-ota-make")
         Thread.sleep(1000)
         
-        runOnUiThread(Runnable {
-            progress_bar.setProgress(50)
-            progress_text.text = "50%"
-        })
-
         while (!SystemProperties.get("init.svc.phh-ota-make", "").equals("stopped")) {
             val state = SystemProperties.get("init.svc.phh-ota-make", "not-defined")
             Log.d("PHH", "Current value of phh-ota-make svc is " + state)
             Thread.sleep(100)
         }
-
-        runOnUiThread(Runnable {
-            progress_bar.setProgress(100)
-            progress_text.text = "100%"
-        })
     }
 
     private fun extractUpdate(stream: InputStream, completeFileSize: Long) {
@@ -365,13 +355,63 @@ class UpdaterActivity : PreferenceActivity() {
 
         runOnUiThread(Runnable {
             update_title.text = getString(R.string.downloading_update_title)
+            progress_bar.setIndeterminate(false)
             progress_bar.setProgress(0)
-            progress_text.text = "0%"
+            progress_text.text = "Downloading 0%"
             progress_bar.setVisibility(View.VISIBLE)
             progress_text.setVisibility(View.VISIBLE)
         })
 
-        val xzOut = XZInputStream(stream)
+        val xzOut = XZInputStream(object: InputStream() {
+            var nBytesRead = 0L
+            override fun read(): Int {
+                nBytesRead++
+                return stream.read()
+            }
+
+            override fun available(): Int {
+                return stream.available()
+            }
+
+            override fun close() {
+                return stream.close()
+            }
+
+            override fun mark(readlimit: Int) {
+                return stream.mark(readlimit)
+            }
+
+            override fun markSupported(): Boolean {
+                return stream.markSupported()
+            }
+
+            override fun read(b: ByteArray?): Int {
+                val n = stream.read(b)
+                nBytesRead += n
+                return n
+            }
+
+            override fun read(b: ByteArray?, off: Int, len: Int): Int {
+                val n = stream.read(b, off, len)
+                nBytesRead += n
+                var extProgress = (100 * nBytesRead) / completeFileSize
+                runOnUiThread(Runnable {
+                    if (extProgress < 100) {
+                        progress_bar.setProgress(extProgress.toInt())
+                        progress_text.text = "Downloading " + extProgress.toInt().toString() + "%"
+                    }
+                })
+                return n
+            }
+
+            override fun reset() {
+                return stream.reset()
+            }
+
+            override fun skip(n: Long): Long {
+                return stream.skip(n)
+            }
+        })
         FileOutputStream("/dev/phh-ota").use { blockDev ->
             val extBuf = ByteArray(1024 * 1024)
             var totalWritten = 0L
@@ -380,15 +420,7 @@ class UpdaterActivity : PreferenceActivity() {
                 if (extRead == -1) break
                 blockDev.write(extBuf, 0, extRead)
                 totalWritten += extRead
-                val extProgress = (100 * totalWritten) / (completeFileSize/0.369)
-                Log.d("PHH", "Extraction progress is: " + extProgress)
-
-                runOnUiThread(Runnable {
-                    if (extProgress < 100) {
-                        progress_bar.setProgress(extProgress.toInt())
-                        progress_text.text = extProgress.toInt().toString() + "%"
-                    }
-                })
+                Log.d("PHH", "Total written to block dev is " + totalWritten)
             }
         }
 
@@ -405,8 +437,7 @@ class UpdaterActivity : PreferenceActivity() {
 
         runOnUiThread(Runnable {
             update_title.text = getString(R.string.applying_update_title)
-            progress_bar.setProgress(0)
-            progress_text.text = "0%"
+            progress_text.text = "Switching slot..."
             progress_bar.setVisibility(View.VISIBLE)
             progress_text.setVisibility(View.VISIBLE)
         })
@@ -414,21 +445,14 @@ class UpdaterActivity : PreferenceActivity() {
         SystemProperties.set("ctl.start", "phh-ota-switch")
         Thread.sleep(1000)
 
-        runOnUiThread(Runnable {
-            progress_bar.setProgress(50)
-            progress_text.text = "50%"
-        })
-
         while (!SystemProperties.get("init.svc.phh-ota-switch", "").equals("stopped")) {
-            val state = SystemProperties.get("init.svc.phh-ota-make", "not-defined")
+            val state = SystemProperties.get("init.svc.phh-ota-switch", "not-defined")
             Log.d("PHH", "Current value of phh-ota-switch svc is " + state)
             Thread.sleep(100)
         }
 
         runOnUiThread(Runnable {
-            update_title.text = getString(R.string.applied_update_title)
-            progress_bar.setProgress(100)
-            progress_text.text = "100%"
+            progress_text.text = "Switched slot. OTA finalized."
         })
     }
 }

@@ -67,11 +67,6 @@
                 <action android:name="android.settings.SYSTEM_UPDATE_SETTINGS" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT"/>
-                <data android:scheme="otahttps" />
-            </intent-filter>
         </activity>
 
         <service
