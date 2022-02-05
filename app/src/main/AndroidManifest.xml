@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="me.phh.treble.app"
     android:persistent="true"
-    android:sharedUserId="android.uid.system">
+    android:sharedUserId="android.uid.system"
+    android:directBootAware="true" >
 
 
     <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
     <uses-permission android:name="android.permission.DIAGNOSTIC" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+    <uses-permission android:name="android.permission.INTERNAL_SYSTEM_WINDOW" />
 
     <application
         android:allowBackup="true"
@@ -67,6 +69,11 @@
             android:name=".DesktopInput"
             android:launchMode="singleTask"
             android:theme="@android:style/Theme.Material.Dialog" >
+        </activity>
+
+        <activity
+            android:name=".RazrSecondary"
+            android:launchMode="singleTask">
         </activity>
 
         <activity android:name=".DebugSensors" />
