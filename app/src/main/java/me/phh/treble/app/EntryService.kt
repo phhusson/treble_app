@@ -3,13 +3,16 @@ package me.phh.treble.app
 import android.app.Service
 import android.content.BroadcastReceiver
 import android.content.Context
+import android.content.ComponentName
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
 import android.os.IBinder
 import android.os.UserHandle
+import android.os.SystemProperties
 import android.util.Log
 import dalvik.system.PathClassLoader
 import kotlin.concurrent.thread
@@ -57,7 +60,13 @@ class EntryService: Service() {
 
             tryC { PresetDownloader.startup(this) }
             tryC {
-
+                val p = SystemProperties.get("ro.system.ota.json_url", "")
+                val c = ComponentName(this, UpdaterActivity::class.java)
+                if(p.trim() == "") {
+                    packageManager.setComponentEnabledSetting(c, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, 0)
+                } else {
+                    packageManager.setComponentEnabledSetting(c, PackageManager.COMPONENT_ENABLED_STATE_DEFAULT, 0)
+                }
             }
         }
     }
