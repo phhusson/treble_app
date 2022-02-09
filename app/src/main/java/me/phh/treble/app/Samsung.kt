@@ -1,10 +1,9 @@
 package me.phh.treble.app
 
-import android.content.*
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.media.AudioSystem
-import android.os.Handler
-import android.os.HandlerThread
 import android.os.SystemProperties
 import android.preference.PreferenceManager
 import android.util.Log
@@ -107,37 +106,7 @@ class Samsung: EntryStartup {
         Log.e("PHH", "Samsung TS: Supports glove_mode ${tsCmdExists("glove_mode")}")
         Log.e("PHH", "Samsung TS: Supports aod_enable ${tsCmdExists("aod_enable")}")
 
-	    tsCmd("check_connection")
-
-
-        val tsWakerHandler = Handler(HandlerThread("Samsung TS Waker").apply { start() }.looper)
-        var tsWakerCount = 0
-        val tsWaker = object: Runnable {
-            override fun run() {
-                Log.d("PHH", "Received intent waky waky")
-                tsWakerCount++
-                Log.d("PHH", "Waky returned " + tsCmd("check_connection"))
-                if(tsWakerCount < 20) {
-                    tsWakerHandler.postDelayed(this, 100L)
-                }
-            }
-        }
-        val screenStateReceiver = object: BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                Log.d("PHH", "Received intent ${intent.action} ${intent.extras?.keySet()}")
-                if(intent.action == Intent.ACTION_SCREEN_ON ) {
-                    Log.d("PHH", "Waky waky")
-                    tsWakerHandler.post(tsWaker)
-                } else if(intent.action == Intent.ACTION_SCREEN_OFF) {
-                    tsWakerHandler.removeCallbacks(tsWaker)
-                }
-            }
-        }
-
-        val screenStateFilter = IntentFilter()
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF)
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_ON)
-        ctxt.registerReceiver(screenStateReceiver, screenStateFilter)
+	tsCmd("check_connection")
 
         for(malware in listOf("com.dti.globe", "com.singtel.mysingtel", "com.LogiaGroup.LogiaDeck", "com.mygalaxy")) {
             try {
