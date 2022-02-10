@@ -85,9 +85,6 @@ class Starter: BroadcastReceiver() {
             Intent.ACTION_BOOT_COMPLETED, Intent.ACTION_MY_PACKAGE_REPLACED -> {
                 context.startServiceAsUser(Intent(context, EntryService::class.java), UserHandle.SYSTEM)
             }
-            "me.phh.update" -> {
-                UpdateApplier.applyUpdate(intent.data.path)
-            }
         }
     }
 }
