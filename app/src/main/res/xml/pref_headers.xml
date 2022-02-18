@@ -41,7 +41,9 @@
     <header
         android:fragment="me.phh.treble.app.CustomSettingsFragment"
         android:title="Customization features" />
-    <header android:title="Updater">
+    <header
+        android:id="@+id/updater"
+        android:title="Updater">
         <intent android:action="android.settings.SYSTEM_UPDATE_SETTINGS"
                 android:targetClass=".UpdaterActivity"/>
     </header>
