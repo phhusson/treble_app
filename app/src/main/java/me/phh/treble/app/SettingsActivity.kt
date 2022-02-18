@@ -3,6 +3,7 @@ package me.phh.treble.app
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Bundle
+import android.os.SystemProperties
 import android.preference.PreferenceActivity
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -68,7 +69,10 @@ class SettingsActivity : PreferenceActivity() {
         if (!ImsSettings.enabled())
             target.removeIf { it.fragment == ImsSettingsFragment::class.java.name }
         if (!CustomSettings.enabled())
-            target.removeIf { it.fragment == CustomSettingsFragment::class.java.name }   
+            target.removeIf { it.fragment == CustomSettingsFragment::class.java.name }
+        val p = SystemProperties.get("ro.system.ota.json_url", "")
+        if (p.trim() == "")
+            target.removeIf { it.id.compareTo(R.id.updater) == 0 }
     }
 
     /**
