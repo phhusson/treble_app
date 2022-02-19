@@ -38,6 +38,7 @@ object MiscSettings : Settings {
     val aod = "key_misc_aod"
     val dt2w = "key_misc_dt2w"
     val restartSystemUI = "key_misc_restart_systemui"
+    val dumpLogs = "key_misc_dump_logs"
 
     override fun enabled() = true
 }
@@ -131,6 +132,12 @@ class MiscSettingsFragment : SettingsFragment() {
         val restartSystemUIPref = findPreference<Preference>(MiscSettings.restartSystemUI)
         restartSystemUIPref!!.setOnPreferenceClickListener {
             SystemProperties.set("sys.phh.restart_sysui", "true")
+            return@setOnPreferenceClickListener true
+        }
+
+        val dumpLogsPref = findPreference<Preference>(MiscSettings.dumpLogs)
+        dumpLogsPref!!.setOnPreferenceClickListener {
+            SystemProperties.set("sys.phh.dump_logs", "true")
             return@setOnPreferenceClickListener true
         }
     }
