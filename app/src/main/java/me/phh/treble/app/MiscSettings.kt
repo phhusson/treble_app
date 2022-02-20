@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.app.Application
 import android.hardware.display.DisplayManager
 import android.os.Bundle
+import android.os.SystemProperties
 import android.util.Log
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -129,17 +130,7 @@ class MiscSettingsFragment : SettingsFragment() {
 
         val restartSystemUIPref = findPreference<Preference>(MiscSettings.restartSystemUI)
         restartSystemUIPref!!.setOnPreferenceClickListener {
-            var cmds = listOf(
-                "/sbin/su -c /system/bin/killall com.android.systemui",
-                "/system/xbin/su -c /system/bin/killall com.android.systemui",
-                "/system/xbin/phh-su -c /system/bin/killall com.android.systemui",
-                "/sbin/su 0 /system/bin/killall com.android.systemui",
-                "/system/xbin/su 0 /system/bin/killall com.android.systemui",
-                "/system/xbin/phh-su 0 /system/bin/killall com.android.systemui"
-            )
-            for (cmd in cmds) {
-                Runtime.getRuntime().exec(cmd).waitFor()
-            }
+            SystemProperties.set("sys.phh.restart_sysui", "true")
             return@setOnPreferenceClickListener true
         }
     }
