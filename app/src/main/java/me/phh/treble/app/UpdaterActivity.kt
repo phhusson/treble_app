@@ -9,6 +9,8 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import java.io.File
 import java.io.FileOutputStream
@@ -41,7 +43,7 @@ class UpdaterActivity : PreferenceActivity() {
 
         updateUiElements(false)
         checkUpdate()
-        
+
         val btn_update = findViewById(R.id.btn_update) as Button
         btn_update.setOnClickListener {
             if (hasUpdate) {
@@ -60,7 +62,7 @@ class UpdaterActivity : PreferenceActivity() {
             val builder = AlertDialog.Builder(this)
             builder.setTitle(getString(R.string.title_activity_updater))
             builder.setMessage(getString(R.string.prevent_exit_message))
-            builder.setPositiveButton(android.R.string.yes) { _, _ -> 
+            builder.setPositiveButton(android.R.string.yes) { _, _ ->
                 super.onBackPressed()
                 finish()
             }
@@ -70,6 +72,31 @@ class UpdaterActivity : PreferenceActivity() {
             super.onBackPressed()
             finish()
         }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.menu_delete_ota -> {
+                Log.e("PHH", "Deleting OTA file")
+                val builder = AlertDialog.Builder(this)
+                builder.setTitle(getString(R.string.warning_dialog_title))
+                builder.setMessage(getString(R.string.delete_ota_message))
+                builder.setPositiveButton(android.R.string.yes) { _, _ ->
+                    Log.e("PHH", "Delete in progress")
+                    SystemProperties.set("sys.phh.uninstall-ota", "true");
+                }
+                builder.setNegativeButton(android.R.string.no) { _, _ -> 
+                    Log.e("PHH", "Delete canceled")
+                }
+                builder.show()
+            }
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     private fun checkUpdate() {
@@ -85,6 +112,7 @@ class UpdaterActivity : PreferenceActivity() {
         update_title.text = getString(R.string.checking_update_title)
 
         if (isDynamic()) {
+            isMagiskInstalled()
             Log.e("PHH", "Updating OTA info at: " + OTA_JSON_URL)
             val request = Request.Builder().url(OTA_JSON_URL).build()
             OkHttpClient().newCall(request).enqueue(object: Callback {
@@ -113,7 +141,7 @@ class UpdaterActivity : PreferenceActivity() {
     private fun updateUiElements(wasUpdated: Boolean) {
         val btn_update = findViewById(R.id.btn_update) as Button
 
-        if (!wasUpdated) {      
+        if (!wasUpdated) {
             btn_update.setVisibility(View.VISIBLE)
         }
 
@@ -193,6 +221,18 @@ class UpdaterActivity : PreferenceActivity() {
         return true
     }
 
+    private fun isMagiskInstalled() {
+        val magiskDir = File("/sbin/.magisk")
+        if (magiskDir.exists()) {
+            Log.e("PHH", "Magisk is installed")
+            val builder = AlertDialog.Builder(this)
+            builder.setTitle(getString(R.string.warning_dialog_title))
+            builder.setMessage(getString(R.string.magisk_exists_message))
+            builder.setPositiveButton(android.R.string.ok) { _, _ -> }
+            builder.show()
+        }
+    }
+
     private fun existsUpdate() : Boolean {
         if (otaJson.length() > 0) {
             var otaDate = otaJson.getString("date")
@@ -247,7 +287,7 @@ class UpdaterActivity : PreferenceActivity() {
         val progress_bar = findViewById(R.id.progress_horizontal) as ProgressBar
         val progress_text = findViewById(R.id.progress_value) as TextView
 
-        val btn_update = findViewById(R.id.btn_update) as Button        
+        val btn_update = findViewById(R.id.btn_update) as Button
         btn_update.setVisibility(View.INVISIBLE)
 
         val url = getUrl()
@@ -340,7 +380,7 @@ class UpdaterActivity : PreferenceActivity() {
 
         SystemProperties.set("ctl.start", "phh-ota-make")
         Thread.sleep(1000)
-        
+
         while (!SystemProperties.get("init.svc.phh-ota-make", "").equals("stopped")) {
             val state = SystemProperties.get("init.svc.phh-ota-make", "not-defined")
             Log.d("PHH", "Current value of phh-ota-make svc is " + state)

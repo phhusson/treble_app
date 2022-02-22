@@ -23,4 +23,8 @@
     <string name="applying_update_title">Applying system update</string>
     <string name="applied_update_title">Update applied successfully</string>
     <string name="prevent_exit_message">The update is still ongoing. Leaving the app now will stop it.\nDo you really want to exit now?</string>
+    <string name="warning_dialog_title">Warning</string>
+    <string name="magisk_exists_message">Magisk was detected! If you proceed with the update you may lose Magisk or the installation may fail!</string>
+    <string name="menu_delete_ota">Delete OTA files</string>
+    <string name="delete_ota_message">Take in consideration that you may lose your userdata if you proceed!\nTo prevent this, cancel this dialog, reboot and flash the latest update on fastboot mode.\nDo you want to proceed anyway?</string>
 </resources>
