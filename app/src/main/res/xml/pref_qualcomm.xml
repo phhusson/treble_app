@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_qualcomm_alternate_mediaprofile"
-        android:title="Use alternate camera profile"
-        android:summary="Requires a reboot" />
+            android:defaultValue="false"
+            android:key="key_qualcomm_alternate_mediaprofile"
+            android:title="@string/Use_alternate_camera_profile"
+            android:summary="@string/Requires_a_reboot" />
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_qualcomm_alternate_audiopolicy"
-        android:title="Use alternate audio policy" />
+            android:defaultValue="false"
+            android:key="key_qualcomm_alternate_audiopolicy"
+            android:title="@string/Use_alternate_audio_policy" />
     <CheckBoxPreference
-        android:defaultValue="false"
-        android:key="key_qualcomm_disable_soundvolume_effect"
-        android:title="Disable soundvolume effect"
-        android:summary="May fix audio distorsion" />
+            android:defaultValue="false"
+            android:key="key_qualcomm_disable_soundvolume_effect"
+            android:title="@string/Disable_soundvolume_effect"
+            android:summary="@string/May_fix_audio_distorsion" />
 </PreferenceScreen>

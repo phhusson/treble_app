@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
 	xmlns:android="http://schemas.android.com/apk/res/android">
-    <Preference android:title="Create IMS APN"
+    <Preference android:title="@string/Create_IMS_APN"
         android:key="key_ims_create_apn" />
-    <Preference android:title="Download and install IMS APK"
+    <Preference android:title="@string/Download_and_install_IMS_APK"
         android:key="key_ims_install_apn" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_ims_request_network"
-        android:title="Request IMS network" />
+        android:title="@string/Request_IMS_network" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_ims_force_enable_setting"
-        android:title="Force the presence of 4G Calling setting" />
+        android:title="@string/Force_the_presence_of_4G_Calling_setting" />
 </PreferenceScreen>

@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="Audio">
+    <PreferenceCategory android:title="@string/Audio">
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_alternate_audio_policy"
-            android:title="Use alternate audio policy" />
+                android:defaultValue="false"
+                android:key="key_samsung_alternate_audio_policy"
+                android:title="@string/Use_alternate_audio_policy" />
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_audio_stereo"
-            android:title="Enable stereo audio mode" />
+                android:defaultValue="false"
+                android:key="key_samsung_audio_stereo"
+                android:title="@string/Enable_stereo_audio_mode" />
         <ListPreference
-            android:defaultValue="0"
-            android:entries="@array/pref_samsung_transport_size"
-            android:entryValues="@array/pref_samsung_transport_size_values"
-            android:key="key_samsung_esco_transport_unit_size"
-            android:title="Set eSCO transport unit size" />
+                android:defaultValue="0"
+                android:entries="@array/pref_samsung_transport_size"
+                android:entryValues="@array/pref_samsung_transport_size_values"
+                android:key="key_samsung_esco_transport_unit_size"
+                android:title="@string/Set_eSCO_transport_unit_size" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Screen">
+    <PreferenceCategory android:title="@string/Screen">
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_high_brightness"
-            android:title="Enable extended brightness range" />
+                android:defaultValue="false"
+                android:key="key_samsung_high_brightness"
+                android:title="@string/Enable_extended_brightness_range" />
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_glove_mode"
-            android:title="Enable glove mode" />
+                android:defaultValue="false"
+                android:key="key_samsung_glove_mode"
+                android:title="@string/Enable_glove_mode" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Misc">
+    <PreferenceCategory android:title="@string/Misc">
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_wireless_charging_transmit"
-            android:title="Enable reversed wireless charging(If applicable)" />
+                android:defaultValue="false"
+                android:key="key_samsung_wireless_charging_transmit"
+                android:title="@string/Enable_reversed_wireless_charging_If_applicable" />
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_double_tap_to_wake"
-            android:title="Enable double tap to wake" />
+                android:defaultValue="false"
+                android:key="key_samsung_double_tap_to_wake"
+                android:title="@string/Enable_double_tap_to_wake" />
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_camera_ids"
-            android:title="Enable access to all cameras"
-            android:summary="Requires Q vendor" />
+                android:defaultValue="false"
+                android:key="key_samsung_camera_ids"
+                android:title="@string/Enable_access_to_all_cameras"
+                android:summary="@string/Requires_Q_vendor" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Workarounds">
+    <PreferenceCategory android:title="@string/Workarounds">
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_extra_sensors"
-            android:title="Enable extra sensors" />
+                android:defaultValue="false"
+                android:key="key_samsung_extra_sensors"
+                android:title="@string/Enable_extra_sensors" />
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_colorspace"
-            android:title="Enable workaround for white-ish screen" />
+                android:defaultValue="false"
+                android:key="key_samsung_colorspace"
+                android:title="@string/Enable_workaround_for_white_ish_screen" />
         <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_samsung_broken_fingerprint"
-            android:title="Enable workaround for broken fingerprint" />
+                android:defaultValue="false"
+                android:key="key_samsung_broken_fingerprint"
+                android:title="@string/Enable_workaround_for_broken_fingerprint" />
         <EditTextPreference
-            android:defaultValue="-1"
-            android:key="key_samsung_backlight_multiplier"
-            android:title="Set backlight scale/max backlight level"
-            android:inputType="number" />
+                android:defaultValue="-1"
+                android:key="key_samsung_backlight_multiplier"
+                android:title="@string/Set_backlight_scale_max_backlight_level"
+                android:inputType="number" />
     </PreferenceCategory>
 </PreferenceScreen>

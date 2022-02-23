@@ -1,159 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen
-	xmlns:android="http://schemas.android.com/apk/res/android">
-	<Preference android:title="Sponsor phh"
-        android:key="key_sponsor">
+		xmlns:android="http://schemas.android.com/apk/res/android">
+	<Preference android:title="@string/Sponsor_phh"
+				android:key="key_sponsor">
 		<intent
-		    android:action="android.intent.action.VIEW"
-		    android:data="https://github.com/sponsors/phhusson/" />
+				android:action="android.intent.action.VIEW"
+				android:data="https://github.com/sponsors/phhusson/" />
 	</Preference>
-	<PreferenceCategory android:title="Mobile network">
+	<PreferenceCategory android:title="@string/Mobile_network">
 		<ListPreference
-		    android:defaultValue="default"
-		    android:entries="@array/pref_misc_mobile_signal"
-		    android:entryValues="@array/pref_misc_mobile_signal_values"
-		    android:key="key_misc_mobile_signal"
-		    android:title="Signal meter method" />
+				android:defaultValue="default"
+				android:entries="@array/pref_misc_mobile_signal"
+				android:entryValues="@array/pref_misc_mobile_signal_values"
+				android:key="key_misc_mobile_signal"
+				android:title="@string/Signal_meter_method" />
 	</PreferenceCategory>
-	<PreferenceCategory android:title="Audio">
+	<PreferenceCategory android:title="@string/Audio">
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_huawei_headset_fix"
-            android:title="Force headset switch (Huawei default)" />
+				android:defaultValue="false"
+				android:key="key_huawei_headset_fix"
+				android:title="@string/Force_headset_switch_Huawei_default" />
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_headset_devinput"
-            android:title="Use alternate way to detect headsets" />
+				android:defaultValue="false"
+				android:key="key_misc_headset_devinput"
+				android:title="@string/Use_alternate_way_to_detect_headsets" />
 		<CheckBoxPreference
-			android:defaultValue="false"
-			android:key="key_misc_disable_audio_effects"
-			android:title="Disable audio effects" />
+				android:defaultValue="false"
+				android:key="key_misc_disable_audio_effects"
+				android:title="@string/Disable_audio_effects" />
 	</PreferenceCategory>
-	<PreferenceCategory android:title="Display">
+	<PreferenceCategory android:title="@string/Display">
 		<EditTextPreference
-            android:defaultValue="-1"
-            android:key="key_misc_rounded_corners"
-	        android:title="Set rounded corners diameter"
-	        android:inputType="number"
-            android:summary="Requires a reboot" />
+				android:defaultValue="-1"
+				android:key="key_misc_rounded_corners"
+				android:title="@string/Set_rounded_corners_diameter"
+				android:inputType="number"
+				android:summary="Requires a reboot" />
 		<EditTextPreference
-			android:defaultValue="-1"
-			android:key="key_misc_rounded_corners_overlay"
-			android:title="Set forced/faked rounded corners diameter"
-			android:inputType="number" />
+				android:defaultValue="-1"
+				android:key="key_misc_rounded_corners_overlay"
+				android:title="@string/Set_forced_faked_rounded_corners_diameter"
+				android:inputType="number" />
 		<ListPreference
-			android:defaultValue="1"
-			android:entries="@array/pref_misc_fps_divisor"
-			android:entryValues="@array/pref_misc_fps_divisor_values"
-			android:key="key_misc_fps_divisor"
-			android:title="FPS Divisor" />
+				android:defaultValue="1"
+				android:entries="@array/pref_misc_fps_divisor"
+				android:entryValues="@array/pref_misc_fps_divisor_values"
+				android:key="key_misc_fps_divisor"
+				android:title="@string/FPS_Divisor" />
 		<ListPreference
-			android:defaultValue="-1"
-			android:entries="@array/pref_misc_display_fps"
-			android:entryValues="@array/pref_misc_display_fps_values"
-			android:key="key_misc_display_fps"
-			android:title="Force FPS" />
-        <Preference
-            android:key="key_misc_restart_systemui"
-            android:title="Restart SystemUI"
-            android:summary="Recommended after switching display resolution" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_no_hwcomposer"
-            android:title="Disable HW overlays"
-            android:summary="Eats more CPU and battery" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_aod"
-            android:title="Force allow Always-On Display" />
+				android:defaultValue="-1"
+				android:entries="@array/pref_misc_display_fps"
+				android:entryValues="@array/pref_misc_display_fps_values"
+				android:key="key_misc_display_fps"
+				android:title="@string/Force_FPS" />
+		<Preference
+				android:key="key_misc_restart_systemui"
+				android:title="@string/Restart_SystemUI"
+				android:summary="Recommended after switching display resolution" />
+		<CheckBoxPreference
+				android:defaultValue="false"
+				android:key="key_misc_no_hwcomposer"
+				android:title="@string/Disable_HW_overlays"
+				android:summary="Eats more CPU and battery" />
+		<CheckBoxPreference
+				android:defaultValue="false"
+				android:key="key_misc_aod"
+				android:title="@string/Force_allow_Always_On_Display" />
 	</PreferenceCategory>
-	<PreferenceCategory android:title="Backlight">
+	<PreferenceCategory android:title="@string/Backlight">
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_linear_brightness"
-            android:title="Use linear screen brightness slider" />
+				android:defaultValue="false"
+				android:key="key_misc_linear_brightness"
+				android:title="@string/Use_linear_screen_brightness_slider" />
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_disable_buttons_backlight"
-            android:title="Disable backlight of hardware buttons if present"
-            android:summary="Requires a reboot" />
+				android:defaultValue="false"
+				android:key="key_misc_disable_buttons_backlight"
+				android:title="@string/Disable_backlight_of_hardware_buttons_if_present"
+				android:summary="Requires a reboot" />
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_backlight_scale"
-            android:title="Force alternative backlight scale" />
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_minimal_brightness"
-            android:title="Allows setting brightness to the lowest possible" />
+				android:defaultValue="false"
+				android:key="key_misc_backlight_scale"
+				android:title="@string/Force_alternative_backlight_scale" />
+		<CheckBoxPreference
+				android:defaultValue="false"
+				android:key="key_misc_minimal_brightness"
+				android:title="@string/Allows_setting_brightness_to_the_lowest_possible" />
 	</PreferenceCategory>
-	<PreferenceCategory android:title="Camera">
+	<PreferenceCategory android:title="@string/Camera">
 		<CheckBoxPreference
-			android:defaultValue="false"
-			android:key="key_misc_multi_camera"
-			android:title="Expose Aux cameras" />
+				android:defaultValue="false"
+				android:key="key_misc_multi_camera"
+				android:title="@string/Expose_Aux_cameras" />
 		<CheckBoxPreference
-			android:defaultValue="false"
-			android:key="key_misc_force_camera2api_hal3"
-			android:title="Force Enable Camera2API HAL3" />
+				android:defaultValue="false"
+				android:key="key_misc_force_camera2api_hal3"
+				android:title="@string/Force_Enable_Camera_API_HAL_" />
 		<ListPreference
-		    android:defaultValue="-1"
-		    android:entries="@array/pref_misc_camera_timestamp"
-		    android:entryValues="@array/pref_misc_camera_timestamp_values"
-		    android:key="key_misc_camera_timestamp"
-            android:title="Force Timestamp Source"
-            android:summary="Requires a reboot" />
-  </PreferenceCategory>
-	<PreferenceCategory android:title="Other">
+				android:defaultValue="-1"
+				android:entries="@array/pref_misc_camera_timestamp"
+				android:entryValues="@array/pref_misc_camera_timestamp_values"
+				android:key="key_misc_camera_timestamp"
+				android:title="@string/Force_Timestamp_Source"
+				android:summary="Requires a reboot" />
+	</PreferenceCategory>
+	<PreferenceCategory android:title="@string/Other">
 		<ListPreference
-			android:defaultValue="-1"
-			android:entries="@array/pref_misc_bluetooth"
-			android:entryValues="@array/pref_misc_bluetooth_values"
-			android:key="key_misc_bluetooth"
-			android:title="Bluetooth workarounds" />
+				android:defaultValue="-1"
+				android:entries="@array/pref_misc_bluetooth"
+				android:entryValues="@array/pref_misc_bluetooth_values"
+				android:key="key_misc_bluetooth"
+				android:title="@string/Bluetooth_workarounds" />
 		<ListPreference
-    	    android:defaultValue="1.86"
-    	    android:entries="@array/pref_misc_max_aspect_ratio_pre_o"
-    	    android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
-    	    android:key="key_misc_max_aspect_ratio_pre_o"
-    	    android:title="Compatibility max aspect ratio" />
+				android:defaultValue="1.86"
+				android:entries="@array/pref_misc_max_aspect_ratio_pre_o"
+				android:entryValues="@array/pref_misc_max_aspect_ratio_pre_o_values"
+				android:key="key_misc_max_aspect_ratio_pre_o"
+				android:title="@string/Compatibility_max_aspect_ratio" />
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_force_a2dp_offload_disable"
-            android:title="Force-disable A2DP offload" />
+				android:defaultValue="false"
+				android:key="key_misc_force_a2dp_offload_disable"
+				android:title="@string/Force_disable_A_DP_offload" />
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_force_navbar_off"
-            android:title="Force navigation bar disabled"
-            android:summary="Requires a reboot" />
+				android:defaultValue="false"
+				android:key="key_misc_force_navbar_off"
+				android:title="@string/Force_navigation_bar_disabled"
+				android:summary="Requires a reboot" />
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_storage_fuse"
-            android:title="Disable FUSE storage layer"
-            android:summary="This can (de/in)crease storage speed\nRequires a reboot" />
+				android:defaultValue="false"
+				android:key="key_misc_storage_fuse"
+				android:title="@string/Disable_FUSE_storage_layer"
+				android:summary="This can (de/in)crease storage speed\nRequires a reboot" />
 		<CheckBoxPreference
 				android:defaultValue="false"
 				android:key="key_misc_restart_ril"
-				android:title="Automatically restart RIL" />
+				android:title="@string/Automatically_restart_RIL" />
 		<CheckBoxPreference
 				android:defaultValue="false"
 				android:key="key_misc_dt2w"
-            android:title="Double tap to wake"
-            android:summary="Unlikely to work for you" />
-		<Preference android:title="Securize"
-            android:key="key_misc_securize" />
+				android:title="@string/Double_tap_to_wake"
+				android:summary="Unlikely to work for you" />
+		<Preference android:title="@string/Securize"
+					android:key="key_misc_securize" />
 		<Preference android:title="@string/remove_telephony_subsystem"
-            android:key="key_misc_removetelephony" />
+					android:key="key_misc_removetelephony" />
 	</PreferenceCategory>
-    <PreferenceCategory android:title="Debugging">
-        <Preference android:title="Debug Sensors">
-            <intent
-                android:action="android.intent.action.VIEW"
-                android:targetPackage="me.phh.treble.app"
-                android:targetClass="me.phh.treble.app.DebugSensors" />
-        </Preference>
+	<PreferenceCategory android:title="@string/Debugging">
+		<Preference android:title="@string/Debug_Sensors">
+			<intent
+					android:action="android.intent.action.VIEW"
+					android:targetPackage="me.phh.treble.app"
+					android:targetClass="me.phh.treble.app.DebugSensors" />
+		</Preference>
 		<CheckBoxPreference
-            android:defaultValue="false"
-            android:key="key_misc_remotectl"
-            android:title="Allow takeover of the device by phh for debugging" />
-    </PreferenceCategory>
+				android:defaultValue="false"
+				android:key="key_misc_remotectl"
+				android:title="@string/Allow_takeover_of_the_device_by_phh_for_debugging" />
+	</PreferenceCategory>
 </PreferenceScreen>
