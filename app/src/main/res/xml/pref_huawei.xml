@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
-    <PreferenceCategory android:title="Fingerprint">
+    <PreferenceCategory android:title="@string/Fingerprint">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_huawei_fingerprint_gestures"
-            android:title="Enable Fingerprint gestures" />
+            android:title="@string/Enable_Fingerprint_gestures" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Display">
+    <PreferenceCategory android:title="@string/Display">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_huawei_touchscreen_glove_mode"
-            android:title="Enable touchscreen glove mode" />
+            android:title="@string/Enable_touchscreen_glove_mode" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_huawei_no_hwcomposer"
-            android:title="Enable graphic issues workaround (recommended if ui is blurry)" />
+            android:title="@string/Enable_graphic_issues_workaround" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="Misc">
+    <PreferenceCategory android:title="@string/Misc_features">
 	    <ListPreference
 		    android:defaultValue="-1"
 		    android:entries="@array/pref_huawei_fast_charge"
 		    android:entryValues="@array/pref_huawei_fast_charge_values"
 		    android:key="key_huawei_fast_charge"
-		    android:title="Huawei fast charge" />
+		    android:title="@string/Huawei_fast_charge" />
     </PreferenceCategory>
 
 </PreferenceScreen>

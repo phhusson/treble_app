@@ -5,6 +5,7 @@
 # Gradle
 .gradle
 build
+app/build
 /local.properties
 /captures
 
@@ -15,6 +16,5 @@ build
 TrebleApp.apk
 
 # Sdk
-/sdk/platform-tools/
-/sdk/platforms/
-/sdk/build-tools/
+sdk
+sdk/.knownPackages
