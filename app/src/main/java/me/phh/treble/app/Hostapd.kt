@@ -4,6 +4,7 @@ import android.content.Context
 import android.hardware.wifi.hostapd.V1_0.HostapdStatus
 import android.hardware.wifi.hostapd.V1_0.HostapdStatusCode
 import android.hardware.wifi.hostapd.V1_0.IHostapd
+import android.os.NativeHandle
 import android.os.SystemProperties
 import android.util.Log
 import java.io.File
@@ -49,6 +50,9 @@ class Hostapd: EntryStartup {
                  list.add(b)
             }
             return stringToHex(list)
+        }
+
+        override fun debug(p0: NativeHandle, p1: ArrayList<String>): Unit {
         }
 
         override fun addAccessPoint(ifaceParams: IHostapd.IfaceParams, nwParams: IHostapd.NetworkParams): HostapdStatus {

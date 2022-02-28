@@ -5,14 +5,19 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.media.AudioSystem
 import android.net.Uri
+import android.os.NativeHandle
 import android.os.SystemProperties
 import android.os.UserHandle
 import android.util.Log
 import dalvik.system.PathClassLoader
+import java.util.ArrayList
 import kotlin.concurrent.thread
 
 class QtiAudio: EntryStartup {
     val cbA = object: vendor.qti.hardware.radio.am.V1_0.IQcRilAudioCallback.Stub() {
+        override fun debug(p0: NativeHandle?, p1: ArrayList<String>?) {
+        }
+
         override fun getParameters(str: String): String {
             return AudioSystem.getParameters(str)
         }
@@ -22,6 +27,9 @@ class QtiAudio: EntryStartup {
         }
     }
     val cbB = object: vendor.qti.qcril.am.V1_0.IQcRilAudioCallback.Stub() {
+        override fun debug(p0: NativeHandle?, p1: ArrayList<String>?) {
+        }
+
         override fun getParameters(str: String?): String {
             return AudioSystem.getParameters(str)
         }

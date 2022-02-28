@@ -122,22 +122,6 @@ class Samsung: EntryStartup {
                 }
             }
         }
-        val screenStateReceiver = object: BroadcastReceiver() {
-            override fun onReceive(context: Context, intent: Intent) {
-                Log.d("PHH", "Received intent ${intent.action} ${intent.extras?.keySet()}")
-                if(intent.action == Intent.ACTION_SCREEN_ON ) {
-                    Log.d("PHH", "Waky waky")
-                    tsWakerHandler.post(tsWaker)
-                } else if(intent.action == Intent.ACTION_SCREEN_OFF) {
-                    tsWakerHandler.removeCallbacks(tsWaker)
-                }
-            }
-        }
-
-        val screenStateFilter = IntentFilter()
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_OFF)
-        screenStateFilter.addAction(Intent.ACTION_SCREEN_ON)
-        ctxt.registerReceiver(screenStateReceiver, screenStateFilter)
 
         for(malware in listOf("com.dti.globe", "com.singtel.mysingtel", "com.LogiaGroup.LogiaDeck", "com.mygalaxy")) {
             try {

@@ -27,7 +27,7 @@
 
         <service android:name=".EntryService" />
 
-        <receiver android:name=".Starter">
+        <receiver android:name=".Starter" android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
                 <action android:name="me.phh.update" />
@@ -50,7 +50,8 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/Theme.TrebleApp">
+            android:theme="@style/Theme.TrebleApp"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT"/>

@@ -8,9 +8,11 @@ import android.net.ConnectivityManager
 import android.net.Network
 import android.net.NetworkCapabilities
 import android.net.NetworkRequest
+import android.os.Build
 import android.os.IBinder
 import android.os.UserHandle
 import android.util.Log
+import androidx.annotation.RequiresApi
 import dalvik.system.PathClassLoader
 import kotlin.concurrent.thread
 
@@ -56,8 +58,12 @@ class EntryService: Service() {
             tryC { Desktop.startup(this) }
 
             tryC { PresetDownloader.startup(this) }
-            tryC {
-
+            thread {
+                tryC {
+                    if (Build.VERSION.SDK_INT >= 31) {
+                        IMS().connectIke(this)
+                    }
+                }
             }
         }
     }
