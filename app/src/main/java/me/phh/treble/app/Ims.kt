@@ -57,6 +57,10 @@ object Ims: EntryStartup {
                 Misc.safeSetprop("persist.dbg.wfc_avail_ovr", value)
                 Misc.safeSetprop("persist.dbg.allow_ims_off", value)
             }
+            ImsSettings.enable5gNetwork -> {
+                val value = sp.getBoolean(key, false)
+                SystemProperties.set("persist.sys.phh.enable_5g_network", if (value) "true" else "false")
+            }
         }
     }
 

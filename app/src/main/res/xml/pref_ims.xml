@@ -13,4 +13,9 @@
         android:defaultValue="false"
         android:key="key_ims_force_enable_setting"
         android:title="Force the presence of 4G Calling setting" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="key_ims_enable_5g_network"
+        android:title="Enable 5G network"
+        android:summary="Requires a reboot" />
 </PreferenceScreen>

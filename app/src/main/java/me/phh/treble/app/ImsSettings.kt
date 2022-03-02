@@ -27,6 +27,7 @@ object ImsSettings : Settings {
     val createApn = "key_ims_create_apn"
     val forceEnableSettings = "key_ims_force_enable_setting"
     val installImsApk = "key_ims_install_apn"
+    val enable5gNetwork = "key_ims_enable_5g_network"
 
     override fun enabled() = true
 }
