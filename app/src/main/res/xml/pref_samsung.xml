@@ -37,6 +37,10 @@
             android:title="Enable double tap to wake" />
         <CheckBoxPreference
             android:defaultValue="false"
+            android:key="key_samsung_fod_single_click"
+            android:title="Clicking fingerprint turns device on" />
+        <CheckBoxPreference
+            android:defaultValue="false"
             android:key="key_samsung_camera_ids"
             android:title="Enable access to all cameras"
             android:summary="Requires Q vendor" />
