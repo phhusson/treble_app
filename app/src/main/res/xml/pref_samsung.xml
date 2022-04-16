@@ -44,6 +44,12 @@
             android:key="key_samsung_camera_ids"
             android:title="Enable access to all cameras"
             android:summary="Requires Q vendor" />
+		<EditTextPreference
+            android:defaultValue="1"
+            android:key="key_samsung_flash_strength"
+	        android:title="Set flash strength"
+	        android:summary="Usually values are integers between 1 and 5"
+	        android:inputType="number" />
     </PreferenceCategory>
     <PreferenceCategory android:title="Workarounds">
         <CheckBoxPreference

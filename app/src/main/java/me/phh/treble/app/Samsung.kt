@@ -87,6 +87,10 @@ class Samsung: EntryStartup {
                 val cmd = if(sp.getBoolean(key, false)) "fod_lp_mode,1" else "fod_lp_mode,0"
                 tsCmd(cmd)
             }
+            SamsungSettings.flashStrength -> {
+                val value = sp.getString(key, "1")
+                SystemProperties.set("persist.sys.phh.flash_strength", value)
+            }
         }
     }
 
