@@ -57,6 +57,7 @@ class EntryService: Service() {
             tryC { Hct.startup(this) }
 
             tryC { Desktop.startup(this) }
+            tryC { Lid.startup(this) }
 
             tryC { PresetDownloader.startup(this) }
             tryC {
