@@ -81,6 +81,7 @@ class PresetDownloader {
                 try {
                     Log.d("PHH-Presets", "Find matching nodes...")
                     val vendorFp = SystemProperties.get("ro.vendor.build.fingerprint", "nope")
+                    val oppoPrjName = SystemProperties.get("ro.boot.prjname", "nope")
                     val json = synchronized(jsonLock) { json } ?: return
 
                     val mutablesNodes = mutableListOf<JSONObject>()
@@ -91,6 +92,7 @@ class PresetDownloader {
                         val re = Regex(node.getString("match_value"))
                         val propValue = when (prop) {
                             "vendor_fp" -> vendorFp
+                            "oppo_prjname" -> oppoPrjName
                             else -> null
                         }
                         if (propValue == null) continue
