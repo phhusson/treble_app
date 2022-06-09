@@ -67,4 +67,15 @@
       <item>"0"</item>
       <item>"1"</item>
     </array>
+
+    <array name="pref_misc_fod_color">
+      <item>"Green"</item>
+      <item>"Magenta"</item>
+      <item>"White"</item>
+    </array>
+    <array name="pref_misc_fod_color_values">
+      <item>"00ff00"</item>
+      <item>"00ffff"</item>
+      <item>"ffffff"</item>
+    </array>
 </resources>

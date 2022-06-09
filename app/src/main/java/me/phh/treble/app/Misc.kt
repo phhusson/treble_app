@@ -228,6 +228,10 @@ object Misc: EntryStartup {
                     asusSvc.setDclickEnable(if(value) 1 else 0)
                 }
             }
+            MiscSettings.fodColor -> {
+                val value = sp.getString(key, "00ff00")
+                SystemProperties.set("persist.sys.phh.fod_color", value)
+            }
         }
     }
 

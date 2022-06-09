@@ -37,6 +37,7 @@ object MiscSettings : Settings {
     val aod = "key_misc_aod"
     val dt2w = "key_misc_dt2w"
     val restartSystemUI = "key_misc_restart_systemui"
+    val fodColor = "key_misc_fod_color"
 
     override fun enabled() = true
 }

@@ -139,6 +139,12 @@
 				android:key="key_misc_dt2w"
             android:title="Double tap to wake"
             android:summary="Unlikely to work for you" />
+		<ListPreference
+		    android:defaultValue="00ff00"
+		    android:entries="@array/pref_misc_fod_color"
+		    android:entryValues="@array/pref_misc_fod_color_values"
+		    android:key="key_misc_fod_color"
+            android:title="Under-display fp color" />
 		<Preference android:title="Securize"
             android:key="key_misc_securize" />
 		<Preference android:title="@string/remove_telephony_subsystem"
