@@ -70,7 +70,7 @@
 
     <array name="pref_misc_fod_color">
       <item>"Green"</item>
-      <item>"Magenta"</item>
+      <item>"Cyan"</item>
       <item>"White"</item>
     </array>
     <array name="pref_misc_fod_color_values">
