@@ -25,6 +25,7 @@
         <uses-library android:name="vendor.huawei.hardware.tp.V1_0" android:required="false"/>
         <uses-library android:name="vendor.qti.hardware.radio.am.V1_0" android:required="false"/>
         <uses-library android:name="vendor.qti.qcril.am.V1_0" android:required="false"/>
+        <uses-library android:name="vendor.xiaomi.hardware.displayfeature.V1_0" android:required="false"/>
 
         <service android:name=".EntryService" />
 
