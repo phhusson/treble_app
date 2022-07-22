@@ -1,9 +1,11 @@
 package me.phh.treble.app
 
 import android.content.Context
+import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.os.SystemProperties
+import android.os.UserHandle
 import android.preference.PreferenceActivity
 import androidx.preference.ListPreference
 import androidx.preference.Preference
@@ -24,6 +26,7 @@ class SettingsActivity : PreferenceActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getApplicationContext().startServiceAsUser(Intent(getApplicationContext(), EntryService::class.java), UserHandle.SYSTEM)
         setupActionBar()
     }
 
