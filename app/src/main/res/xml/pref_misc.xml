@@ -56,7 +56,7 @@
         <Preference
             android:key="key_misc_restart_systemui"
             android:title="Restart SystemUI"
-            android:summary="Recommended after switching display resolution" />
+            android:summary="Recommended after switching display resolution\nRequires root" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_misc_no_hwcomposer"

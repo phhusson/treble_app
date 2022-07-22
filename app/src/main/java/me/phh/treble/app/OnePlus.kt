@@ -12,6 +12,7 @@ import java.io.File
 object OnePlus: EntryStartup {
     val dtPanel = "/proc/touchpanel/double_tap_enable" //OP3
     val gestureEnable = "/proc/touchpanel/gesture_enable" //OP6
+    val triStateKey = "/devices/platform/soc/soc:tri_state_key"
     val spListener = SharedPreferences.OnSharedPreferenceChangeListener { sp, key ->
         when(key) {
             OnePlusSettings.displayModeKey -> {
@@ -71,30 +72,31 @@ object OnePlus: EntryStartup {
     override fun startup(ctxt: Context) {
         if(!OnePlusSettings.enabled()) return
         Log.d("PHH", "Starting OP service")
-        //TODO: Oneplus framework calibrates tri_state_key because it is a hall sensor
-        // It does so by copying /mnt/vendor/persist/engineermode/tri_state_hall_data to /sys/bus/platform/devices/soc:tri_state_key/hall_data_calib
-        object : UEventObserver() {
-            override fun onUEvent(event: UEventObserver.UEvent) {
-                try {
-                    android.util.Log.v("PHH", "USB UEVENT: " + event.toString())
-                    val state = event.get("STATE")
 
-                    val ringing = state.contains("USB=0")
-                    val silent = state.contains("(null)=0")
-                    val vibrate = state.contains("USB_HOST=0")
-                    android.util.Log.v("PHH", "Got ringing = $ringing, silent = $silent, vibrate = $vibrate")
-                    if (ringing && !silent && !vibrate)
-                        Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
-                    if (silent && !ringing && !vibrate)
-                        Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT)
-                    if (vibrate && !silent && !ringing)
-                        Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
-                } catch (e: Exception) {
-                    android.util.Log.d("PHH", "Failed parsing uevent", e)
+        if (File("/sys" + triStateKey).exists()) {
+            //TODO: Oneplus framework calibrates tri_state_key because it is a hall sensor
+            // It does so by copying /mnt/vendor/persist/engineermode/tri_state_hall_data to /sys/bus/platform/devices/soc:tri_state_key/hall_data_calib
+            object : UEventObserver() {
+                override fun onUEvent(event: UEventObserver.UEvent) {
+                    try {
+                        android.util.Log.v("PHH", "USB UEVENT: " + event.toString())
+                        val state = event.get("STATE")
+                        val ringing = state.contains("USB=0")
+                        val silent = state.contains("(null)=0")
+                        val vibrate = state.contains("USB_HOST=0")
+                        android.util.Log.v("PHH", "Got ringing = $ringing, silent = $silent, vibrate = $vibrate")
+                        if (ringing && !silent && !vibrate)
+                            Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL)
+                        if (silent && !ringing && !vibrate)
+                            Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_SILENT)
+                        if (vibrate && !silent && !ringing)
+                            Tools.audioManager.setRingerMode(AudioManager.RINGER_MODE_VIBRATE)
+                    } catch (e: Exception) {
+                        android.util.Log.d("PHH", "Failed parsing uevent", e)
+                    }
                 }
-
-            }
-        }.startObserving("DEVPATH=/devices/platform/soc/soc:tri_state_key")
+            }.startObserving("DEVPATH=" + triStateKey)
+        }
 
         val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
         sp.registerOnSharedPreferenceChangeListener(spListener)
