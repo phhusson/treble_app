@@ -26,15 +26,19 @@ object Misc: EntryStartup {
     }
 
     val surfaceFlinger = ServiceManager.getService("SurfaceFlinger")
-    fun forceFps(v: Int) {
+    fun forceFps(v: Int, c: Boolean) {
         val data = Parcel.obtain()
         try {
             data.writeInterfaceToken("android.ui.ISurfaceComposer")
             data.writeInt(v)
             surfaceFlinger.transact(1035, data, null, 0)
-            Log.d("PHH", "Set surface flinger forced fps/mode to $v")
+            Log.d("PHH", "Set surface flinger forced fps/mode to supportedModes[$v]")
+            if (c) {
+                Log.d("PHH", "Resolution changed, attempting to restart SystemUI")
+                tryExecWithSu("/system/bin/killall com.android.systemui")
+            }
         } catch (r: Exception) {
-            Log.d("PHH", "Failed setting surface flinger forced fps/mode to $v")
+            Log.d("PHH", "Failed setting surface flinger forced fps/mode to supportedModes[$v]")
         } finally {
             data.recycle()
         }
@@ -169,13 +173,19 @@ object Misc: EntryStartup {
                 }
             }
             MiscSettings.displayFps -> {
-                val value = sp.getString(key, "-1").toInt()
-                val maxValue = displayManager.displays[0].supportedModes.size
-                if(value>= maxValue) {
-                    Log.d("PHH", "Trying to set impossible mode " + value)
+                val thisModeIndex = sp.getString(key, "-1").toInt()
+                val displayInfo = displayManager.displays[0]
+                if (thisModeIndex < 0 || thisModeIndex >= displayInfo.supportedModes.size) {
+                    Log.d("PHH", "Trying to set impossible supportedModes[$thisModeIndex]")
                 } else {
-                    Log.d("PHH", "Trying to set mode " + value)
-                    forceFps(value)
+                    Log.d("PHH", "Trying to set supportedModes[$thisModeIndex]")
+                    val lastMode = displayInfo.getMode()
+                    var lastModeIndex = displayInfo.supportedModes.indexOf(lastMode)
+                    val thisMode = displayInfo.supportedModes[thisModeIndex]
+                    Log.d("PHH", "\tlastMode = supportedModes[$lastModeIndex] = $lastMode")
+                    Log.d("PHH", "\tthisMode = supportedModes[$thisModeIndex] = $thisMode")
+                    forceFps(thisModeIndex, (thisMode.getPhysicalWidth() != lastMode.getPhysicalWidth())
+                        || (thisMode.getPhysicalHeight() != lastMode.getPhysicalHeight()))
                 }
             }
             MiscSettings.remotectl -> {
