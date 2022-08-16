@@ -118,8 +118,8 @@ class MiscSettingsFragment : SettingsFragment() {
         val displayManager = activity.getSystemService(DisplayManager::class.java)
         for(display in displayManager.displays) {
             Log.d("PHH", "Got display $display")
-            for(mode in display.supportedModes) {
-                Log.d("PHH", "\tMode ${mode.modeId} $mode")
+            for((index, mode) in display.supportedModes.withIndex()) {
+                Log.d("PHH", "\tsupportedModes[$index] = $mode")
             }
         }
 
@@ -129,7 +129,7 @@ class MiscSettingsFragment : SettingsFragment() {
             val h = it.physicalHeight
             "${w}x${h}@${fps}"
         }
-        val fpsValues = listOf("-1") + displayManager.displays[0].supportedModes.map { (it.modeId - 1).toString() }
+        val fpsValues = (-1.. displayManager.displays[0].supportedModes.size).toList().map { it.toString() }
 
         fpsPref.setEntries(fpsEntries.toTypedArray())
         fpsPref.setEntryValues(fpsValues.toTypedArray())
