@@ -35,7 +35,22 @@ object Misc: EntryStartup {
             Log.d("PHH", "Set surface flinger forced fps/mode to supportedModes[$v]")
             if (c) {
                 Log.d("PHH", "Resolution changed, attempting to restart SystemUI")
-                tryExecWithSu("/system/bin/killall com.android.systemui")
+                var cmds = listOf(
+                    arrayOf("/sbin/su", "-c", "/system/bin/killall com.android.systemui"),
+                    arrayOf("/system/xbin/su", "-c", "/system/bin/killall com.android.systemui"),
+                    arrayOf("/system/xbin/phh-su", "-c", "/system/bin/killall com.android.systemui"),
+                    arrayOf("/sbin/su", "0", "/system/bin/killall com.android.systemui"),
+                    arrayOf("/system/xbin/su", "0", "/system/bin/killall com.android.systemui"),
+                    arrayOf("/system/xbin/phh-su", "0", "/system/bin/killall com.android.systemui")
+                )
+                for (cmd in cmds) {
+                    try {
+                        Runtime.getRuntime().exec(cmd).waitFor()
+                        break
+                    } catch (t: Throwable) {
+                        Log.d("PHH", "Failed to exec \"" + cmd.joinToString(separator = " ") + "\", skipping")
+                    }
+                }
             }
         } catch (r: Exception) {
             Log.d("PHH", "Failed setting surface flinger forced fps/mode to supportedModes[$v]")
