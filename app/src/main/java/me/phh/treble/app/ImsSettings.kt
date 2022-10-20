@@ -88,17 +88,22 @@ class ImsSettingsFragment : SettingsFragment() {
 
         val installIms = findPreference<Preference>(ImsSettings.installImsApk)
 
-        Log.d("PHH", "MTK Pie radio = ${Ims.gotMtkPie}")
-        Log.d("PHH", "MTK Quack radio = ${Ims.gotMtkQuack}")
-        Log.d("PHH", "MTK Roar radio = ${Ims.gotMtkRoar}")
-        Log.d("PHH", "Qualcomm radio = ${Ims.gotQualcomm}")
+        Log.d("PHH", "MTK P radio = ${Ims.gotMtkP}")
+        Log.d("PHH", "MTK Q radio = ${Ims.gotMtkQ}")
+        Log.d("PHH", "MTK R radio = ${Ims.gotMtkR}")
+        Log.d("PHH", "MTK S radio = ${Ims.gotMtkS}")
+        Log.d("PHH", "Qualcomm HIDL radio = ${Ims.gotQcomHidl}")
+        Log.d("PHH", "Qualcomm AIDL radio = ${Ims.gotQcomAidl}")
 
         val (url, message) =
                 when {
-                    Ims.gotMtkPie -> Pair("https://treble.phh.me/stable/ims-mtk-p.apk", "Mediatek Pie vendor")
-                    Ims.gotMtkQuack -> Pair("https://treble.phh.me/stable/ims-mtk-q.apk", "Mediatek Q vendor")
-                    Ims.gotMtkRoar -> Pair("https://treble.phh.me/stable/ims-mtk-r.apk", "Mediatek R vendor")
-                    Ims.gotQualcomm -> Pair("https://treble.phh.me/stable/ims-q.64.apk", "Qualcomm vendor")
+                    Ims.gotMtkP -> Pair("https://treble.phh.me/stable/ims-mtk-p.apk", "MediaTek P vendor")
+                    Ims.gotMtkQ -> Pair("https://treble.phh.me/stable/ims-mtk-q.apk", "MediaTek Q vendor")
+                    Ims.gotMtkR -> Pair("https://treble.phh.me/stable/ims-mtk-r.apk", "MediaTek R vendor")
+                    Ims.gotMtkS -> Pair("https://treble.phh.me/stable/ims-mtk-s.apk", "MediaTek S vendor")
+                    Ims.gotQcomHidlMoto -> Pair("https://treble.phh.me/stable/ims-caf-moto.apk", "Qualcomm pre-S vendor (Motorola)")
+                    Ims.gotQcomHidl -> Pair("https://treble.phh.me/stable/ims-q.64.apk", "Qualcomm pre-S vendor")
+                    Ims.gotQcomAidl -> Pair("https://treble.phh.me/stable/ims-caf-s.apk", "Qualcomm S+ vendor")
                     else -> Pair("", "NOT SUPPORTED")
                 }
 
