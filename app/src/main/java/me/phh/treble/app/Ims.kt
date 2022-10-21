@@ -63,14 +63,20 @@ object Ims: EntryStartup {
     val mHidlService = android.hidl.manager.V1_0.IServiceManager.getService()
 
     val mAllSlots = listOf("imsrild1", "imsrild2", "imsrild3", "slot1", "slot2", "slot3", "imsSlot1", "imsSlot2", "mtkSlot1", "mtkSlot2", "imsradio0", "imsradio1")
-    val gotMtkPie = mAllSlots
+    val gotMtkP = mAllSlots
             .find { i -> mHidlService.get("vendor.mediatek.hardware.radio@3.0::IRadio", i) != null } != null
-    val gotMtkQuack = mAllSlots
+    val gotMtkQ = mAllSlots
             .find { i -> mHidlService.get("vendor.mediatek.hardware.mtkradioex@1.0::IMtkRadioEx", i) != null } != null
-    val gotMtkRoar = mAllSlots
+    val gotMtkR = mAllSlots
             .find { i -> mHidlService.get("vendor.mediatek.hardware.mtkradioex@2.0::IMtkRadioEx", i) != null } != null
-    val gotQualcomm = mAllSlots
+    val gotMtkS = mAllSlots
+            .find { i -> mHidlService.get("vendor.mediatek.hardware.mtkradioex@3.0::IMtkRadioEx", i) != null } != null
+    val gotQcomHidl = mAllSlots
             .find { i -> mHidlService.get("vendor.qti.hardware.radio.ims@1.0::IImsRadio", i) != null } != null
+    val gotQcomHidlMoto = gotQcomHidl
+            && SystemProperties.get("ro.product.vendor.brand", "N/A").equals("motorola")
+    val gotQcomAidl = mAllSlots
+            .find { i -> ServiceManager.getService("vendor.qti.hardware.radio.ims.IImsRadio/" + i) != null } != null
     val gotSLSI = mAllSlots
             .find { i -> mHidlService.get("vendor.samsung_slsi.telephony.hardware.radio@1.0::IOemSamsungslsi", i) != null } != null
     val gotSPRD = mAllSlots
@@ -88,11 +94,11 @@ object Ims: EntryStartup {
 
         val allOverlays = listOf("me.phh.treble.overlay.mtkims_telephony", "me.phh.treble.overlay.cafims_telephony", "me.phh.treble.overlay.hwims_telephony")
         val selectOverlay = when {
-            gotMtkPie || gotMtkQuack || gotMtkRoar -> "me.phh.treble.overlay.mtkims_telephony"
-            gotQualcomm -> "me.phh.treble.overlay.cafims_telephony"
+            gotMtkP || gotMtkQ || gotMtkR || gotMtkS -> "me.phh.treble.overlay.mtkims_telephony"
+            gotQcomHidl || gotQcomAidl -> "me.phh.treble.overlay.cafims_telephony"
             gotSLSI -> "me.phh.treble.overlay.slsiims_telephony"
             gotSPRD -> "me.phh.treble.overlay.sprdims_telephony"
-	        gotHW -> "me.phh.treble.overlay.hwims_telephony"
+	    gotHW -> "me.phh.treble.overlay.hwims_telephony"
             else -> null
         }
         if(selectOverlay != null) {
