@@ -7,6 +7,7 @@ object QualcommSettings : Settings {
     val alternateMediaprofile = "key_qualcomm_alternate_mediaprofile"
     val alternateAudiopolicy = "key_qualcomm_alternate_audiopolicy"
     val disableSoundVolumeEffect = "key_qualcomm_disable_soundvolume_effect"
+    val disableStereoVoip = "key_qualcomm_disable_stereo_voip"
 
     override fun enabled() = QtiAudio.isQualcommDevice || SystemProperties.get("ro.hardware", "N/A") == "qcom"
 }
