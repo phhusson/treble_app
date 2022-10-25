@@ -12,5 +12,5 @@
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_ims_force_enable_setting"
-        android:title="4G通話設定を強制的に有効" />
+        android:title="4G通話(VoLTE)設定を強制的に有効" />
 </PreferenceScreen>

@@ -31,6 +31,6 @@
             android:entries="@array/pref_custom_font_family"
             android:entryValues="@array/pref_custom_font_family_values"
             android:key="key_custom_font_family"
-		android:title="フォント" />
+		android:title="フォントファミリー" />
     </PreferenceCategory>
 </PreferenceScreen>

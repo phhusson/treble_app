@@ -8,6 +8,6 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_doze_pocket"
-            android:title="アウトオブポケットジェスチャーを有効" />
+            android:title="ポケットから取り出した時のジェスチャーを有効" />
     </PreferenceCategory>
 </PreferenceScreen>

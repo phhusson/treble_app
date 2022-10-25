@@ -43,12 +43,12 @@
             android:defaultValue="false"
             android:key="key_samsung_camera_ids"
             android:title="すべてのカメラにアクセス可能にする"
-            android:summary="Q Vendorが必要です" />
+            android:summary="Q Vendorが必要です。" />
 		<EditTextPreference
             android:defaultValue="1"
             android:key="key_samsung_flash_strength"
 	        android:title="フラッシュの強さを設定"
-	        android:summary="通常の値は1～5になります"
+	        android:summary="通常の値は1～5になります。"
 	        android:inputType="number" />
     </PreferenceCategory>
     <PreferenceCategory android:title="回避策">
