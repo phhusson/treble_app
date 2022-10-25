@@ -7,30 +7,30 @@
             android:targetPackage="com.android.systemui"
             android:targetClass="com.android.systemui.DemoMode" />
     </Preference>
-    <PreferenceCategory android:title="Styles">
+    <PreferenceCategory android:title="スタイル">
 	<ListPreference
 		android:defaultValue=""
             android:entries="@array/pref_custom_accent_color"
             android:entryValues="@array/pref_custom_accent_color_values"
             android:key="key_custom_accent_color"
-		android:title="Accent color" />
+		android:title="アクセントカラー" />
 	<ListPreference
 		android:defaultValue=""
             android:entries="@array/pref_custom_icon_shape"
             android:entryValues="@array/pref_custom_icon_shape_values"
             android:key="key_custom_icon_shape"
-		android:title="Icon shape" />
+		android:title="アイコンシェイプ" />
 	<ListPreference
 		android:defaultValue=""
             android:entries="@array/pref_custom_icon_pack"
             android:entryValues="@array/pref_custom_icon_pack_values"
             android:key="key_custom_icon_pack"
-		android:title="Icon pack" />
+		android:title="アイコンパック" />
 	<ListPreference
 		android:defaultValue=""
             android:entries="@array/pref_custom_font_family"
             android:entryValues="@array/pref_custom_font_family_values"
             android:key="key_custom_font_family"
-		android:title="Font family" />
+		android:title="フォント" />
     </PreferenceCategory>
 </PreferenceScreen>
