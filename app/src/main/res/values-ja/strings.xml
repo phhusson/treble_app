@@ -7,7 +7,7 @@
     <string name="remove_root">Rootを削除</string>
     <string name="continue_question">続行をしますか?</string>
     <string name="title_activity_updater">アップデート</string>
-    <string name="update_not_found_title">使用しているシステムは最新です</string>
+    <string name="update_not_found_title">使用中のシステムは最新です</string>
     <string name="update_found_title">システムアップデートが可能です</string>
     <string name="checking_update_title">アップデートを確認中です</string>
     <string name="update_found_button">ダウンロードとインストール</string>
