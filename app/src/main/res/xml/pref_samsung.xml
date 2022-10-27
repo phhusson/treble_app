@@ -8,7 +8,7 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="key_samsung_audio_stereo"
-            android:title="ステレオオーディオモード有効" />
+            android:title="ステレオオーディオモードを有効" />
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/pref_samsung_transport_size"
