@@ -3,20 +3,20 @@
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_qualcomm_alternate_mediaprofile"
-        android:title="Use alternate camera profile"
-        android:summary="Requires a reboot" />
+        android:title="代替のカメラプロファイルを使用する"
+        android:summary="再起動が必要です。" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_qualcomm_alternate_audiopolicy"
-        android:title="Use alternate audio policy" />
+        android:title="代替のオーディオポリシーを使用する" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_qualcomm_disable_soundvolume_effect"
-        android:title="Disable soundvolume effect"
-        android:summary="May fix audio distorsion" />
+        android:title="サウンドボリュームエフェクトを無効にする"
+        android:summary="音の乱れを改善する事ができます。" />
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="key_qualcomm_disable_stereo_voip"
-        android:title="Disable stereo support on VoIP"
-        android:summary="May fix high pitched audio. Requires a reboot" />
+        android:title="VoIPのステレオ対応を無効にする"
+        android:summary="高音域の音声の問題を修正できる可能性があります。再起動が必要です。" />
 </PreferenceScreen>
