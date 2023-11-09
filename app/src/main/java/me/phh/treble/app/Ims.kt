@@ -85,6 +85,7 @@ object Ims: EntryStartup {
 
     override fun startup(ctxt: Context) {
         if (!ImsSettings.enabled()) return
+        val gotFloss = ctxt.packageManager.getInstalledPackages(0).find { it.packageName == "me.phh.ims" } != null
 
         val sp = PreferenceManager.getDefaultSharedPreferences(ctxt)
         sp.registerOnSharedPreferenceChangeListener(spListener)
@@ -97,7 +98,8 @@ object Ims: EntryStartup {
             gotQcomHidl || gotQcomAidl -> "me.phh.treble.overlay.cafims_telephony"
             gotSLSI -> "me.phh.treble.overlay.slsiims_telephony"
             gotSPRD -> "me.phh.treble.overlay.sprdims_telephony"
-	    gotHW -> "me.phh.treble.overlay.hwims_telephony"
+            gotHW -> "me.phh.treble.overlay.hwims_telephony"
+            gotFloss -> "me.phh.treble.overlay.flossims_telephony"
             else -> null
         }
         if(selectOverlay != null) {
