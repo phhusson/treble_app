@@ -8,7 +8,7 @@ object OppoSettings : Settings {
     val usbOtg = "key_oppo_usb_otg"
     val dcDiming = "key_oppo_dc_diming"
 
-    override fun enabled() = Tools.deviceId.startsWith("RMX") || Tools.deviceId == "CPH1859"
+    override fun enabled() = Tools.deviceId.startsWith("RMX") || Tools.deviceId == "CPH1859" || Tools.oppoPrjName.contains("19531")
 }
 
 class OppoSettingsFragment : SettingsFragment() {
