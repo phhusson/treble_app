@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="pref_huawei_fast_charge">
+	    <item>標準の USB 充電 (1500mA)</item>
+	    <item>中速 (2750mA)</item>
+	    <item>高速 (4000mA)</item>
+    </array>
+    <array name="pref_huawei_fast_charge_values">
+	    <item>"-1"</item>
+	    <item>"2750"</item>
+	    <item>"4000"</item>
+    </array>
+</resources>
