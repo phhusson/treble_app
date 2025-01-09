@@ -24,7 +24,9 @@ object Lid: EntryStartup {
 
     fun lenovo(ctxt: Context) {
         val sensorManager = ctxt.getSystemService(SensorManager::class.java)
-        val lidSensor = sensorManager.getSensorList(Sensor.TYPE_ALL).firstOrNull() { it.name.contains("ah1902 Hall Effect Sensor Wakeup")}
+        val lidSensor = sensorManager.getSensorList(Sensor.TYPE_ALL).firstOrNull() {
+            it.name.contains("(ah1902|bu52053nvx) Hall Effect Sensor Wakeup".toRegex())
+        }
         if(lidSensor == null) {
             Log.d("PHH", "Failed finding sensor for lid wakeup")
             for(s in sensorManager.getSensorList(Sensor.TYPE_ALL)) {
@@ -75,7 +77,13 @@ object Lid: EntryStartup {
     }
 
     override fun startup(ctxt: Context) {
-        if(Tools.vendorFpLow.startsWith("Lenovo/TB-9707F_PRC/TB-9707F".lowercase())) {
+        val lenovoTablets = arrayOf(
+            "Lenovo/TB-9707F_PRC/TB-9707F",
+            "Lenovo/TB320FC/TB320FC",
+            "Lenovo/TB320FC_PRC/TB320FC",
+            "NEC/LAVIETab9QHD1/LAVIETab9QHD1"
+        )
+        if(lenovoTablets.any { Tools.vendorFpLow.startsWith(it, ignoreCase = true) }) {
             lenovo(ctxt)
         }
         if(Tools.vendorFpLow.startsWith("Cat/S22FLIP/S22FLIP".lowercase())) {
