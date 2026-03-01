@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PhhTrebleApp</string>
+    <string name="title_activity_settings">Настройки</string>
+    <string name="title_activity_top_level">Phh Treble Настройки</string>
+    <string name="desc_activity_top_level">Специфические настройки вашего устройства</string>
+    <string name="remove_telephony_subsystem">Удалить Субсистему Телефонии</string>
+    <string name="remove_root">Удалить Root</string>
+    <string name="continue_question">Продолжить?</string>
+</resources>
